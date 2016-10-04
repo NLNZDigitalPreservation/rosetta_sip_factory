@@ -11,6 +11,7 @@ The Rosetta SIP Factory provides functionality for creating METS XML deposits fo
 Usage
 -----
 To use as part of a different program::
+
     from rosetta_sip_factory import sip_builder
     sip_builder.build_sip(
         ie_dmd_dict=None,
