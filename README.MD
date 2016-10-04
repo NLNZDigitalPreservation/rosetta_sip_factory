@@ -36,10 +36,10 @@ The above arguments (if required) should be submitted in the following format:
  "dcterms:provenance": "Transferred from Agency ABCD"}
 ```
 (See below in the "dc, dcterms and xsi mapping in ie_dmd" description for more
-details about building an ie_dmd section)
-**pres_master_dir** = string
-**modified_master_dir** = string
-**access_derivative_dir** = string
+details about building an ie_dmd section)  
+**pres_master_dir** = string  
+**modified_master_dir** = string  
+**access_derivative_dir** = string  
 **cms** = dictionary inside list, such as follows:  
 ```python
 [{'system': <system name>, 'recordId': <CMS ID> },]
@@ -47,7 +47,7 @@ details about building an ie_dmd section)
 **generalIECharacteristics** = dictionary inside list, such as follows:  
 ```python
 [{'IEEntityType': <entity type>, 'submissionReason': <submission reason>},]
-``` 
+```  
 **objectIdentifier** = dictionary inside list, such as follows:  
 ```python
 [{'policyId': <policy ID>, 'policyDescription': <policy description>},]
@@ -68,7 +68,7 @@ details about building an ie_dmd section)
 (**Note**: Not all key/value pairs are required for events.)  
 **input_dir** = string  
 **digital_original** = Boolean (default is False)  
-**output_folder** = string
+**output_folder** = string  
 
 ###Typical SIP folder structure
 The build_sip function creates a SIP struture that is compliant with what the Rosetta application expects to see. Below is an example of how a single-representation SIP would look:
