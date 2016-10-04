@@ -29,7 +29,7 @@ sip_builder.build_sip(
 
 The above arguments (if required) should be submitted in the following format:
 
-ie_dmd_dict = dictionary, such as follows:
+**ie_dmd_dict** = dictionary, such as follows:
 ```python
 {"dc:title": "Title of record", "dcterms:isPartOf": "19926",
  "dc:identifier xsi:type=InstitionalIdentifier": "A1234",
@@ -37,29 +37,22 @@ ie_dmd_dict = dictionary, such as follows:
 ```
 (See below in the "dc, dcterms and xsi mapping in ie_dmd" description for more
 details about building an ie_dmd section)
-<br>  
-pres_master_dir = string
-<br>  
-modified_master_dir = string
-<br>  
-access derivative_dir = string
-<br>  
-cms = dictionary inside list, such as follows:  
+**pres_master_dir** = string
+**modified_master_dir** = string
+**access_derivative_dir** = string
+**cms** = dictionary inside list, such as follows:  
 ```python
 [{'system': <system name>, 'recordId': <CMS ID> },]
 ```  
-<br>
-generalIECharacteristics = dictionary inside list, such as follows:  
+**generalIECharacteristics** = dictionary inside list, such as follows:  
 ```python
 [{'IEEntityType': <entity type>, 'submissionReason': <submission reason>},]
 ``` 
-<br> 
-objectIdentifier = dictionary inside list, such as follows:  
+**objectIdentifier** = dictionary inside list, such as follows:  
 ```python
 [{'policyId': <policy ID>, 'policyDescription': <policy description>},]
-``` 
-<br> 
-eventList = dictionary inside list, such as follows:  
+```  
+**eventList** = dictionary inside list, such as follows:  
 ```python
 [{'eventDateTime': <event datetime>, 
   'eventType': <event type>,
@@ -73,10 +66,9 @@ eventList = dictionary inside list, such as follows:
   },]
 ```  
 (**Note**: Not all key/value pairs are required for events.)  
-input_dir = string  
-<br>
-digital_original = Boolean (default is False)  
-<br>   
+**input_dir** = string  
+**digital_original** = Boolean (default is False)  
+**output_folder** = string
 
 ###Typical SIP folder structure
 The build_sip function creates a SIP struture that is compliant with what the Rosetta application expects to see. Below is an example of how a single-representation SIP would look:
