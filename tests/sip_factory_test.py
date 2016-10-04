@@ -63,5 +63,32 @@ def test_sip_build_correct_digital_original_value():
     digital_original_el = mets.xpath('.//dnx:key[@id="DigitalOriginal"]',
         namespaces={'dnx': 'http://www.exlibrisgroup.com/dps/dnx'})[0]
     # digital_original_el = mets.xpath('.//*[@id="DigitalOriginal"]')
-    print(digital_original_el.text)
+    # print(digital_original_el.text)
     assert(digital_original_el.text == "true")
+
+
+def test_mets_dnx_with_dc_xml():
+    """Test basic construction of METS DNX with a dc.xml file for the SIP title"""
+    output_folder = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data', 'output_1')
+    # first off, delete anything that's in the output folder
+    shutil.rmtree(output_folder)
+    os.makedirs(output_folder)
+    ie_dc_dict = {"dc:title": "test title"}    
+    sip_title = 'Test Deposit'
+    sb.build_sip(
+        ie_dmd_dict=ie_dc_dict,
+        pres_master_dir=os.path.join(os.path.dirname(os.path.realpath(__file__)),'data', 'test_batch_1', 'pm'),
+        modified_master_dir=os.path.join(os.path.dirname(os.path.realpath(__file__)),'data', 'test_batch_1', 'mm'),
+        input_dir=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data', 'test_batch_1'),
+        generalIECharacteristics=[{'submissionReason': 'bornDigitalContent', 'IEEntityType': 'periodicIE'}],
+        sip_title=sip_title,
+        output_folder=output_folder
+        )
+    files_list = os.listdir(os.path.join(output_folder, 'content'))
+    if 'dc.xml' in files_list:
+        dc_xml = ET.parse(os.path.join(output_folder, 'content', 'dc.xml'))
+        dc = dc_xml.getroot()
+        title = dc.xpath(".//dc:title", namespaces=dc.nsmap)[0].text
+    else:
+        title = None
+    assert(title == sip_title)

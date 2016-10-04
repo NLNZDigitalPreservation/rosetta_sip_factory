@@ -9,6 +9,17 @@ import os
 import shutil
 
 
+# declare namespaces
+DC_NS = "http://purl.org/dc/elements/1.1/"
+DCTERMS_NS = "http://purl.org/dc/terms/"
+XSI_NS = "http://www.w3.org/2001/XMLSchema-instance"
+
+dc_nsmap = {
+    "dc": DC_NS,
+    "dcterms": DCTERMS_NS,
+    "xsi": XSI_NS,
+}
+
 def copytree(src, dst, symlinks=False, ignore=None):
     for item in os.listdir(src):
         s = os.path.join(src, item)
@@ -30,6 +41,7 @@ def build_sip(ie_dmd_dict=None,
         eventList=None,
         input_dir=None,
         digital_original=False,
+        sip_title=None,
         output_folder=None):
 
     # build METS
@@ -70,4 +82,12 @@ def build_sip(ie_dmd_dict=None,
 
     with open(os.path.join(output_folder, 'content', 'mets.xml'), 'w') as metsfile:
         metsfile.write(ET.tounicode(mets, pretty_print=True))
-    # return mets
+    
+    # write SIP DC file if SIP title is supplied
+    if sip_title != None:
+        dc_xml = ET.Element('{%s}record' % DC_NS, nsmap=dc_nsmap)
+        title = ET.SubElement(dc_xml, '{%s}title' % DC_NS, nsmap=dc_nsmap)
+        title.text = sip_title
+        with open(os.path.join(output_folder, 'content', 'dc.xml'), 'wb') as dc_file:
+            dc_file.write(ET.tostring(dc_xml, xml_declaration=True,
+                encoding="UTF-8"))
