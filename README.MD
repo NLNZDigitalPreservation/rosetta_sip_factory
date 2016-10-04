@@ -21,8 +21,9 @@ sip_builder.build_sip(
     objectIdentifier=None,
     accessRightsPolicy=None,
     eventList=None,
-    input_dir=None
+    input_dir=None,
     digital_original=False,
+    sip_title=None,
     output_folder=None
 )
 ```
@@ -68,10 +69,12 @@ details about building an ie_dmd section)
 (**Note**: Not all key/value pairs are required for events.)  
 **input_dir** = string  
 **digital_original** = Boolean (default is False)  
+**sip_title** = String
 **output_folder** = string  
 
 ###Typical SIP folder structure
 The build_sip function creates a SIP struture that is compliant with what the Rosetta application expects to see. Below is an example of how a single-representation SIP would look:
+(Note: in all of these examples, the sip_title parameter has been supplied, which results in the dc.xml file being generated)
 ```
 Base_location_on_server
 |
@@ -87,6 +90,8 @@ Base_location_on_server
          |   |_file2.txt
          |
          |_mets.xml
+         |
+         |_dc.xml
 ```
 Below is an example of a multi-representation SIP:
 ```
@@ -116,6 +121,8 @@ Base_location_on_server
          |        |_file1.pdf
          |    
          |_mets.xml
+         |
+         |_dc.xml
 ```
 
 
@@ -139,6 +146,8 @@ Base_location_on_server
          |   |_file2.txt
          |
          |_mets.xml
+         |
+         |_dc.xml
 ```   
 The "settings.properties" file should look like this:
 
