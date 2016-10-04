@@ -46,10 +46,10 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalRepCharacteristics">
               <record>
-                <key id="usageType">VIEW</key>
                 <key id="DigitalOriginal">false</key>
-                <key id="RevisionNumber">1</key>
+                <key id="usageType">VIEW</key>
                 <key id="preservationType">PRESERVATION_MASTER</key>
+                <key id="RevisionNumber">1</key>
               </record>
             </section>
           </dnx>
@@ -86,9 +86,9 @@
             <section id="generalFileCharacteristics">
               <record>
                 <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/workspaces/rosetta_sip_projects/rosetta_sip_factory/tests/data/test_batch_1/pm/presmaster.jpg</key>
+                <key id="fileSizeBytes">25678</key>
                 <key id="fileCreationDate">2016-10-05T08:27:36</key>
                 <key id="fileModificationDate">2016-10-05T08:21:51</key>
-                <key id="fileSizeBytes">25678</key>
               </record>
             </section>
           </dnx>
@@ -118,10 +118,10 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalRepCharacteristics">
               <record>
-                <key id="usageType">VIEW</key>
                 <key id="DigitalOriginal">false</key>
-                <key id="RevisionNumber">1</key>
+                <key id="usageType">VIEW</key>
                 <key id="preservationType">MODIFIED_MASTER</key>
+                <key id="RevisionNumber">1</key>
               </record>
             </section>
           </dnx>
@@ -158,9 +158,9 @@
             <section id="generalFileCharacteristics">
               <record>
                 <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/workspaces/rosetta_sip_projects/rosetta_sip_factory/tests/data/test_batch_1/mm/modifiedmaster.jpg</key>
+                <key id="fileSizeBytes">29690</key>
                 <key id="fileCreationDate">2016-10-05T08:27:23</key>
                 <key id="fileModificationDate">2016-10-05T08:25:08</key>
-                <key id="fileSizeBytes">29690</key>
               </record>
             </section>
           </dnx>
