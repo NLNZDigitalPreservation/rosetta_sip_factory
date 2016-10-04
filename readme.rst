@@ -10,7 +10,7 @@ The Rosetta SIP Factory provides functionality for creating METS XML deposits fo
 
 Usage
 -----
-To use as part of a different program:
+To use as part of a different program::
     python
     from rosetta_sip_factory import sip_builder
 
@@ -32,7 +32,7 @@ To use as part of a different program:
 
 The above arguments (if required) should be submitted in the following format:
 
-**ie_dmd_dict** = dictionary, such as follows:
+**ie_dmd_dict** = dictionary, such as follows::
 
     {"dc:title": "Title of record", "dcterms:isPartOf": "19926",
      "dc:identifier xsi:type=InstitionalIdentifier": "A1234",
@@ -43,7 +43,7 @@ details about building an ie_dmd section)
 **pres_master_dir** = string  
 **modified_master_dir** = string  
 **access_derivative_dir** = string  
-**cms** = dictionary inside list, such as follows:  
+**cms** = dictionary inside list, such as follows::
 
     [{'system': <system name>, 'recordId': <CMS ID> },]
  
@@ -51,11 +51,11 @@ details about building an ie_dmd section)
 
     [{'IEEntityType': <entity type>, 'submissionReason': <submission reason>},]
   
-**objectIdentifier** = dictionary inside list, such as follows:  
+**objectIdentifier** = dictionary inside list, such as follows::  
 
     [{'policyId': <policy ID>, 'policyDescription': <policy description>},]
 
-**eventList** = dictionary inside list, such as follows:  
+**eventList** = dictionary inside list, such as follows::  
 
     [{'eventDateTime': <event datetime>, 
       'eventType': <event type>,
@@ -77,7 +77,7 @@ details about building an ie_dmd section)
 Typical SIP folder structure
 ----------------------------
 The build_sip function creates a SIP struture that is compliant with what the Rosetta application expects to see. Below is an example of how a single-representation SIP would look:
-(Note: in all of these examples, the sip_title parameter has been supplied, which results in the dc.xml file being generated)
+(Note: in all of these examples, the sip_title parameter has been supplied, which results in the dc.xml file being generated)::
 
     Base_location_on_server
     |
@@ -96,7 +96,7 @@ The build_sip function creates a SIP struture that is compliant with what the Ro
              |
              |_dc.xml
 
-Below is an example of a multi-representation SIP:
+Below is an example of a multi-representation SIP::
 
     Base_location_on_server
     |
@@ -129,7 +129,7 @@ Below is an example of a multi-representation SIP:
 
 
 You can have as many "sip_folder" folders in the "Base_location_on_server" as you like.  
-Depending on your mode of deposit, you may want to add a settings folder and settings.properties file. If that is the case, you should add them so the SIP structure looks like this:
+Depending on your mode of deposit, you may want to add a settings folder and settings.properties file. If that is the case, you should add them so the SIP structure looks like this::
 
     Base_location_on_server
     |
@@ -151,8 +151,7 @@ Depending on your mode of deposit, you may want to add a settings folder and set
              |
              |_dc.xml
 
-The "settings.properties" file should look like this:
-
+The "settings.properties" file should look like this::
 
     material_flow_id=12345
     deposit_set_id=1
@@ -174,7 +173,7 @@ xsi - is mapped to "http://www.w3.org/2001/XMLSchema-instance", and is
 
 Installing Rosetta SIP Factory
 ------------------------------
-If you have downloaded the package, unzip it and execute the following command:  
+If you have downloaded the package, unzip it and execute the following command::  
     python setup.py install  
 This package will also install the most recent lxml library via pip if it is
 not already installed.
