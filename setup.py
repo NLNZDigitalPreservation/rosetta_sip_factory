@@ -10,6 +10,6 @@ config = {
 	'author_email':'sean.mosely@gmail.com',
 	'packages':['rosetta_sip_factory',],
 	'description':'Python library for building Submission Information Packages for the Rosetta digital preservation application',
-	'install_requires':['lxml',]}
+	'install_requires':['lxml==3.6.4',]}
 
 setup(**config)
