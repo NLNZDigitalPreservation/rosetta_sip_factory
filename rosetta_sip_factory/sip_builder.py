@@ -1,12 +1,12 @@
+import os
+import shutil
+
+from lxml import etree as ET
+
 from pydc import factory as dc_factory
 from pydnx import factory as dnx_factory
 from pymets import mets_factory
 from mets_dnx.factory import build_mets
-
-from lxml import etree as ET
-
-import os
-import shutil
 
 
 # declare namespaces
@@ -62,25 +62,30 @@ def build_sip(ie_dmd_dict=None,
     streams_dir = os.path.join(output_folder, 'content', 'streams')
     os.makedirs(streams_dir)
     if pres_master_dir != None:
-        # print("line 43! DEBUG")
-        # print(os.path.basename(pres_master_dir))
-        destination = os.path.join(streams_dir, os.path.basename(pres_master_dir))
+        destination = os.path.join(
+            streams_dir, 
+            os.path.basename(pres_master_dir))
         os.makedirs(destination)
-        # shutil.copytree(pres_master_dir, destination)
         copytree(pres_master_dir, destination)
     if modified_master_dir != None:
-        destination = os.path.join(streams_dir, os.path.basename(modified_master_dir))
+        destination = os.path.join(
+            streams_dir, 
+            os.path.basename(modified_master_dir))
         os.makedirs(destination)
-        # shutil.copytree(pres_master_dir, destination)
         copytree(pres_master_dir, destination)
     if access_derivative_dir != None:
-        destination = os.path.join(streams_dir, os.path.basename(access_derivative_dir))
+        destination = os.path.join(
+            streams_dir, 
+            os.path.basename(access_derivative_dir))
         os.makedirs(destination)
-        # shutil.copytree(pres_master_dir, destination)
         copytree(pres_master_dir, destination)
 
 
-    with open(os.path.join(output_folder, 'content', 'mets.xml'), 'w') as metsfile:
+    with open(os.path.join(
+                output_folder, 
+                'content', 
+                'mets.xml'), 
+            'w') as metsfile:
         metsfile.write(ET.tounicode(mets, pretty_print=True))
     
     # write SIP DC file if SIP title is supplied
@@ -88,6 +93,10 @@ def build_sip(ie_dmd_dict=None,
         dc_xml = ET.Element('{%s}record' % DC_NS, nsmap=dc_nsmap)
         title = ET.SubElement(dc_xml, '{%s}title' % DC_NS, nsmap=dc_nsmap)
         title.text = sip_title
-        with open(os.path.join(output_folder, 'content', 'dc.xml'), 'wb') as dc_file:
+        with open(os.path.join(
+                    output_folder,
+                   'content', 
+                   'dc.xml'), 
+                    'wb') as dc_file:
             dc_file.write(ET.tostring(dc_xml, xml_declaration=True,
                 encoding="UTF-8"))

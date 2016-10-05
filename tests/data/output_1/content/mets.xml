@@ -46,9 +46,9 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalRepCharacteristics">
               <record>
-                <key id="RevisionNumber">1</key>
-                <key id="DigitalOriginal">false</key>
                 <key id="usageType">VIEW</key>
+                <key id="DigitalOriginal">false</key>
+                <key id="RevisionNumber">1</key>
                 <key id="preservationType">PRESERVATION_MASTER</key>
               </record>
             </section>
@@ -77,18 +77,18 @@
       <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
         <mets:xmlData>
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
-            <section id="generalFileCharacteristics">
-              <record>
-                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/workspaces/rosetta_sip_projects/rosetta_sip_factory/tests/data/test_batch_1/pm/presmaster.jpg</key>
-                <key id="fileSizeBytes">25678</key>
-                <key id="fileCreationDate">2016-10-05T08:27:36</key>
-                <key id="fileModificationDate">2016-10-05T08:21:51</key>
-              </record>
-            </section>
             <section id="fileFixity">
               <record>
                 <key ID="fixityType">md5</key>
                 <key ID="fixityValue">9d09f20ab8e37e5d32cdd1508b49f0a9</key>
+              </record>
+            </section>
+            <section id="generalFileCharacteristics">
+              <record>
+                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/workspaces/rosetta_sip_projects/rosetta_sip_factory/tests/data/test_batch_1/pm/presmaster.jpg</key>
+                <key id="fileSizeBytes">25678</key>
+                <key id="fileModificationDate">2016-10-05T08:21:51</key>
+                <key id="fileCreationDate">2016-10-05T08:27:36</key>
               </record>
             </section>
           </dnx>
@@ -118,9 +118,9 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalRepCharacteristics">
               <record>
-                <key id="RevisionNumber">1</key>
-                <key id="DigitalOriginal">false</key>
                 <key id="usageType">VIEW</key>
+                <key id="DigitalOriginal">false</key>
+                <key id="RevisionNumber">1</key>
                 <key id="preservationType">MODIFIED_MASTER</key>
               </record>
             </section>
@@ -149,18 +149,18 @@
       <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
         <mets:xmlData>
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
-            <section id="generalFileCharacteristics">
-              <record>
-                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/workspaces/rosetta_sip_projects/rosetta_sip_factory/tests/data/test_batch_1/mm/modifiedmaster.jpg</key>
-                <key id="fileSizeBytes">29690</key>
-                <key id="fileCreationDate">2016-10-05T08:27:23</key>
-                <key id="fileModificationDate">2016-10-05T08:25:08</key>
-              </record>
-            </section>
             <section id="fileFixity">
               <record>
                 <key ID="fixityType">md5</key>
                 <key ID="fixityValue">aff64bf1391ac627edb3234a422f9a77</key>
+              </record>
+            </section>
+            <section id="generalFileCharacteristics">
+              <record>
+                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/workspaces/rosetta_sip_projects/rosetta_sip_factory/tests/data/test_batch_1/mm/modifiedmaster.jpg</key>
+                <key id="fileSizeBytes">29690</key>
+                <key id="fileModificationDate">2016-10-05T08:25:08</key>
+                <key id="fileCreationDate">2016-10-05T08:27:23</key>
               </record>
             </section>
           </dnx>
