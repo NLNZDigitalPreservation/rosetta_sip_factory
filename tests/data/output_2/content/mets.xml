@@ -46,9 +46,9 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalRepCharacteristics">
               <record>
-                <key id="RevisionNumber">1</key>
-                <key id="DigitalOriginal">false</key>
                 <key id="usageType">VIEW</key>
+                <key id="DigitalOriginal">false</key>
+                <key id="RevisionNumber">1</key>
                 <key id="preservationType">PRESERVATION_MASTER</key>
               </record>
             </section>
@@ -79,16 +79,16 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="fileFixity">
               <record>
-                <key ID="fixityValue">11c2563db299225b38d5df6287ccda7d</key>
                 <key ID="fixityType">md5</key>
+                <key ID="fixityValue">11c2563db299225b38d5df6287ccda7d</key>
               </record>
             </section>
             <section id="generalFileCharacteristics">
               <record>
-                <key id="fileSizeBytes">113715</key>
                 <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/workspaces/rosetta_sip_projects/rosetta_sip_factory/tests/data/test_batch_2/root_folder/Stock-White-angle-Front.jpg</key>
-                <key id="fileCreationDate">2016-10-05T08:41:30</key>
                 <key id="fileModificationDate">2016-10-05T08:41:30</key>
+                <key id="fileCreationDate">2016-10-05T08:41:30</key>
+                <key id="fileSizeBytes">113715</key>
               </record>
             </section>
           </dnx>
@@ -118,16 +118,16 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="fileFixity">
               <record>
-                <key ID="fixityValue">416e0ef2a640cb8d44ef861259b2bec8</key>
                 <key ID="fixityType">md5</key>
+                <key ID="fixityValue">416e0ef2a640cb8d44ef861259b2bec8</key>
               </record>
             </section>
             <section id="generalFileCharacteristics">
               <record>
-                <key id="fileSizeBytes">1240735</key>
                 <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/workspaces/rosetta_sip_projects/rosetta_sip_factory/tests/data/test_batch_2/root_folder/tier_2_folder/Experience.jpg</key>
-                <key id="fileCreationDate">2016-10-05T08:42:04</key>
                 <key id="fileModificationDate">2016-10-05T08:42:04</key>
+                <key id="fileCreationDate">2016-10-05T08:42:04</key>
+                <key id="fileSizeBytes">1240735</key>
               </record>
             </section>
           </dnx>
@@ -157,16 +157,16 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="fileFixity">
               <record>
-                <key ID="fixityValue">73836ad5ed74e486238b0d5ea0fa2607</key>
                 <key ID="fixityType">md5</key>
+                <key ID="fixityValue">73836ad5ed74e486238b0d5ea0fa2607</key>
               </record>
             </section>
             <section id="generalFileCharacteristics">
               <record>
-                <key id="fileSizeBytes">143156</key>
                 <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/workspaces/rosetta_sip_projects/rosetta_sip_factory/tests/data/test_batch_2/root_folder/tier_2_folder/tier_3_folder/freedom_isnt_what_i_thought_it_would_be.jpg</key>
-                <key id="fileCreationDate">2016-10-05T08:43:31</key>
                 <key id="fileModificationDate">2016-10-05T08:43:31</key>
+                <key id="fileCreationDate">2016-10-05T08:43:31</key>
+                <key id="fileSizeBytes">143156</key>
               </record>
             </section>
           </dnx>
