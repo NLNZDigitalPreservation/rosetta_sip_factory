@@ -13,7 +13,7 @@ config = {
 	'packages':['rosetta_sip_factory',],
 	'description':'Python library for building Submission Information Packages for the Rosetta digital preservation application',
 	'install_requires':['lxml==3.6.4',],
-	'download_url': 'https://github.com/NLNZDigitalPreservation/pymets/archive/'+VERSION+'.tar.gz',
+	'download_url': 'https://github.com/NLNZDigitalPreservation/rosetta_sip_factory/archive/'+VERSION+'.tar.gz',
 	}
 
 setup(**config)
