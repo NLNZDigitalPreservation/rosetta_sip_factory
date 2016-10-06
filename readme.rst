@@ -40,8 +40,11 @@ The above arguments (if required) should be submitted in the following format:
 (See below in the "dc, dcterms and xsi mapping in ie_dmd" description for more
 details about building an ie_dmd section)  
 **pres_master_dir** = string  
+
 **modified_master_dir** = string  
+
 **access_derivative_dir** = string  
+
 **cms** = dictionary inside list, such as follows::
 
     [{'system': <system name>, 'recordId': <CMS ID> },]
@@ -168,7 +171,7 @@ and attributes. Specifically, the following three namespaces are supported:
 dc - is mapped to "http://purl.org/dc/elements/1.1/"   
 dcterms - is mapped to "http://purl.org/dc/terms/"   
 xsi - is mapped to "http://www.w3.org/2001/XMLSchema-instance", and is
-      intended only for use with attributes, not the element names.
+intended only for use with attributes, not the element names.
 
 Installing Rosetta SIP Factory
 ------------------------------
