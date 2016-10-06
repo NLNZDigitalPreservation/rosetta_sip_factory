@@ -20,7 +20,7 @@ dc_nsmap = {
     "xsi": XSI_NS,
 }
 
-def copytree(src, dst, symlinks=False, ignore=None):
+def _copytree(src, dst, symlinks=False, ignore=None):
     for item in os.listdir(src):
         s = os.path.join(src, item)
         d = os.path.join(dst, item)
@@ -149,19 +149,19 @@ def build_sip(
             streams_dir, 
             os.path.basename(pres_master_dir))
         os.makedirs(destination)
-        copytree(pres_master_dir, destination)
+        _copytree(pres_master_dir, destination)
     if modified_master_dir != None:
         destination = os.path.join(
             streams_dir, 
             os.path.basename(modified_master_dir))
         os.makedirs(destination)
-        copytree(pres_master_dir, destination)
+        _copytree(pres_master_dir, destination)
     if access_derivative_dir != None:
         destination = os.path.join(
             streams_dir, 
             os.path.basename(access_derivative_dir))
         os.makedirs(destination)
-        copytree(pres_master_dir, destination)
+        _copytree(pres_master_dir, destination)
 
 
     with open(os.path.join(
