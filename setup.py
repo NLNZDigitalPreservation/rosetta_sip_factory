@@ -3,7 +3,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
-VERSION="v0.1.0"
+VERSION="0.1.0"
 
 config = {
 	'name':'rosetta_sip_factory',
@@ -13,7 +13,7 @@ config = {
 	'packages':['rosetta_sip_factory',],
 	'description':'Python library for building Submission Information Packages for the Rosetta digital preservation application',
 	'install_requires':['lxml==3.6.4',],
-	'download_url': 'https://github.com/NLNZDigitalPreservation/rosetta_sip_factory/archive/'+VERSION+'.tar.gz',
+	'download_url': 'https://github.com/NLNZDigitalPreservation/rosetta_sip_factory/archive/v'+VERSION+'.tar.gz',
 	'license': 'MIT'
 	}
 
