@@ -26,55 +26,55 @@ Usage
         input_dir=None,
         digital_original=False,
         sip_title=None,
-        output_folder=None
+        output_dir=None
     )
 
 The above arguments (if required) should be submitted in the following format:
 
-**ie_dmd_dict** = dictionary, such as follows::
-
-    {"dc:title": "Title of record", "dcterms:isPartOf": "19926",
-     "dc:identifier xsi:type=InstitionalIdentifier": "A1234",
-     "dcterms:provenance": "Transferred from Agency ABCD"}
-
-(See below in the "dc, dcterms and xsi mapping in ie_dmd" description for more
-details about building an ie_dmd section)  
-**pres_master_dir** = string  
-
-**modified_master_dir** = string  
-
-**access_derivative_dir** = string  
-
-**cms** = dictionary inside list, such as follows::
-
-    [{'system': <system name>, 'recordId': <CMS ID> },]
- 
-**generalIECharacteristics** = dictionary inside list, such as follows:  
-
-    [{'IEEntityType': <entity type>, 'submissionReason': <submission reason>},]
-  
-**objectIdentifier** = dictionary inside list, such as follows::  
-
-    [{'policyId': <policy ID>, 'policyDescription': <policy description>},]
-
-**eventList** = dictionary inside list, such as follows::  
-
-    [{'eventDateTime': <event datetime>, 
-      'eventType': <event type>,
-      'eventIdentifierType': <event identifier type>, 
-      'eventIdentifierValue': <event identifier value>,
-      'eventOutcome1': <event outcome 1>,
-      'eventOutcomeDetail1': <event outcome detail 1>,
-      'eventDescription': <event description>,
-      'linkingAgentIdentifierType1': <linking agent identifier type 1>,
-      'linkingAgentIdentifierValue1': <linking agent identifier value 1>
-      },]
-
-(**Note**: Not all key/value pairs are required for events.)  
-**input_dir** = string  
-**digital_original** = Boolean (default is False)  
-**sip_title** = String
-**output_folder** = string  
+|**ie_dmd_dict** = dictionary, such as follows::
+|
+|    {"dc:title": "Title of record", "dcterms:isPartOf": "19926",
+|     "dc:identifier xsi:type=InstitionalIdentifier": "A1234",
+|     "dcterms:provenance": "Transferred from Agency ABCD"}
+|
+|(See below in the "dc, dcterms and xsi mapping in ie_dmd" description for more
+|details about building an ie_dmd section)  
+|**pres_master_dir** = string  
+|
+|**modified_master_dir** = string  
+|
+|**access_derivative_dir** = string  
+|
+|**cms** = dictionary inside list, such as follows::
+|
+|    [{'system': <system name>, 'recordId': <CMS ID> },]
+| 
+|**generalIECharacteristics** = dictionary inside list, such as follows:  
+|
+|    [{'IEEntityType': <entity type>, 'submissionReason': <submission reason>},]
+|  
+|**objectIdentifier** = dictionary inside list, such as follows::  
+|
+|    [{'policyId': <policy ID>, 'policyDescription': <policy description>},]
+|
+|**eventList** = dictionary inside list, such as follows::  
+|
+|    [{'eventDateTime': <event datetime>, 
+|      'eventType': <event type>,
+|      'eventIdentifierType': <event identifier type>, 
+|      'eventIdentifierValue': <event identifier value>,
+|      'eventOutcome1': <event outcome 1>,
+|      'eventOutcomeDetail1': <event outcome detail 1>,
+|      'eventDescription': <event description>,
+|      'linkingAgentIdentifierType1': <linking agent identifier type 1>,
+|      'linkingAgentIdentifierValue1': <linking agent identifier value 1>
+|      },]
+|
+|(**Note**: Not all key/value pairs are required for events.)  
+|**input_dir** = string  
+|**digital_original** = Boolean (default is False)  
+|**sip_title** = String
+|**output_dir** = string  
 
 Typical SIP folder structure
 ----------------------------
