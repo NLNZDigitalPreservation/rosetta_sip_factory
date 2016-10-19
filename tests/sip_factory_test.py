@@ -6,7 +6,6 @@ from nose.tools import *
 
 from rosetta_sip_factory import sip_builder as sb
 
-
 def test_mets_dnx():
     """Test basic construction of METS DNX"""
     output_dir = os.path.join(
@@ -141,6 +140,42 @@ def test_mets_dnx_with_dc_xml():
                 os.path.dirname(os.path.realpath(__file__)),
                 'data',
                 'test_batch_1'),
+        generalIECharacteristics=[
+                {'submissionReason': 'bornDigitalContent',
+                'IEEntityType': 'periodicIE'}],
+        sip_title=sip_title,
+        output_dir=output_dir
+        )
+    files_list = os.listdir(os.path.join(output_dir, 'content'))
+    if 'dc.xml' in files_list:
+        dc_xml = ET.parse(os.path.join(output_dir, 'content', 'dc.xml'))
+        dc = dc_xml.getroot()
+        title = dc.xpath(".//dc:title", namespaces=dc.nsmap)[0].text
+    else:
+        title = None
+    assert(title == sip_title)
+
+
+def test_single_file_mets_dnx_with_dc_xml():
+    """Test basic construction of a single-file METS DNX with a dc.xml
+    file for the SIP title
+    """
+    output_dir = os.path.join(os.path.dirname(
+                os.path.realpath(__file__)), 
+                'data',
+                'output_3')
+    # first off, delete anything that's in the output folder
+    shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
+    ie_dc_dict = {"dc:title": "test title"}    
+    sip_title = 'Test Deposit'
+    sb.build_single_file_sip(
+        ie_dmd_dict=ie_dc_dict,
+        filepath=os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_3',
+                'presmaster.jpg'),
         generalIECharacteristics=[
                 {'submissionReason': 'bornDigitalContent',
                 'IEEntityType': 'periodicIE'}],

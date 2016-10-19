@@ -6,7 +6,7 @@ from lxml import etree as ET
 from pydc import factory as dc_factory
 from pydnx import factory as dnx_factory
 from pymets import mets_factory
-from mets_dnx.factory import build_mets
+from mets_dnx.factory import build_mets, build_single_file_mets
 
 
 # declare namespaces
@@ -20,6 +20,18 @@ dc_nsmap = {
     "xsi": XSI_NS,
 }
 
+def _build_dc_sip(output_dir, sip_title):
+    dc_xml = ET.Element('{%s}record' % DC_NS, nsmap=dc_nsmap)
+    title = ET.SubElement(dc_xml, '{%s}title' % DC_NS, nsmap=dc_nsmap)
+    title.text = sip_title
+    with open(os.path.join(
+                output_dir,
+               'content', 
+               'dc.xml'), 
+                'wb') as dc_file:
+        dc_file.write(ET.tostring(dc_xml, xml_declaration=True,
+            encoding="UTF-8"))
+
 def _copytree(src, dst, symlinks=False, ignore=None):
     for item in os.listdir(src):
         s = os.path.join(src, item)
@@ -28,6 +40,14 @@ def _copytree(src, dst, symlinks=False, ignore=None):
             shutil.copytree(s, d, symlinks, ignore)
         else:
             shutil.copy2(s, d)
+
+def _write_sip(mets, output_dir):
+    with open(os.path.join(
+                output_dir, 
+                'content', 
+                'mets.xml'), 
+            'w') as metsfile:
+        metsfile.write(ET.tounicode(mets, pretty_print=True))
 
 def build_sip(
         ie_dmd_dict=None,
@@ -174,22 +194,41 @@ def build_sip(
         _copytree(pres_master_dir, destination)
 
 
-    with open(os.path.join(
-                output_dir, 
-                'content', 
-                'mets.xml'), 
-            'w') as metsfile:
-        metsfile.write(ET.tounicode(mets, pretty_print=True))
+    _write_sip(mets, output_dir)
     
     # write SIP DC file if SIP title is supplied
     if sip_title != None:
-        dc_xml = ET.Element('{%s}record' % DC_NS, nsmap=dc_nsmap)
-        title = ET.SubElement(dc_xml, '{%s}title' % DC_NS, nsmap=dc_nsmap)
-        title.text = sip_title
-        with open(os.path.join(
-                    output_dir,
-                   'content', 
-                   'dc.xml'), 
-                    'wb') as dc_file:
-            dc_file.write(ET.tostring(dc_xml, xml_declaration=True,
-                encoding="UTF-8"))
+        _build_dc_sip(output_dir, sip_title)
+
+
+def build_single_file_sip(ie_dmd_dict=None,
+        filepath=None,
+        cms=None,
+        webHarvesting=None,
+        generalIECharacteristics=None,
+        objectIdentifier=None,
+        accessRightsPolicy=None,
+        eventList=None,
+        digital_original=False,
+        sip_title=None,
+        output_dir=None):
+    # build mets
+    mets = build_single_file_mets(ie_dmd_dict=ie_dmd_dict,
+                filepath=filepath,
+                cms=cms,
+                webHarvesting=webHarvesting,
+                generalIECharacteristics=generalIECharacteristics,
+                objectIdentifier=objectIdentifier,
+                accessRightsPolicy=accessRightsPolicy,
+                eventList=eventList,
+                digital_original=digital_original)
+    
+
+    # build output SIP folder structure
+    streams_dir = os.path.join(output_dir, 'content', 'streams')
+    os.makedirs(streams_dir)
+    shutil.copy2(filepath, os.path.join(streams_dir,
+                    os.path.basename(filepath)))
+    _write_sip(mets, output_dir)
+    if sip_title != None:
+        _build_dc_sip(output_dir, sip_title)
