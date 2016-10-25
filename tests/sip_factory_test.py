@@ -51,23 +51,31 @@ def test_sip_single_rep_multi_folder_hierarchy():
     shutil.rmtree(output_dir)
     os.makedirs(output_dir)
     ie_dc_dict = {"dc:title": "test title"}
+    input_dir = os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_2')
     sb.build_sip(
         ie_dmd_dict=ie_dc_dict,
         pres_master_dir=os.path.join(
-                os.path.dirname(os.path.realpath(__file__)),
-                'data',
-                'test_batch_2',
+                input_dir,
                 'root_folder'),
         input_dir=os.path.join(
-                os.path.dirname(os.path.realpath(__file__)),
-                'data',
-                'test_batch_2'),
+                input_dir),
         generalIECharacteristics=[
                 {'submissionReason': 'bornDigitalContent', 
                  'IEEntityType': 'periodicIE'}
                  ],
         output_dir=output_dir
         )
+    input_content = os.listdir(input_dir)
+    streams_content = os.listdir(
+                        os.path.join(
+                            output_dir,
+                            'content',
+                            'streams'))
+    for thing in input_content:
+        assert(thing in streams_content)
     
 def test_sip_build_correct_digital_original_value():
     """Test to confirm bug fix - digital original value was being populated with
@@ -190,3 +198,39 @@ def test_single_file_mets_dnx_with_dc_xml():
     else:
         title = None
     assert(title == sip_title)
+
+
+def test_sip_single_rep_flat_files():
+    """Build SIP with single representation in a flat filestructure"""
+    output_dir = os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'output_4')
+    # first off, delete anything that's in the output folder
+    shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
+    ie_dc_dict = {"dc:title": "test title"}
+    input_dir = os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_4')
+    sb.build_sip(
+        ie_dmd_dict=ie_dc_dict,
+        pres_master_dir=os.path.join(
+                input_dir),
+        input_dir=os.path.join(
+                input_dir),
+        generalIECharacteristics=[
+                {'submissionReason': 'bornDigitalContent', 
+                 'IEEntityType': 'periodicIE'}
+                 ],
+        output_dir=output_dir
+        )
+    input_content = os.listdir(input_dir)
+    streams_content = os.listdir(
+                        os.path.join(
+                            output_dir,
+                            'content',
+                            'streams'))
+    for thing in input_content:
+        assert(thing in streams_content)

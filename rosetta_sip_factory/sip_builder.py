@@ -175,10 +175,19 @@ def build_sip(
     streams_dir = os.path.join(output_dir, 'content', 'streams')
     os.makedirs(streams_dir)
     if pres_master_dir != None:
-        destination = os.path.join(
-            streams_dir, 
-            os.path.basename(pres_master_dir))
-        os.makedirs(destination)
+        # 2016-10-26: casing for where PM is the same as
+        # input_dir, in which case, omit the parent dir
+        # for the stream and throw the file straight into
+        # the streams dir
+        if (modified_master_dir == None and 
+            access_derivative_dir == None and
+            input_dir == pres_master_dir):
+            destination = os.path.join(streams_dir)
+        else:
+            destination = os.path.join(
+                streams_dir, 
+                os.path.basename(pres_master_dir))
+            os.makedirs(destination)
         _copytree(pres_master_dir, destination)
     if modified_master_dir != None:
         destination = os.path.join(
