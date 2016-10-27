@@ -6,7 +6,7 @@ from lxml import etree as ET
 from pydc import factory as dc_factory
 from pydnx import factory as dnx_factory
 from pymets import mets_factory
-from mets_dnx.factory import build_mets, build_single_file_mets
+from mets_dnx.factory import build_mets, build_single_file_mets, build_mets_from_json
 
 
 # declare namespaces
@@ -18,6 +18,11 @@ dc_nsmap = {
     "dc": DC_NS,
     "dcterms": DCTERMS_NS,
     "xsi": XSI_NS,
+}
+
+mets_dnx_nsmap = {
+    'mets': 'http://www.loc.gov/METS/',
+    'dnx': 'http://www.exlibrisgroup.com/dps/dnx'
 }
 
 def _build_dc_sip(output_dir, sip_title):
@@ -239,5 +244,58 @@ def build_single_file_sip(ie_dmd_dict=None,
     shutil.copy2(filepath, os.path.join(streams_dir,
                     os.path.basename(filepath)))
     _write_sip(mets, output_dir)
+    if sip_title != None:
+        _build_dc_sip(output_dir, sip_title)
+
+
+def build_sip_from_json(ie_dmd_dict=None,
+        pres_master_json=None, 
+        modified_master_json=None,
+        access_derivative_json=None,
+        cms=None,
+        webHarvesting=None,
+        generalIECharacteristics=None,
+        objectIdentifier=None,
+        accessRightsPolicy=None,
+        eventList=None,
+        input_dir=None,
+        digital_original=False,
+        sip_title=None,
+        output_dir=None):
+    # build METS
+    mets = build_mets_from_json(
+        ie_dmd_dict=ie_dmd_dict,
+        pres_master_json=pres_master_json, 
+        modified_master_json=modified_master_json,
+        access_derivative_json=access_derivative_json,
+        cms=cms,
+        webHarvesting=webHarvesting,
+        generalIECharacteristics=generalIECharacteristics,
+        objectIdentifier=objectIdentifier,
+        accessRightsPolicy=accessRightsPolicy,
+        eventList=eventList,
+        input_dir=input_dir,
+        digital_original=digital_original)
+
+    # build output SIP folder structure
+    streams_dir = os.path.join(output_dir, 'content', 'streams')
+    os.makedirs(streams_dir)
+
+    files_list = mets.findall(".//{http://www.loc.gov/METS/}fileSec/{http://www.loc.gov/METS/}fileGrp/{http://www.loc.gov/METS/}file")
+    for file in files_list:
+        origin = mets.find('.//mets:amdSec[@ID="%s"]/mets:techMD/mets:mdWrap/mets:xmlData/dnx/section[@id="generalFileCharacteristics"]/record/key[@id="fileOriginalPath"]' % (file.attrib["ADMID"]), namespaces=mets_dnx_nsmap ).text
+        destination = os.path.join(file.find(".//{http://www.loc.gov/METS/}FLocat").attrib["{http://www.w3.org/1999/xlink}href"])
+        if not os.path.exists(os.path.join(streams_dir, os.path.dirname(destination))):
+            try:
+                os.makedirs(os.path.join(streams_dir, os.path.dirname(destination)))
+            except OSError as exc:  # Guard against race condition
+                if exc.errno != errno.EEXIST:
+                    raise
+        # _copytree(origin, destination)
+        shutil.copy2(origin, destination)
+
+    _write_sip(mets, output_dir)
+    
+    # write SIP DC file if SIP title is supplied
     if sip_title != None:
         _build_dc_sip(output_dir, sip_title)

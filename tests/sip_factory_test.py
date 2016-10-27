@@ -6,6 +6,10 @@ from nose.tools import *
 
 from rosetta_sip_factory import sip_builder as sb
 
+
+CURRENT_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)))
+
+
 def test_mets_dnx():
     """Test basic construction of METS DNX"""
     output_dir = os.path.join(
@@ -234,3 +238,51 @@ def test_sip_single_rep_flat_files():
                             'streams'))
     for thing in input_content:
         assert(thing in streams_content)
+
+
+def test_sip_single_rep_json():
+    """Build SIP with single representation with JSON input"""
+
+    pm_json = """[{"name": "%s",
+                "type": "directory",
+                "children":                   
+                    [{"name": "img_1.jpg",
+                      "type": "file",
+                      "MD5": "9d09f20ab8e37e5d32cdd1508b49f0a9",
+                      "fileCreationDate": "1st of January, 1601",
+                      "fileModificationDate": "1st of January, 1601",
+                      "label": "Image One",
+                      "note": "This is a note for image 1"},
+                     {"name": "img_2.jpg",
+                      "type": "file",
+                      "MD5": "11c2563db299225b38d5df6287ccda7d",
+                      "fileCreationDate": "1st of January, 1601",
+                      "fileModificationDate": "1st of January, 1601",
+                      "label": "Image Two",
+                      "note": "This is a note for image 2"
+                      }
+                    ]
+                }]""" % (os.path.join(CURRENT_DIR, "data", "test_batch_4"))
+    output_dir = os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'output_4')
+    # first off, delete anything that's in the output folder
+    shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
+    ie_dc_dict = {"dc:title": "test title"}
+    input_dir = os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_4')
+    sb.build_sip_from_json(
+        ie_dmd_dict=ie_dc_dict,
+        pres_master_json=pm_json,
+        input_dir=os.path.join(
+                input_dir),
+        generalIECharacteristics=[
+                {'submissionReason': 'bornDigitalContent', 
+                 'IEEntityType': 'periodicIE'}
+                 ],
+        output_dir=output_dir
+        )
