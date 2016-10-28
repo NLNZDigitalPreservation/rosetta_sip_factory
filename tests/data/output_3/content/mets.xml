@@ -15,8 +15,8 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalIECharacteristics">
               <record>
-                <key id="submissionReason">bornDigitalContent</key>
                 <key id="IEEntityType">periodicIE</key>
+                <key id="submissionReason">bornDigitalContent</key>
               </record>
             </section>
           </dnx>
@@ -52,10 +52,10 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalRepCharacteristics">
               <record>
-                <key id="usageType">VIEW</key>
-                <key id="preservationType">PRESERVATION_MASTER</key>
-                <key id="RevisionNumber">1</key>
                 <key id="DigitalOriginal">false</key>
+                <key id="usageType">VIEW</key>
+                <key id="RevisionNumber">1</key>
+                <key id="preservationType">PRESERVATION_MASTER</key>
               </record>
             </section>
           </dnx>
@@ -89,18 +89,18 @@
       <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
         <mets:xmlData>
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
-            <section id="fileFixity">
-              <record>
-                <key ID="fixityType">MD5</key>
-                <key ID="fixityValue">9d09f20ab8e37e5d32cdd1508b49f0a9</key>
-              </record>
-            </section>
             <section id="generalFileCharacteristics">
               <record>
-                <key id="fileSizeBytes">25678</key>
-                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/workspaces/rosetta_sip_projects/rosetta_sip_factory/tests/data/test_batch_3/presmaster.jpg</key>
                 <key id="fileCreationDate">2016-10-18T15:04:23</key>
+                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/workspaces/rosetta_sip_projects/rosetta_sip_factory/tests/data/test_batch_3/presmaster.jpg</key>
                 <key id="fileModificationDate">2016-10-18T15:04:23</key>
+                <key id="fileSizeBytes">25678</key>
+              </record>
+            </section>
+            <section id="fileFixity">
+              <record>
+                <key ID="fixityValue">9d09f20ab8e37e5d32cdd1508b49f0a9</key>
+                <key ID="fixityType">MD5</key>
               </record>
             </section>
           </dnx>

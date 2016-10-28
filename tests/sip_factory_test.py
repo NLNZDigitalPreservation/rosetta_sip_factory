@@ -243,26 +243,43 @@ def test_sip_single_rep_flat_files():
 def test_sip_single_rep_json():
     """Build SIP with single representation with JSON input"""
 
-    pm_json = """[{"name": "%s",
-                "type": "directory",
-                "children":                   
-                    [{"name": "img_1.jpg",
-                      "type": "file",
-                      "MD5": "9d09f20ab8e37e5d32cdd1508b49f0a9",
-                      "fileCreationDate": "1st of January, 1601",
-                      "fileModificationDate": "1st of January, 1601",
-                      "label": "Image One",
-                      "note": "This is a note for image 1"},
-                     {"name": "img_2.jpg",
-                      "type": "file",
-                      "MD5": "11c2563db299225b38d5df6287ccda7d",
-                      "fileCreationDate": "1st of January, 1601",
-                      "fileModificationDate": "1st of January, 1601",
-                      "label": "Image Two",
-                      "note": "This is a note for image 2"
-                      }
-                    ]
-                }]""" % (os.path.join(CURRENT_DIR, "data", "test_batch_4"))
+    pm_json = """[
+        {"name": "img_1.jpg",
+         "fileOriginalPath": "img_1.jpg",
+         "physical_path" : "%s/img_1.jpg",
+         "MD5": "9d09f20ab8e37e5d32cdd1508b49f0a9",
+         "fileCreationDate": "1st of January, 1601",
+         "fileModificationDate": "1st of January, 1601",
+         "label": "Image One",
+         "note": "This is a note for image 1"},
+         {"name": "img_2.jpg",
+         "fileOriginalPath": "img_2.jpg",
+         "physical_path" : "%s/img_2.jpg",
+         "MD5": "11c2563db299225b38d5df6287ccda7d",
+         "fileCreationDate": "1st of January, 1601",
+         "fileModificationDate": "1st of January, 1601",
+         "label": "Image Two",
+         "note": "This is a note for image 2"}
+    ]""" % (os.path.join(CURRENT_DIR, "data", "test_batch_4"),
+            os.path.join(CURRENT_DIR, "data", "test_batch_4"))
+    # pm_json = """[
+    #     {"name": "img_1.jpg",
+    #      "path": "%s/img1.jpg",
+    #      "MD5": "9d09f20ab8e37e5d32cdd1508b49f0a9",
+    #      "fileCreationDate": "1st of January, 1601",
+    #      "fileModificationDate": "1st of January, 1601",
+    #      "label": "Image One",
+    #      "note": "This is a note for image 1"},
+    #      {"name": "img_2.jpg",
+    #      "path": "%s/img2.jpg",
+    #      "MD5": "11c2563db299225b38d5df6287ccda7d",
+    #      "fileCreationDate": "1st of January, 1601",
+    #      "fileModificationDate": "1st of January, 1601",
+    #      "label": "Image Two",
+    #      "note": "This is a note for image 2"}
+    # ]""" % (os.path.join(CURRENT_DIR, "data", "test_batch_4"),
+    #         os.path.join(CURRENT_DIR, "data", "test_batch_4"))
+
     output_dir = os.path.join(
                 os.path.dirname(os.path.realpath(__file__)),
                 'data',

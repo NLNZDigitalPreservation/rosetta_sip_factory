@@ -1,3 +1,4 @@
+import json
 import os
 import shutil
 
@@ -247,6 +248,23 @@ def build_single_file_sip(ie_dmd_dict=None,
     if sip_title != None:
         _build_dc_sip(output_dir, sip_title)
 
+def _move_files_from_json(json_doc, streams_dir):
+    if type(json_doc) == str:
+        rep_dict = json.loads(json_doc)
+    else:
+        rep_dict = json_doc
+    for item in rep_dict:
+        origin = item['physical_path']
+        destination = item['fileOriginalPath']
+        if not os.path.exists(os.path.join(streams_dir, os.path.dirname(destination))):
+            try:
+                os.makedirs(os.path.join(streams_dir, os.path.dirname(destination)))
+            except OSError as exc:  # Guard against race condition
+                if exc.errno != errno.EEXIST:
+                    raise
+        shutil.copy2(origin, destination)
+
+
 
 def build_sip_from_json(ie_dmd_dict=None,
         pres_master_json=None, 
@@ -281,20 +299,26 @@ def build_sip_from_json(ie_dmd_dict=None,
     streams_dir = os.path.join(output_dir, 'content', 'streams')
     os.makedirs(streams_dir)
 
-    files_list = mets.findall(".//{http://www.loc.gov/METS/}fileSec/{http://www.loc.gov/METS/}fileGrp/{http://www.loc.gov/METS/}file")
-    for file in files_list:
-        origin = mets.find('.//mets:amdSec[@ID="%s"]/mets:techMD/mets:mdWrap/mets:xmlData/dnx/section[@id="generalFileCharacteristics"]/record/key[@id="fileOriginalPath"]' % (file.attrib["ADMID"]), namespaces=mets_dnx_nsmap ).text
-        destination = os.path.join(file.find(".//{http://www.loc.gov/METS/}FLocat").attrib["{http://www.w3.org/1999/xlink}href"])
-        if not os.path.exists(os.path.join(streams_dir, os.path.dirname(destination))):
-            try:
-                os.makedirs(os.path.join(streams_dir, os.path.dirname(destination)))
-            except OSError as exc:  # Guard against race condition
-                if exc.errno != errno.EEXIST:
-                    raise
-        # _copytree(origin, destination)
-        shutil.copy2(origin, destination)
+    # print(ET.tounicode(mets, pretty_print=True))
+    # files_list = mets.findall(".//{http://www.loc.gov/METS/}fileSec/{http://www.loc.gov/METS/}fileGrp/{http://www.loc.gov/METS/}file")
+    # for file in files_list:
+    #     print("finding {}!".format(file.attrib["ADMID"]))
+    #     origin = mets.find('.//mets:amdSec[@ID="%s"]/mets:techMD/mets:mdWrap/mets:xmlData/dnx/section[@id="generalFileCharacteristics"]/record/key[@id="fileOriginalPath"]' % (file.attrib["ADMID"]), namespaces=mets_dnx_nsmap ).text
+    #     destination = os.path.join(file.find(".//{http://www.loc.gov/METS/}FLocat").attrib["{http://www.w3.org/1999/xlink}href"])
+    #     if not os.path.exists(os.path.join(streams_dir, os.path.dirname(destination))):
+    #         try:
+    #             os.makedirs(os.path.join(streams_dir, os.path.dirname(destination)))
+    #         except OSError as exc:  # Guard against race condition
+    #             if exc.errno != errno.EEXIST:
+    #                 raise
+    #     # _copytree(origin, destination)
+    #     shutil.copy2(origin, destination)
 
     _write_sip(mets, output_dir)
+    for entry in (pres_master_json, modified_master_json, access_derivative_json):
+        if entry != None:
+            _move_files_from_json(entry, streams_dir)
+
     
     # write SIP DC file if SIP title is supplied
     if sip_title != None:

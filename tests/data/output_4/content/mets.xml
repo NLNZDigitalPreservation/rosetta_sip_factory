@@ -15,8 +15,8 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalIECharacteristics">
               <record>
-                <key id="submissionReason">bornDigitalContent</key>
                 <key id="IEEntityType">periodicIE</key>
+                <key id="submissionReason">bornDigitalContent</key>
               </record>
             </section>
           </dnx>
@@ -52,10 +52,10 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalRepCharacteristics">
               <record>
-                <key id="usageType">VIEW</key>
-                <key id="preservationType">PRESERVATION_MASTER</key>
-                <key id="RevisionNumber">1</key>
                 <key id="DigitalOriginal">false</key>
+                <key id="usageType">VIEW</key>
+                <key id="RevisionNumber">1</key>
+                <key id="preservationType">PRESERVATION_MASTER</key>
               </record>
             </section>
           </dnx>
@@ -89,19 +89,19 @@
       <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
         <mets:xmlData>
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
-            <section id="fileFixity">
-              <record>
-                <key ID="fixityType">MD5</key>
-                <key ID="fixityValue">9d09f20ab8e37e5d32cdd1508b49f0a9</key>
-              </record>
-            </section>
             <section id="generalFileCharacteristics">
               <record>
                 <key id="note">This is a note for image 1</key>
-                <key id="fileOriginalName">img_1.jpg</key>
-                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/workspaces/rosetta_sip_projects/rosetta_sip_factory/tests/data/test_batch_4/img_1.jpg</key>
                 <key id="fileCreationDate">1st of January, 1601</key>
+                <key id="fileOriginalName">img_1.jpg</key>
+                <key id="fileOriginalPath">img_1.jpg</key>
                 <key id="fileModificationDate">1st of January, 1601</key>
+              </record>
+            </section>
+            <section id="fileFixity">
+              <record>
+                <key ID="fixityValue">9d09f20ab8e37e5d32cdd1508b49f0a9</key>
+                <key ID="fixityType">MD5</key>
               </record>
             </section>
           </dnx>
@@ -135,19 +135,19 @@
       <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
         <mets:xmlData>
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
-            <section id="fileFixity">
-              <record>
-                <key ID="fixityType">MD5</key>
-                <key ID="fixityValue">11c2563db299225b38d5df6287ccda7d</key>
-              </record>
-            </section>
             <section id="generalFileCharacteristics">
               <record>
                 <key id="note">This is a note for image 2</key>
-                <key id="fileOriginalName">img_2.jpg</key>
-                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/workspaces/rosetta_sip_projects/rosetta_sip_factory/tests/data/test_batch_4/img_2.jpg</key>
                 <key id="fileCreationDate">1st of January, 1601</key>
+                <key id="fileOriginalName">img_2.jpg</key>
+                <key id="fileOriginalPath">img_2.jpg</key>
                 <key id="fileModificationDate">1st of January, 1601</key>
+              </record>
+            </section>
+            <section id="fileFixity">
+              <record>
+                <key ID="fixityValue">11c2563db299225b38d5df6287ccda7d</key>
+                <key ID="fixityType">MD5</key>
               </record>
             </section>
           </dnx>
@@ -186,15 +186,13 @@
       </mets:file>
     </mets:fileGrp>
   </mets:fileSec>
-  <mets:structMap ID="rep2-1" TYPE="PHYSICAL">
+  <mets:structMap ID="rep1-1" TYPE="PHYSICAL">
     <mets:div LABEL="Preservation Master">
-      <mets:div LABEL="/home/sean/Documents/programming_stuff/python/workspaces/rosetta_sip_projects/rosetta_sip_factory/tests/data/test_batch_4" TYPE="FOLDER">
-        <mets:div LABEL="Image One" TYPE="FILE">
-          <mets:fptr FILEID="fid1-1"/>
-        </mets:div>
-        <mets:div LABEL="Image Two" TYPE="FILE">
-          <mets:fptr FILEID="fid2-1"/>
-        </mets:div>
+      <mets:div LABEL="Image One" TYPE="FILE">
+        <mets:fptr FILEID="fid1-1"/>
+      </mets:div>
+      <mets:div LABEL="Image Two" TYPE="FILE">
+        <mets:fptr FILEID="fid1-1"/>
       </mets:div>
     </mets:div>
   </mets:structMap>
