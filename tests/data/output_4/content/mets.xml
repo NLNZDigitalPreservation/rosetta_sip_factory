@@ -15,8 +15,8 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalIECharacteristics">
               <record>
-                <key id="IEEntityType">periodicIE</key>
                 <key id="submissionReason">bornDigitalContent</key>
+                <key id="IEEntityType">periodicIE</key>
               </record>
             </section>
           </dnx>
@@ -52,10 +52,10 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalRepCharacteristics">
               <record>
-                <key id="DigitalOriginal">false</key>
-                <key id="usageType">VIEW</key>
                 <key id="RevisionNumber">1</key>
+                <key id="DigitalOriginal">false</key>
                 <key id="preservationType">PRESERVATION_MASTER</key>
+                <key id="usageType">VIEW</key>
               </record>
             </section>
           </dnx>
@@ -89,19 +89,19 @@
       <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
         <mets:xmlData>
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
-            <section id="generalFileCharacteristics">
-              <record>
-                <key id="note">This is a note for image 1</key>
-                <key id="fileCreationDate">1st of January, 1601</key>
-                <key id="fileOriginalName">img_1.jpg</key>
-                <key id="fileOriginalPath">img_1.jpg</key>
-                <key id="fileModificationDate">1st of January, 1601</key>
-              </record>
-            </section>
             <section id="fileFixity">
               <record>
                 <key ID="fixityValue">9d09f20ab8e37e5d32cdd1508b49f0a9</key>
                 <key ID="fixityType">MD5</key>
+              </record>
+            </section>
+            <section id="generalFileCharacteristics">
+              <record>
+                <key id="fileOriginalPath">img_1.jpg</key>
+                <key id="fileCreationDate">1st of January, 1601</key>
+                <key id="note">This is a note for image 1</key>
+                <key id="fileModificationDate">1st of January, 1601</key>
+                <key id="fileOriginalName">img_1.jpg</key>
               </record>
             </section>
           </dnx>
@@ -135,19 +135,19 @@
       <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
         <mets:xmlData>
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
-            <section id="generalFileCharacteristics">
-              <record>
-                <key id="note">This is a note for image 2</key>
-                <key id="fileCreationDate">1st of January, 1601</key>
-                <key id="fileOriginalName">img_2.jpg</key>
-                <key id="fileOriginalPath">img_2.jpg</key>
-                <key id="fileModificationDate">1st of January, 1601</key>
-              </record>
-            </section>
             <section id="fileFixity">
               <record>
                 <key ID="fixityValue">11c2563db299225b38d5df6287ccda7d</key>
                 <key ID="fixityType">MD5</key>
+              </record>
+            </section>
+            <section id="generalFileCharacteristics">
+              <record>
+                <key id="fileOriginalPath">img_2.jpg</key>
+                <key id="fileCreationDate">1st of January, 1601</key>
+                <key id="note">This is a note for image 2</key>
+                <key id="fileModificationDate">1st of January, 1601</key>
+                <key id="fileOriginalName">img_2.jpg</key>
               </record>
             </section>
           </dnx>

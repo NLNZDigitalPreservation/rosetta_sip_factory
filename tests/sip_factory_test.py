@@ -244,7 +244,7 @@ def test_sip_single_rep_json():
     """Build SIP with single representation with JSON input"""
 
     pm_json = """[
-        {"name": "img_1.jpg",
+        {"fileOriginalName": "img_1.jpg",
          "fileOriginalPath": "img_1.jpg",
          "physical_path" : "%s/img_1.jpg",
          "MD5": "9d09f20ab8e37e5d32cdd1508b49f0a9",
@@ -252,7 +252,7 @@ def test_sip_single_rep_json():
          "fileModificationDate": "1st of January, 1601",
          "label": "Image One",
          "note": "This is a note for image 1"},
-         {"name": "img_2.jpg",
+         {"fileOriginalName": "img_2.jpg",
          "fileOriginalPath": "img_2.jpg",
          "physical_path" : "%s/img_2.jpg",
          "MD5": "11c2563db299225b38d5df6287ccda7d",

@@ -262,7 +262,7 @@ def _move_files_from_json(json_doc, streams_dir):
             except OSError as exc:  # Guard against race condition
                 if exc.errno != errno.EEXIST:
                     raise
-        shutil.copy2(origin, destination)
+        shutil.copy2(origin, os.path.join(streams_dir, destination))
 
 
 
