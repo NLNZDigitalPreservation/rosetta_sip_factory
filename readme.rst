@@ -71,10 +71,14 @@ details about building an ie_dmd section)
       },]
 
 (**Note**: Not all key/value pairs are required for events.)  
-**input_dir** = string  
+
+**input_dir** = string (can supply os.path.join() construct if preferred)  
+
 **digital_original** = Boolean (default is False)  
-**sip_title** = String
-**output_dir** = string  
+
+**sip_title** = String  
+
+**output_dir** = string (can supply os.path.join() construct if preferred)  
 
 Typical SIP folder structure
 ----------------------------
