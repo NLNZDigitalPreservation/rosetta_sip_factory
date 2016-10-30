@@ -47,13 +47,6 @@ def _copytree(src, dst, symlinks=False, ignore=None):
         else:
             shutil.copy2(s, d)
 
-def _write_sip(mets, output_dir):
-    with open(os.path.join(
-                output_dir, 
-                'content', 
-                'mets.xml'), 
-            'w') as metsfile:
-        metsfile.write(ET.tounicode(mets, pretty_print=True))
 
 def build_sip(
         ie_dmd_dict=None,
@@ -209,7 +202,7 @@ def build_sip(
         _copytree(pres_master_dir, destination)
 
 
-    _write_sip(mets, output_dir)
+    mets.write(os.path.join(output_dir, 'content', 'mets.xml'))
     
     # write SIP DC file if SIP title is supplied
     if sip_title != None:
@@ -244,7 +237,7 @@ def build_single_file_sip(ie_dmd_dict=None,
     os.makedirs(streams_dir)
     shutil.copy2(filepath, os.path.join(streams_dir,
                     os.path.basename(filepath)))
-    _write_sip(mets, output_dir)
+    mets.write(os.path.join(output_dir, 'content', 'mets.xml'))
     if sip_title != None:
         _build_dc_sip(output_dir, sip_title)
 
@@ -314,7 +307,7 @@ def build_sip_from_json(ie_dmd_dict=None,
     #     # _copytree(origin, destination)
     #     shutil.copy2(origin, destination)
 
-    _write_sip(mets, output_dir)
+    mets.write(os.path.join(output_dir, 'content', 'mets.xml'))
     for entry in (pres_master_json, modified_master_json, access_derivative_json):
         if entry != None:
             _move_files_from_json(entry, streams_dir)
