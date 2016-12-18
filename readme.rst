@@ -29,6 +29,8 @@ Usage
         output_dir=None
     )
 
+**NOTE**: If you are wondering why the above arguments are a mixture of snake_case and camelCase, it is beacuse the camelCase terms are the terms as used within Ex Libris's DNX metadata schema. While the author is coming to regret this stylistic decision, it does have the benefit of being able to directly map the arguments to their DNX metadata elements.
+
 The above arguments (if required) should be submitted in the following format:
 
 **ie_dmd_dict** = dictionary, such as follows::
@@ -39,11 +41,11 @@ The above arguments (if required) should be submitted in the following format:
 
 (See below in the "dc, dcterms and xsi mapping in ie_dmd" description for more
 details about building an ie_dmd section)  
-**pres_master_dir** = string  
+**pres_master_dir** = string (can supply os.path.join() construct if preferred)  
 
-**modified_master_dir** = string  
+**modified_master_dir** = string (can supply os.path.join() construct if preferred)  
 
-**access_derivative_dir** = string  
+**access_derivative_dir** = string (can supply os.path.join() construct if preferred)  
 
 **cms** = dictionary inside list, such as follows::
 
@@ -54,6 +56,10 @@ details about building an ie_dmd section)
     [{'IEEntityType': <entity type>, 'submissionReason': <submission reason>},]
   
 **objectIdentifier** = dictionary inside list, such as follows::  
+
+    [{'objectIdentifierType': <object identifier type>, 'objectIdentifierValue': <object identifier value>}]
+
+**accessRightsPolicy** = dictionary inside list, such as follows::
 
     [{'policyId': <policy ID>, 'policyDescription': <policy description>},]
 
@@ -176,6 +182,8 @@ dc - is mapped to "http://purl.org/dc/elements/1.1/"
 dcterms - is mapped to "http://purl.org/dc/terms/"   
 xsi - is mapped to "http://www.w3.org/2001/XMLSchema-instance", and is
 intended only for use with attributes, not the element names.
+
+Note that multi-word dc/dcterms elements should be camelCased (i.e. the dcterms element "Bibliographic Citation" should be rendered as "dcterms:bibligraphicCitation").
 
 Installing Rosetta SIP Factory
 ------------------------------
