@@ -202,7 +202,7 @@ def build_sip(
         _copytree(pres_master_dir, destination)
 
 
-    mets.write(os.path.join(output_dir, 'content', 'mets.xml'))
+    mets.write(os.path.join(output_dir, 'content', 'mets.xml'), pretty_print=True)
     
     # write SIP DC file if SIP title is supplied
     if sip_title != None:
@@ -237,7 +237,7 @@ def build_single_file_sip(ie_dmd_dict=None,
     os.makedirs(streams_dir)
     shutil.copy2(filepath, os.path.join(streams_dir,
                     os.path.basename(filepath)))
-    mets.write(os.path.join(output_dir, 'content', 'mets.xml'))
+    mets.write(os.path.join(output_dir, 'content', 'mets.xml'), pretty_print=True)
     if sip_title != None:
         _build_dc_sip(output_dir, sip_title)
 
@@ -307,7 +307,7 @@ def build_sip_from_json(ie_dmd_dict=None,
     #     # _copytree(origin, destination)
     #     shutil.copy2(origin, destination)
 
-    mets.write(os.path.join(output_dir, 'content', 'mets.xml'))
+    mets.write(os.path.join(output_dir, 'content', 'mets.xml'), pretty_print=True)
     for entry in (pres_master_json, modified_master_json, access_derivative_json):
         if entry != None:
             _move_files_from_json(entry, streams_dir)
