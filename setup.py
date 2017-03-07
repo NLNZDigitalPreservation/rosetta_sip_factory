@@ -3,7 +3,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
-VERSION="0.1.3"
+VERSION="0.1.4"
 
 config = {
 	'name':'rosetta_sip_factory',
