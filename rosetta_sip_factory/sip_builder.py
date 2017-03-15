@@ -32,8 +32,8 @@ def _build_dc_sip(output_dir, sip_title):
     title.text = sip_title
     with open(os.path.join(
                 output_dir,
-               'content', 
-               'dc.xml'), 
+               'content',
+               'dc.xml'),
                 'wb') as dc_file:
         dc_file.write(ET.tostring(dc_xml, xml_declaration=True,
             encoding="UTF-8"))
@@ -50,7 +50,7 @@ def _copytree(src, dst, symlinks=False, ignore=None):
 
 def build_sip(
         ie_dmd_dict=None,
-        pres_master_dir=None, 
+        pres_master_dir=None,
         modified_master_dir=None,
         access_derivative_dir=None,
         cms=None,
@@ -71,16 +71,16 @@ def build_sip(
 
     Args:
         ie_dmd_dict: A dictionary inside a list, with each of the keys
-            being the dc or dcterms element (with a dc or dcterms 
+            being the dc or dcterms element (with a dc or dcterms
             prefix), and the dictionary. values being the dc/dcterms
-            values e.g: 
+            values e.g:
             [{'dc:title': 'Sample Title', 'dc:identifier': '0001'}].
             The list must be a maximum length of 1.
         pres_master_dir: A string representing the location of the
             preservation master directory. Can, of course, receive an
-            os.path.join() constrcution. All SIPs must have a 
+            os.path.join() constrcution. All SIPs must have a
             pres_master_dir.
-        modified_master_dir: A string representing the location of the 
+        modified_master_dir: A string representing the location of the
             modified master directory. Can take an os.path.join()
             construction.
         access_derivative_dir: A string representing the location of
@@ -90,12 +90,12 @@ def build_sip(
             'recordId'. Values must be strings. e.g.
             [{'system': 'ilsdb', 'recordId': '7718a'}]
             The list must be a maximum length of 1.
-        webHarvesting: A dictionary inside a list. For describing a 
+        webHarvesting: A dictionary inside a list. For describing a
             deposit from the Web Curator Tool. Allowed keys are
             'primarySeedURL', 'WCTIdentifier', 'targetName', 'group',
             'harvestDate' and 'harvestTime'. Values must be strings.
             e.g.
-            [{'primarySeedUrl': 'http://www.sample.com', 
+            [{'primarySeedUrl': 'http://www.sample.com',
               'targetName': 'Sample Website'}]
             The list must be a maximum length of 1.
         generalIECharacteristics: A dictionary inside a list. Allowed
@@ -116,7 +116,7 @@ def build_sip(
             strings. e.g.
             [{'policyId': '100', 'policyDescription': 'Open Access'}]
             The list must be a maximum length of 1.
-        eventList: A list of dictionaries. Allowed keys are 
+        eventList: A list of dictionaries. Allowed keys are
             'eventIdentifierType', 'eventIdentifierValue', 'eventType',
             'eventDescription', 'eventDateTime', 'eventOutcome1',
             'eventOutcomeDetail1', 'eventOutcomeDetailExtension1',
@@ -133,14 +133,14 @@ def build_sip(
             'linkingAgentIdentifierType3',
             'linkingAgentIdentifierValue3' and 'linkingAgentRole3'.
             Values must be strings. e.g.
-            [{'eventType': 'PRE-DEPOSIT', 
+            [{'eventType': 'PRE-DEPOSIT',
               'eventDescription': 'changed foo to bar',
               'eventDateTime': '2016-03-14 14:22:01',
               'eventOutcome1': 'SUCCESS'}]
-            The list may contain any number of dictionaries. Each 
+            The list may contain any number of dictionaries. Each
             dictionary represents a separate event.
         input_dir: The root directory of the group of files or folders
-            that will be turned into a SIP. Can take an os.path.join() 
+            that will be turned into a SIP. Can take an os.path.join()
             construction. If the SIP consists only of a single
             representation, this value will most probably be the same
             as pres_master_dir.
@@ -158,7 +158,7 @@ def build_sip(
     # build METS
     mets = build_mets(
         ie_dmd_dict=ie_dmd_dict,
-        pres_master_dir=pres_master_dir, 
+        pres_master_dir=pres_master_dir,
         modified_master_dir=modified_master_dir,
         access_derivative_dir=access_derivative_dir,
         cms=cms,
@@ -178,32 +178,32 @@ def build_sip(
         # input_dir, in which case, omit the parent dir
         # for the stream and throw the file straight into
         # the streams dir
-        if (modified_master_dir == None and 
+        if (modified_master_dir == None and
             access_derivative_dir == None and
             input_dir == pres_master_dir):
             destination = os.path.join(streams_dir)
         else:
             destination = os.path.join(
-                streams_dir, 
+                streams_dir,
                 os.path.basename(pres_master_dir))
             os.makedirs(destination)
         _copytree(pres_master_dir, destination)
     if modified_master_dir != None:
         destination = os.path.join(
-            streams_dir, 
+            streams_dir,
             os.path.basename(modified_master_dir))
         os.makedirs(destination)
-        _copytree(pres_master_dir, destination)
+        _copytree(modified_master_dir, destination)
     if access_derivative_dir != None:
         destination = os.path.join(
-            streams_dir, 
+            streams_dir,
             os.path.basename(access_derivative_dir))
         os.makedirs(destination)
-        _copytree(pres_master_dir, destination)
+        _copytree(access_derivative_dir, destination)
 
 
     mets.write(os.path.join(output_dir, 'content', 'mets.xml'), pretty_print=True)
-    
+
     # write SIP DC file if SIP title is supplied
     if sip_title != None:
         _build_dc_sip(output_dir, sip_title)
@@ -230,7 +230,7 @@ def build_single_file_sip(ie_dmd_dict=None,
                 accessRightsPolicy=accessRightsPolicy,
                 eventList=eventList,
                 digital_original=digital_original)
-    
+
 
     # build output SIP folder structure
     streams_dir = os.path.join(output_dir, 'content', 'streams')
@@ -260,7 +260,7 @@ def _move_files_from_json(json_doc, streams_dir):
 
 
 def build_sip_from_json(ie_dmd_dict=None,
-        pres_master_json=None, 
+        pres_master_json=None,
         modified_master_json=None,
         access_derivative_json=None,
         cms=None,
@@ -276,7 +276,7 @@ def build_sip_from_json(ie_dmd_dict=None,
     # build METS
     mets = build_mets_from_json(
         ie_dmd_dict=ie_dmd_dict,
-        pres_master_json=pres_master_json, 
+        pres_master_json=pres_master_json,
         modified_master_json=modified_master_json,
         access_derivative_json=access_derivative_json,
         cms=cms,
@@ -312,7 +312,7 @@ def build_sip_from_json(ie_dmd_dict=None,
         if entry != None:
             _move_files_from_json(entry, streams_dir)
 
-    
+
     # write SIP DC file if SIP title is supplied
     if sip_title != None:
         _build_dc_sip(output_dir, sip_title)

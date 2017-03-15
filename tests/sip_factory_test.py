@@ -13,8 +13,8 @@ CURRENT_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)))
 def test_mets_dnx():
     """Test basic construction of METS DNX"""
     output_dir = os.path.join(
-                os.path.dirname(os.path.realpath(__file__)), 
-                'data', 
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
                 'output_1')
     # first off, delete anything that's in the output folder
     shutil.rmtree(output_dir)
@@ -24,8 +24,8 @@ def test_mets_dnx():
         ie_dmd_dict=ie_dc_dict,
         pres_master_dir=os.path.join(
                 os.path.dirname(os.path.realpath(__file__)),
-                'data', 
-                'test_batch_1', 
+                'data',
+                'test_batch_1',
                 'pm'),
         modified_master_dir=
                 os.path.join(os.path.dirname(os.path.realpath(__file__)),
@@ -37,7 +37,7 @@ def test_mets_dnx():
                 'data',
                 'test_batch_1'),
         generalIECharacteristics=[
-                {'submissionReason': 'bornDigitalContent', 
+                {'submissionReason': 'bornDigitalContent',
                  'IEEntityType': 'periodicIE'}
                 ],
         output_dir=output_dir
@@ -67,7 +67,7 @@ def test_sip_single_rep_multi_folder_hierarchy():
         input_dir=os.path.join(
                 input_dir),
         generalIECharacteristics=[
-                {'submissionReason': 'bornDigitalContent', 
+                {'submissionReason': 'bornDigitalContent',
                  'IEEntityType': 'periodicIE'}
                  ],
         output_dir=output_dir
@@ -80,7 +80,7 @@ def test_sip_single_rep_multi_folder_hierarchy():
                             'streams'))
     for thing in input_content:
         assert(thing in streams_content)
-    
+
 def test_sip_build_correct_digital_original_value():
     """Test to confirm bug fix - digital original value was being populated with
     output folder value"""
@@ -124,17 +124,17 @@ def test_sip_build_correct_digital_original_value():
 
 
 def test_mets_dnx_with_dc_xml():
-    """Test basic construction of METS DNX with a dc.xml file for the 
+    """Test basic construction of METS DNX with a dc.xml file for the
     SIP title
     """
     output_dir = os.path.join(os.path.dirname(
-                os.path.realpath(__file__)), 
+                os.path.realpath(__file__)),
                 'data',
                 'output_1')
     # first off, delete anything that's in the output folder
     shutil.rmtree(output_dir)
     os.makedirs(output_dir)
-    ie_dc_dict = {"dc:title": "test title"}    
+    ie_dc_dict = {"dc:title": "test title"}
     sip_title = 'Test Deposit'
     sb.build_sip(
         ie_dmd_dict=ie_dc_dict,
@@ -173,13 +173,13 @@ def test_single_file_mets_dnx_with_dc_xml():
     file for the SIP title
     """
     output_dir = os.path.join(os.path.dirname(
-                os.path.realpath(__file__)), 
+                os.path.realpath(__file__)),
                 'data',
                 'output_3')
     # first off, delete anything that's in the output folder
     shutil.rmtree(output_dir)
     os.makedirs(output_dir)
-    ie_dc_dict = {"dc:title": "test title"}    
+    ie_dc_dict = {"dc:title": "test title"}
     sip_title = 'Test Deposit'
     sb.build_single_file_sip(
         ie_dmd_dict=ie_dc_dict,
@@ -225,7 +225,7 @@ def test_sip_single_rep_flat_files():
         input_dir=os.path.join(
                 input_dir),
         generalIECharacteristics=[
-                {'submissionReason': 'bornDigitalContent', 
+                {'submissionReason': 'bornDigitalContent',
                  'IEEntityType': 'periodicIE'}
                  ],
         output_dir=output_dir
@@ -298,8 +298,56 @@ def test_sip_single_rep_json():
         input_dir=os.path.join(
                 input_dir),
         generalIECharacteristics=[
-                {'submissionReason': 'bornDigitalContent', 
+                {'submissionReason': 'bornDigitalContent',
                  'IEEntityType': 'periodicIE'}
                  ],
         output_dir=output_dir
         )
+
+
+def test_sip_build_pm_and_ad():
+    """Test to confirm bug fix - make sure that the output AD directory gets the
+    AD files, not PM files."""
+    output_dir = os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'output_1')
+    # first off, delete anything that's in the output folder
+    shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
+    ie_dc_dict = {"dc:title": "test title"}
+    sb.build_sip(
+        ie_dmd_dict=ie_dc_dict,
+        pres_master_dir=os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_1',
+                'pm'),
+        access_derivative_dir=os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_1',
+                'mm'),
+        input_dir=os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_1'),
+        generalIECharacteristics=[
+                {'submissionReason': 'bornDigitalContent',
+                 'IEEntityType': 'periodicIE'}
+                ],
+        digital_original=True,
+        output_dir=output_dir
+        )
+    ad_input_files = os.listdir(os.path.join(
+                        os.path.dirname(os.path.realpath(__file__)),
+                        'data',
+                        'test_batch_1',
+                        'mm'))
+    ad_output_files = os.listdir(os.path.join(
+                            output_dir,
+                            'content',
+                            'streams',
+                            'mm'))
+    for f in ad_input_files:
+        assert(f in ad_output_files)

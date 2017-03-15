@@ -1,1 +1,148 @@
-<mets:mets xmlns:mets="http://www.loc.gov/METS/"><mets:dmdSec ID="ie-dmd"><mets:mdWrap MDTYPE="DC"><mets:xmlData><dc:record xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><dc:title>test title</dc:title></dc:record></mets:xmlData></mets:mdWrap></mets:dmdSec><mets:amdSec ID="ie-amd"><mets:techMD ID="ie-amd-tech"><mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx"><mets:xmlData><dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"><section id="generalIECharacteristics"><record><key id="submissionReason">bornDigitalContent</key><key id="IEEntityType">periodicIE</key></record></section></dnx></mets:xmlData></mets:mdWrap></mets:techMD><mets:rightsMD ID="ie-amd-rights"><mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx"><mets:xmlData><dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"/></mets:xmlData></mets:mdWrap></mets:rightsMD><mets:sourceMD ID="ie-amd-source"><mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx"><mets:xmlData><dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"/></mets:xmlData></mets:mdWrap></mets:sourceMD><mets:digiprovMD ID="ie-amd-digiprov"><mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx"><mets:xmlData><dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"/></mets:xmlData></mets:mdWrap></mets:digiprovMD></mets:amdSec><mets:amdSec ID="rep1-amd"><mets:techMD ID="rep1-amd-tech"><mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx"><mets:xmlData><dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"><section id="generalRepCharacteristics"><record><key id="RevisionNumber">1</key><key id="preservationType">PRESERVATION_MASTER</key><key id="usageType">VIEW</key><key id="DigitalOriginal">false</key></record></section></dnx></mets:xmlData></mets:mdWrap></mets:techMD><mets:rightsMD ID="rep1-amd-rights"><mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx"><mets:xmlData><dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"/></mets:xmlData></mets:mdWrap></mets:rightsMD><mets:sourceMD ID="rep1-amd-source"><mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx"><mets:xmlData><dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"/></mets:xmlData></mets:mdWrap></mets:sourceMD><mets:digiprovMD ID="rep1-amd-digiprov"><mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx"><mets:xmlData><dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"/></mets:xmlData></mets:mdWrap></mets:digiprovMD></mets:amdSec><mets:amdSec ID="fid1-1-amd"><mets:techMD ID="fid1-1-amd-tech"><mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx"><mets:xmlData><dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"><section id="generalFileCharacteristics"><record><key id="fileSizeBytes">25678</key><key id="fileCreationDate">2016-10-18T15:04:23</key><key id="fileModificationDate">2016-10-18T15:04:23</key><key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/workspaces/rosetta_sip_projects/rosetta_sip_factory/tests/data/test_batch_3/presmaster.jpg</key></record></section><section id="fileFixity"><record><key ID="fixityType">MD5</key><key ID="fixityValue">9d09f20ab8e37e5d32cdd1508b49f0a9</key></record></section></dnx></mets:xmlData></mets:mdWrap></mets:techMD><mets:rightsMD ID="fid1-1-amd-rights"><mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx"><mets:xmlData><dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"/></mets:xmlData></mets:mdWrap></mets:rightsMD><mets:sourceMD ID="fid1-1-amd-source"><mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx"><mets:xmlData><dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"/></mets:xmlData></mets:mdWrap></mets:sourceMD><mets:digiprovMD ID="fid1-1-amd-digiprov"><mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx"><mets:xmlData><dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"/></mets:xmlData></mets:mdWrap></mets:digiprovMD></mets:amdSec><mets:fileSec><mets:fileGrp ADMID="rep1-amd" ID="rep1" USE="VIEW"><mets:file ADMID="fid1-1-amd" ID="fid1-1"><mets:FLocat xmlns:xlin="http://www.w3.org/1999/xlink" LOCTYPE="URL" xlin:href="presmaster.jpg"/></mets:file></mets:fileGrp></mets:fileSec><mets:structMap ID="rep1-1" TYPE="PHYSICAL"><mets:div LABEL="Preservation Master"><mets:div LABEL="presmaster.jpg" TYPE="FILE"><mets:fptr FILEID="fid1-1"/></mets:div></mets:div></mets:structMap></mets:mets>
+<mets:mets xmlns:mets="http://www.loc.gov/METS/">
+  <mets:dmdSec ID="ie-dmd">
+    <mets:mdWrap MDTYPE="DC">
+      <mets:xmlData>
+        <dc:record xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <dc:title>test title</dc:title>
+        </dc:record>
+      </mets:xmlData>
+    </mets:mdWrap>
+  </mets:dmdSec>
+  <mets:amdSec ID="ie-amd">
+    <mets:techMD ID="ie-amd-tech">
+      <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
+        <mets:xmlData>
+          <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
+            <section id="generalIECharacteristics">
+              <record>
+                <key id="IEEntityType">periodicIE</key>
+                <key id="submissionReason">bornDigitalContent</key>
+              </record>
+            </section>
+          </dnx>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:techMD>
+    <mets:rightsMD ID="ie-amd-rights">
+      <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
+        <mets:xmlData>
+          <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"/>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:rightsMD>
+    <mets:sourceMD ID="ie-amd-source">
+      <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
+        <mets:xmlData>
+          <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"/>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:sourceMD>
+    <mets:digiprovMD ID="ie-amd-digiprov">
+      <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
+        <mets:xmlData>
+          <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"/>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:digiprovMD>
+  </mets:amdSec>
+  <mets:amdSec ID="rep1-amd">
+    <mets:techMD ID="rep1-amd-tech">
+      <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
+        <mets:xmlData>
+          <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
+            <section id="generalRepCharacteristics">
+              <record>
+                <key id="usageType">VIEW</key>
+                <key id="preservationType">PRESERVATION_MASTER</key>
+                <key id="RevisionNumber">1</key>
+                <key id="DigitalOriginal">false</key>
+              </record>
+            </section>
+          </dnx>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:techMD>
+    <mets:rightsMD ID="rep1-amd-rights">
+      <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
+        <mets:xmlData>
+          <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"/>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:rightsMD>
+    <mets:sourceMD ID="rep1-amd-source">
+      <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
+        <mets:xmlData>
+          <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"/>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:sourceMD>
+    <mets:digiprovMD ID="rep1-amd-digiprov">
+      <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
+        <mets:xmlData>
+          <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"/>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:digiprovMD>
+  </mets:amdSec>
+  <mets:amdSec ID="fid1-1-amd">
+    <mets:techMD ID="fid1-1-amd-tech">
+      <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
+        <mets:xmlData>
+          <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
+            <section id="generalFileCharacteristics">
+              <record>
+                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/environments/quickenv/rosenv/rosetta_sip_factory/tests/data/test_batch_3/presmaster.jpg</key>
+                <key id="fileCreationDate">2017-03-07T15:31:31</key>
+                <key id="fileOriginalName">presmaster.jpg</key>
+                <key id="label">presmaster</key>
+                <key id="fileModificationDate">2017-03-07T15:31:31</key>
+                <key id="fileSizeBytes">25678</key>
+              </record>
+            </section>
+            <section id="fileFixity">
+              <record>
+                <key id="fixityValue">9d09f20ab8e37e5d32cdd1508b49f0a9</key>
+                <key id="fixityType">MD5</key>
+              </record>
+            </section>
+          </dnx>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:techMD>
+    <mets:rightsMD ID="fid1-1-amd-rights">
+      <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
+        <mets:xmlData>
+          <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"/>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:rightsMD>
+    <mets:sourceMD ID="fid1-1-amd-source">
+      <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
+        <mets:xmlData>
+          <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"/>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:sourceMD>
+    <mets:digiprovMD ID="fid1-1-amd-digiprov">
+      <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
+        <mets:xmlData>
+          <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx"/>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:digiprovMD>
+  </mets:amdSec>
+  <mets:fileSec>
+    <mets:fileGrp ADMID="rep1-amd" ID="rep1" USE="VIEW">
+      <mets:file ADMID="fid1-1-amd" ID="fid1-1">
+        <mets:FLocat xmlns:xlin="http://www.w3.org/1999/xlink" LOCTYPE="URL" xlin:href="presmaster.jpg"/>
+      </mets:file>
+    </mets:fileGrp>
+  </mets:fileSec>
+  <mets:structMap ID="rep1-1" TYPE="PHYSICAL">
+    <mets:div LABEL="Preservation Master" ORDER="1">
+      <mets:div LABEL="presmaster" ORDER="1">
+        <mets:fptr FILEID="fid1-1"/>
+      </mets:div>
+    </mets:div>
+  </mets:structMap>
+</mets:mets>
