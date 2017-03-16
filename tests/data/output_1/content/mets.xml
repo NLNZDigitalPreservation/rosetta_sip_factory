@@ -53,8 +53,8 @@
             <section id="generalRepCharacteristics">
               <record>
                 <key id="usageType">VIEW</key>
-                <key id="preservationType">PRESERVATION_MASTER</key>
                 <key id="RevisionNumber">1</key>
+                <key id="preservationType">PRESERVATION_MASTER</key>
                 <key id="DigitalOriginal">true</key>
               </record>
             </section>
@@ -89,20 +89,20 @@
       <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
         <mets:xmlData>
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
-            <section id="generalFileCharacteristics">
-              <record>
-                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/environments/quickenv/rosenv/rosetta_sip_factory/tests/data/test_batch_1/pm/presmaster.jpg</key>
-                <key id="fileCreationDate">2017-03-07T15:31:31</key>
-                <key id="fileOriginalName">presmaster.jpg</key>
-                <key id="label">presmaster</key>
-                <key id="fileModificationDate">2017-03-07T15:31:31</key>
-                <key id="fileSizeBytes">25678</key>
-              </record>
-            </section>
             <section id="fileFixity">
               <record>
-                <key id="fixityValue">9d09f20ab8e37e5d32cdd1508b49f0a9</key>
                 <key id="fixityType">MD5</key>
+                <key id="fixityValue">9d09f20ab8e37e5d32cdd1508b49f0a9</key>
+              </record>
+            </section>
+            <section id="generalFileCharacteristics">
+              <record>
+                <key id="fileOriginalName">presmaster.jpg</key>
+                <key id="fileSizeBytes">25678</key>
+                <key id="label">presmaster</key>
+                <key id="fileModificationDate">2017-03-07T15:31:31</key>
+                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/environments/quickenv/rosenv/rosetta_sip_factory/tests/data/test_batch_1/pm/presmaster.jpg</key>
+                <key id="fileCreationDate">2017-03-07T15:31:31</key>
               </record>
             </section>
           </dnx>
@@ -139,8 +139,8 @@
             <section id="generalRepCharacteristics">
               <record>
                 <key id="usageType">VIEW</key>
-                <key id="preservationType">DERIVATIVE_COPY</key>
                 <key id="RevisionNumber">1</key>
+                <key id="preservationType">MODIFIED_MASTER</key>
                 <key id="DigitalOriginal">true</key>
               </record>
             </section>
@@ -175,20 +175,20 @@
       <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
         <mets:xmlData>
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
-            <section id="generalFileCharacteristics">
-              <record>
-                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/environments/quickenv/rosenv/rosetta_sip_factory/tests/data/test_batch_1/mm/modifiedmaster.jpg</key>
-                <key id="fileCreationDate">2017-03-07T15:31:31</key>
-                <key id="fileOriginalName">modifiedmaster.jpg</key>
-                <key id="label">modifiedmaster</key>
-                <key id="fileModificationDate">2017-03-07T15:31:31</key>
-                <key id="fileSizeBytes">29690</key>
-              </record>
-            </section>
             <section id="fileFixity">
               <record>
-                <key id="fixityValue">aff64bf1391ac627edb3234a422f9a77</key>
                 <key id="fixityType">MD5</key>
+                <key id="fixityValue">aff64bf1391ac627edb3234a422f9a77</key>
+              </record>
+            </section>
+            <section id="generalFileCharacteristics">
+              <record>
+                <key id="fileOriginalName">modifiedmaster.jpg</key>
+                <key id="fileSizeBytes">29690</key>
+                <key id="label">modifiedmaster</key>
+                <key id="fileModificationDate">2017-03-07T15:31:31</key>
+                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/environments/quickenv/rosenv/rosetta_sip_factory/tests/data/test_batch_1/mm/modifiedmaster.jpg</key>
+                <key id="fileCreationDate">2017-03-07T15:31:31</key>
               </record>
             </section>
           </dnx>
@@ -237,7 +237,7 @@
     </mets:div>
   </mets:structMap>
   <mets:structMap ID="rep2-1" TYPE="PHYSICAL">
-    <mets:div LABEL="Derivative Copy" ORDER="1">
+    <mets:div LABEL="Modified Master" ORDER="1">
       <mets:div LABEL="modifiedmaster" ORDER="1">
         <mets:fptr FILEID="fid1-2"/>
       </mets:div>

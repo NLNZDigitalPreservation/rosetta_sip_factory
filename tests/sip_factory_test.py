@@ -351,3 +351,50 @@ def test_sip_build_pm_and_ad():
                             'mm'))
     for f in ad_input_files:
         assert(f in ad_output_files)
+
+def test_sip_build_pm_and_mm():
+    """Test to confirm bug fix - make sure that the output AD directory gets the
+    AD files, not PM files."""
+    output_dir = os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'output_1')
+    # first off, delete anything that's in the output folder
+    shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
+    ie_dc_dict = {"dc:title": "test title"}
+    sb.build_sip(
+        ie_dmd_dict=ie_dc_dict,
+        pres_master_dir=os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_1',
+                'pm'),
+        modified_master_dir=os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_1',
+                'mm'),
+        input_dir=os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_1'),
+        generalIECharacteristics=[
+                {'submissionReason': 'bornDigitalContent',
+                 'IEEntityType': 'periodicIE'}
+                ],
+        digital_original=True,
+        output_dir=output_dir
+        )
+    ad_input_files = os.listdir(os.path.join(
+                        os.path.dirname(os.path.realpath(__file__)),
+                        'data',
+                        'test_batch_1',
+                        'mm'))
+    mm_output_files = os.listdir(os.path.join(
+                            output_dir,
+                            'content',
+                            'streams',
+                            'mm'))
+    for f in ad_input_files:
+        assert(f in mm_output_files)
