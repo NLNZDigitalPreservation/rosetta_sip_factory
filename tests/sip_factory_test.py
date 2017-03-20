@@ -81,6 +81,7 @@ def test_sip_single_rep_multi_folder_hierarchy():
     for thing in input_content:
         assert(thing in streams_content)
 
+
 def test_sip_build_correct_digital_original_value():
     """Test to confirm bug fix - digital original value was being populated with
     output folder value"""
@@ -398,3 +399,119 @@ def test_sip_build_pm_and_mm():
                             'mm'))
     for f in ad_input_files:
         assert(f in mm_output_files)
+
+def test_sip_build_multiple_ies():
+    """Test to build a SIP with two IEs in it. Only PMs."""
+    output_dir = os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'output_4')
+    # first off, delete anything that's in the output folder
+    shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
+
+    ie_dc_dict = {"dc:title": "test title"}
+    other_ie_dc_dict = {"dc:title": "Other test title"}
+    
+    sb.build_sip(
+        ie_dmd_dict=ie_dc_dict,
+        pres_master_dir=os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_3'),
+        input_dir=os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_3'),
+        generalIECharacteristics=[
+                {'submissionReason': 'bornDigitalContent',
+                 'IEEntityType': 'periodicIE'}
+                ],
+        digital_original=True,
+        mets_filename='test1',
+        output_dir=output_dir
+        )
+
+    sb.build_sip(
+        ie_dmd_dict=other_ie_dc_dict,
+        pres_master_dir=os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_4'),
+        input_dir=os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_4'),
+        generalIECharacteristics=[
+                {'submissionReason': 'bornDigitalContent',
+                 'IEEntityType': 'periodicIE'}
+                ],
+        digital_original=True,
+        mets_filename='test2',
+        output_dir=output_dir
+        )
+    output_files = os.listdir(os.path.join(output_dir, 'content', 'streams'))
+    for f in ['img_1.jpg', 'img_2.jpg', 'presmaster.jpg']:
+        assert(f in output_files)
+    output_metses = os.listdir(os.path.join(output_dir, 'content'))
+    for f in ['test1.xml', 'test2.xml']:
+        assert(f in output_metses)
+
+@raises(Exception)
+def test_sip_build_multiple_ies_with_same_named_files():
+    """Test to see how this process handles two IEs that both have the same named
+    files."""
+    output_dir = os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'output_4')
+    # first off, delete anything that's in the output folder
+    shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
+
+    ie_dc_dict = {"dc:title": "test title"}
+    other_ie_dc_dict = {"dc:title": "Other test title"}
+    
+    sb.build_sip(
+        ie_dmd_dict=ie_dc_dict,
+        pres_master_dir=os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_4'),
+        input_dir=os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_4'),
+        generalIECharacteristics=[
+                {'submissionReason': 'bornDigitalContent',
+                 'IEEntityType': 'periodicIE'}
+                ],
+        digital_original=True,
+        mets_filename='test1',
+        output_dir=output_dir
+        )
+
+    sb.build_sip(
+        ie_dmd_dict=other_ie_dc_dict,
+        pres_master_dir=os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_4'),
+        input_dir=os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_4'),
+        generalIECharacteristics=[
+                {'submissionReason': 'bornDigitalContent',
+                 'IEEntityType': 'periodicIE'}
+                ],
+        digital_original=True,
+        mets_filename='test2',
+        output_dir=output_dir
+        )
+    output_files = os.listdir(os.path.join(output_dir, 'content', 'streams'))
+    for f in ['img_1.jpg', 'img_2.jpg']:
+        assert(f in output_files)
+    output_metses = os.listdir(os.path.join(output_dir, 'content'))
+    for f in ['test1.xml', 'test2.xml']:
+        assert(f in output_metses)

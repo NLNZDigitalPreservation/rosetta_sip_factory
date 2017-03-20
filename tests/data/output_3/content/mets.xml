@@ -15,8 +15,8 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalIECharacteristics">
               <record>
-                <key id="IEEntityType">periodicIE</key>
                 <key id="submissionReason">bornDigitalContent</key>
+                <key id="IEEntityType">periodicIE</key>
               </record>
             </section>
           </dnx>
@@ -52,10 +52,10 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalRepCharacteristics">
               <record>
-                <key id="usageType">VIEW</key>
-                <key id="RevisionNumber">1</key>
                 <key id="preservationType">PRESERVATION_MASTER</key>
                 <key id="DigitalOriginal">false</key>
+                <key id="RevisionNumber">1</key>
+                <key id="usageType">VIEW</key>
               </record>
             </section>
           </dnx>
@@ -97,12 +97,12 @@
             </section>
             <section id="generalFileCharacteristics">
               <record>
-                <key id="fileOriginalName">presmaster.jpg</key>
-                <key id="fileSizeBytes">25678</key>
-                <key id="label">presmaster</key>
                 <key id="fileModificationDate">2017-03-07T15:31:31</key>
-                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/environments/quickenv/rosenv/rosetta_sip_factory/tests/data/test_batch_3/presmaster.jpg</key>
                 <key id="fileCreationDate">2017-03-07T15:31:31</key>
+                <key id="label">presmaster</key>
+                <key id="fileSizeBytes">25678</key>
+                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/environments/quickenv/rosenv/rosetta_sip_factory/tests/data/test_batch_3/presmaster.jpg</key>
+                <key id="fileOriginalName">presmaster.jpg</key>
               </record>
             </section>
           </dnx>

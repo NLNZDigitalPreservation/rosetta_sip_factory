@@ -45,7 +45,12 @@ def _copytree(src, dst, symlinks=False, ignore=None):
         if os.path.isdir(s):
             shutil.copytree(s, d, symlinks, ignore)
         else:
-            shutil.copy2(s, d)
+            # 2017-03-21: change to check if file exists first.
+            # WARNING: THIS IS NOT IMMUNE TO RACE CONDITIONS!
+            if os.path.isfile(d):
+                raise Exception("{} already exists.".format(d))
+            else:
+                shutil.copy2(s, d)
 
 
 def build_sip(
@@ -61,6 +66,7 @@ def build_sip(
         eventList=None,
         input_dir=None,
         digital_original=False,
+        mets_filename=None,
         sip_title=None,
         output_dir=None):
     """
@@ -172,7 +178,12 @@ def build_sip(
 
     # build output SIP folder structure
     streams_dir = os.path.join(output_dir, 'content', 'streams')
-    os.makedirs(streams_dir)
+    # 2017-03-21: add try block to accommodate multiple IEs
+    try:
+        os.makedirs(streams_dir)
+    except:
+        pass
+
     if pres_master_dir != None:
         # 2016-10-26: casing for where PM is the same as
         # input_dir, in which case, omit the parent dir
@@ -201,8 +212,13 @@ def build_sip(
         os.makedirs(destination)
         _copytree(access_derivative_dir, destination)
 
-
-    mets.write(os.path.join(output_dir, 'content', 'mets.xml'), pretty_print=True)
+    # 2017-03-21: Add "if" block for when there is a mets filename
+    if mets_filename:
+        mets.write(os.path.join(output_dir, 'content', 
+                mets_filename + '.xml'), pretty_print=True)
+    else:
+        mets.write(os.path.join(output_dir, 'content', 
+                'mets.xml'), pretty_print=True)
 
     # write SIP DC file if SIP title is supplied
     if sip_title != None:
