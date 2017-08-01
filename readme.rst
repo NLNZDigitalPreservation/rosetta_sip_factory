@@ -179,6 +179,7 @@ with your appropriate values instead of the placeholder values.
 Common Use Case Examples
 ------------------------
 **SIP for an Intellectual Entity that consists of one file**  
+  
 Directory Structure:
 ::
 
@@ -213,6 +214,7 @@ Code:
     )
 
 **SIP for an Intellectual Entity with one representation, consisting of files in one directory**  
+  
 Directory Structure:
 ::
 
@@ -256,6 +258,7 @@ The primary reason for ordering representations in their own directories is to a
 containing files with the same name.)
 
 **SIP for an Intellectual Entity with two representations, consisting of files in one directory per rep**  
+  
 Directory Structure:
 ::
 
