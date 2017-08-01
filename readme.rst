@@ -239,15 +239,14 @@ Code:
         ie_dmd_dict=[{'dc:title': 'title of IE',
                       'dcterms:isPartOf': 'Series 001'
                     }],
-        pres_master_dir=os.path.join(base_dir, 'rep_folder')
+        pres_master_dir=os.path.join(base_dir, 'rep_folder'),
         generalIECharacteristics=[{'IEEntityType': 'unpublishedImages',
                                    'status': 'ACTIVE'
                                  }],
-        
         objectIdentifier=[{'objectIdentifierType': 'ALMAMMS',
                            'objectIdentifierValue': '9901234578901234'}],
         accessRightsPolicy=[{'policyID': '1000'}],
-        input_dir=base_dir
+        input_dir=base_dir,
         digital_original=True,
         sip_title='Title of SIP'
         output_dir=output_dir
@@ -293,11 +292,10 @@ Code:
         generalIECharacteristics=[{'IEEntityType': 'unpublishedImages',
                                    'status': 'ACTIVE'
                                  }],
-        
         objectIdentifier=[{'objectIdentifierType': 'ALMAMMS',
                            'objectIdentifierValue': '9901234578901234'}],
         accessRightsPolicy=[{'policyID': '1000'}],
-        input_dir=base_dir
+        input_dir=base_dir,
         digital_original=True,
         sip_title='Title of SIP'
         output_dir=output_dir
