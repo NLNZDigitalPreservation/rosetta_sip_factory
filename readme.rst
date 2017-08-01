@@ -86,6 +86,8 @@ details about building an ie_dmd section)
 
 **output_dir** = string (can supply os.path.join() construct if preferred)  
 
+In addition to the "build_sip" function, there is also a convenience function called "build_single_file_sip", which takes a "filepath" parameter, and does not accept "pres_master_dir", "modified_master_dir", "access_derivative_dir" or "input_dir". An example of its usage is shown in the "Common Use Case Examples" subsection below.  
+
 Typical SIP folder structure
 ----------------------------
 The build_sip function creates a SIP struture that is compliant with what the Rosetta application expects to see. Below is an example of how a single-representation SIP would look:
@@ -173,6 +175,115 @@ The "settings.properties" file should look like this::
     user_producer_id=99999
 
 with your appropriate values instead of the placeholder values.
+
+Common Use Case Examples
+------------------------
+**SIP for an Intellectual Entity that consists of one file**
+Directory Structure::
+  /path/to/base_dir
+            |
+            |__file1.tif
+Code::
+    import os
+    from rosetta_sip_factory import sip_builder
+
+    # set the filepath and the output directory for convenience's sake
+    filepath = os.path.join('/', 'path', 'to', 'base_dir', 'file1.jpg',)
+    output_dir = os.path.join('/', 'path', 'to', 'destination_dir')
+
+    sip_builder.build_single_file_sip(
+        ie_dmd_dict=[{'dc:title': 'title of IE',
+                      'dcterms:isPartOf': 'Series 001'
+                    }],
+        filepath=filepath,
+        generalIECharacteristics=[{'IEEntityType': 'unpublishedImages',
+                                   'status': 'ACTIVE'
+                                 }],
+        objectIdentifier=[{'objectIdentifierType': 'ALMAMMS',
+                           'objectIdentifierValue': '9901234578901234'}],
+        accessRightsPolicy=[{'policyId': '1000'}],
+        digital_original=True,
+        sip_title='Title of SIP',
+        output_dir=output_dir
+    )
+
+**SIP for an Intellectual Entity with one representation, consisting of files in one directory**
+Directory Structure::
+    /path/to/base_dir
+            |
+            |__rep_folder
+                   |
+                   |__file1.tif
+                   |__file2.tif
+Code::
+    import os
+    from rosetta_sip_factory import sip_builder
+
+    # set the base directory and the output directory for convenience's sake
+    base_dir = os.path.join('/', 'path', 'to', 'base_dir')
+    output_dir = os.path.join('/', 'path', 'to', 'destination_dir')
+
+    sip_builder.build_sip(
+        ie_dmd_dict=[{'dc:title': 'title of IE',
+                      'dcterms:isPartOf': 'Series 001'
+                    }],
+        pres_master_dir=os.path.join(base_dir, 'rep_folder')
+        generalIECharacteristics=[{'IEEntityType': 'unpublishedImages',
+                                   'status': 'ACTIVE'
+                                 }],
+        
+        objectIdentifier=[{'objectIdentifierType': 'ALMAMMS',
+                           'objectIdentifierValue': '9901234578901234'}],
+        accessRightsPolicy=[{'policyID': '1000'}],
+        input_dir=base_dir
+        digital_original=True,
+        sip_title='Title of SIP'
+        output_dir=output_dir
+    )
+(**NOTE** : in the above excerpt, it would also be possible to set the input dir as the same directory as the rep. In that case,
+the files would be placed directly in the "content" directory in the SIP, rather than being placed inside another directory.
+The primary reason for ordering representations in their own directories is to avoid the possibility of multiple representations
+containing files with the same name.)
+
+**SIP for an Intellectual Entity with two representations, consisting of files in one directory per rep**
+Directory Structure:
+    /path/to/base_dir
+            |
+            |__rep_folder_1
+            |      |
+            |      |__file1.tif
+            |      |__file2.tif
+            |
+            |__rep_folder_2   
+                   |
+                   |__file1.jpg
+                   |__file2.jpg
+Code::
+    import os
+    from rosetta_sip_factory import sip_builder
+
+    # set the base directory and the output directory for convenience's sake
+    base_dir = os.path.join('/', 'path', 'to', 'base_dir')
+    output_dir = os.path.join('/', 'path', 'to', 'destination_dir')
+
+    sip_builder.build_sip(
+        ie_dmd_dict=[{'dc:title': 'title of IE',
+                      'dcterms:isPartOf': 'Series 001'
+                    }],
+        pres_master_dir=os.path.join(base_dir, 'rep_folder_1'),
+        modified_master_dir=os.path,join(base_dir, 'rep_folder_2'),
+        generalIECharacteristics=[{'IEEntityType': 'unpublishedImages',
+                                   'status': 'ACTIVE'
+                                 }],
+        
+        objectIdentifier=[{'objectIdentifierType': 'ALMAMMS',
+                           'objectIdentifierValue': '9901234578901234'}],
+        accessRightsPolicy=[{'policyID': '1000'}],
+        input_dir=base_dir
+        digital_original=True,
+        sip_title='Title of SIP'
+        output_dir=output_dir
+    )
 
 dc, dcterms and xsi mapping in ie_dmd
 -------------------------------------
