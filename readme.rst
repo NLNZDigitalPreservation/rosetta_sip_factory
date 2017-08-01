@@ -178,12 +178,12 @@ with your appropriate values instead of the placeholder values.
 
 Common Use Case Examples
 ------------------------
-**SIP for an Intellectual Entity that consists of one file**
+**SIP for an Intellectual Entity that consists of one file**  
 Directory Structure::
   /path/to/base_dir
             |
             |__file1.tif
-
+  
 Code::
     import os
     from rosetta_sip_factory import sip_builder
@@ -208,7 +208,7 @@ Code::
         output_dir=output_dir
     )
 
-**SIP for an Intellectual Entity with one representation, consisting of files in one directory**
+**SIP for an Intellectual Entity with one representation, consisting of files in one directory**  
 Directory Structure::
     /path/to/base_dir
             |
@@ -216,7 +216,7 @@ Directory Structure::
                    |
                    |__file1.tif
                    |__file2.tif
-
+  
 Code::
     import os
     from rosetta_sip_factory import sip_builder
@@ -247,7 +247,7 @@ the files would be placed directly in the "content" directory in the SIP, rather
 The primary reason for ordering representations in their own directories is to avoid the possibility of multiple representations
 containing files with the same name.)
 
-**SIP for an Intellectual Entity with two representations, consisting of files in one directory per rep**
+**SIP for an Intellectual Entity with two representations, consisting of files in one directory per rep**  
 Directory Structure:
     /path/to/base_dir
             |
@@ -260,7 +260,7 @@ Directory Structure:
                    |
                    |__file1.jpg
                    |__file2.jpg
-
+  
 Code::
     import os
     from rosetta_sip_factory import sip_builder
