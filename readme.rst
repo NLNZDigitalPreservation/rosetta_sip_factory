@@ -183,6 +183,7 @@ Directory Structure::
   /path/to/base_dir
             |
             |__file1.tif
+
 Code::
     import os
     from rosetta_sip_factory import sip_builder
@@ -215,6 +216,7 @@ Directory Structure::
                    |
                    |__file1.tif
                    |__file2.tif
+
 Code::
     import os
     from rosetta_sip_factory import sip_builder
@@ -258,6 +260,7 @@ Directory Structure:
                    |
                    |__file1.jpg
                    |__file2.jpg
+
 Code::
     import os
     from rosetta_sip_factory import sip_builder
