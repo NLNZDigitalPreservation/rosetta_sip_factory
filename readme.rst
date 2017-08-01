@@ -179,12 +179,16 @@ with your appropriate values instead of the placeholder values.
 Common Use Case Examples
 ------------------------
 **SIP for an Intellectual Entity that consists of one file**  
-Directory Structure::
+Directory Structure:
+::
+
   /path/to/base_dir
             |
             |__file1.tif
   
-Code::
+Code:
+::
+
     import os
     from rosetta_sip_factory import sip_builder
 
@@ -209,7 +213,9 @@ Code::
     )
 
 **SIP for an Intellectual Entity with one representation, consisting of files in one directory**  
-Directory Structure::
+Directory Structure:
+::
+
     /path/to/base_dir
             |
             |__rep_folder
@@ -217,7 +223,9 @@ Directory Structure::
                    |__file1.tif
                    |__file2.tif
   
-Code::
+Code:
+::
+
     import os
     from rosetta_sip_factory import sip_builder
 
@@ -249,6 +257,8 @@ containing files with the same name.)
 
 **SIP for an Intellectual Entity with two representations, consisting of files in one directory per rep**  
 Directory Structure:
+::
+
     /path/to/base_dir
             |
             |__rep_folder_1
@@ -261,7 +271,9 @@ Directory Structure:
                    |__file1.jpg
                    |__file2.jpg
   
-Code::
+Code:
+::
+
     import os
     from rosetta_sip_factory import sip_builder
 
