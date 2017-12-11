@@ -51,10 +51,10 @@ details about building an ie_dmd section)
 
     [{'system': <system name>, 'recordId': <CMS ID> },]
  
-**generalIECharacteristics** = dictionary inside list, such as follows:  
+**generalIECharacteristics** = dictionary inside list, such as follows::
 
     [{'IEEntityType': <entity type>, 'submissionReason': <submission reason>},]
-  
+ 
 **objectIdentifier** = dictionary inside list, such as follows::  
 
     [{'objectIdentifierType': <object identifier type>, 'objectIdentifierValue': <object identifier value>}]
@@ -300,6 +300,76 @@ Code:
         sip_title='Title of SIP'
         output_dir=output_dir
     )
+
+**SIP for an Intellectual Entity where rep and file level details are describedas JSON documents**  
+
+Directory Structure:
+::
+
+    /full/path/to/base_dir
+                 |
+                 |__rep_folder_1
+                        |
+                        |__file1.tif
+                        |__file2.tif
+                        |__file3.tif
+
+  
+Code:
+::
+
+    import os
+    from rosetta_sip_factory import sip_builder
+
+    # set the base directory and the output directory for convenience's sake
+    base_dir = os.path.join('/', 'path', 'to', 'base_dir')
+    output_dir = os.path.join('/', 'path', 'to', 'destination_dir')
+
+    pm_json = [{'fileOriginalName': 'file1.tif',
+                'fileOriginalPath': os.path.join('rep_folder_1', 'file1.tif'), 
+                'physical_path': os.path.dir(base_dir, 'rep_folder_1', 'file1.tif')),
+                'MD5': '11c2563db299225b38d5df6287ccda7d',
+                'fileSizeBytes': '25678'
+                'fileCreationDate': 'Wed Aug 09 14:10:22 NZDT 2017',
+                'fileModificationDate': 'Mon Nov 13 15:19:34 NZDT 2017',
+                'label': 'Image One',
+                'note': 'This is a note for Image One'},
+                {'fileOriginalName': 'file2.tif',
+                'fileOriginalPath': os.path.join('rep_folder_1', 'file2.tif'), 
+                'physical_path': os.path.dir(base_dir, 'rep_folder_1', 'file2.tif')),
+                'MD5': '9d09f20ab8e37e5d32cdd1508b49f0a9',
+                'fileSizeBytes': '113715'
+                'fileCreationDate': 'Fri Sep 22 09:01:21 NZDT 2017',
+                'fileModificationDate': 'Wed Nov 15 16:54:02 NZDT 2017',
+                'label': 'Image Two',
+                'note': 'This is a note for Image two'},
+                {'fileOriginalName': 'file3.tif',
+                'fileOriginalPath': os.path.join('rep_folder_1', 'file3.tif'), 
+                'physical_path': os.path.dir(base_dir, 'rep_folder_1', 'file3.tif')),
+                'MD5': '861f762a651b0feaa64cd6bf346e6d46',
+                'fileSizeBytes': '189552'
+                'fileCreationDate': 'Tue Aug 29 11:45:29 NZDT 2017',
+                'fileModificationDate': 'Mon Dec 11 08:32:06 NZDT 2017',
+                'label': 'Image Three',
+                'note': 'This is a note for Image Three'}]
+
+    sip_builder.build_sip_from_json(
+        ie_dmd_dict=[{'dc:title': 'title of IE',
+                      'dcterms:isPartOf': 'Series 001'
+                    }],
+        pres_master_json=pm_json,
+        generalIECharacteristics=[{'IEEntityType': 'unpublishedImages',
+                                   'status': 'ACTIVE'
+                                 }],
+        objectIdentifier=[{'objectIdentifierType': 'ALMAMMS',
+                           'objectIdentifierValue': '9901234578901234'}],
+        accessRightsPolicy=[{'policyID': '1000'}],
+        input_dir=base_dir,
+        digital_original=True,
+        sip_title='Title of SIP'
+        output_dir=output_dir
+    )
+
 
 dc, dcterms and xsi mapping in ie_dmd
 -------------------------------------
