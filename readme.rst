@@ -301,7 +301,7 @@ Code:
         output_dir=output_dir
     )
 
-**SIP for an Intellectual Entity where rep and file level details are describedas JSON documents**  
+**SIP for an Intellectual Entity where rep and file level details are described as JSON documents**  
 
 Directory Structure:
 ::
