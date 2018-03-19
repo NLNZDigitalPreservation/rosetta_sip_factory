@@ -15,8 +15,8 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalIECharacteristics">
               <record>
-                <key id="submissionReason">bornDigitalContent</key>
                 <key id="IEEntityType">periodicIE</key>
+                <key id="submissionReason">bornDigitalContent</key>
               </record>
             </section>
           </dnx>
@@ -52,10 +52,10 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalRepCharacteristics">
               <record>
-                <key id="preservationType">PRESERVATION_MASTER</key>
-                <key id="DigitalOriginal">true</key>
                 <key id="RevisionNumber">1</key>
+                <key id="DigitalOriginal">true</key>
                 <key id="usageType">VIEW</key>
+                <key id="preservationType">PRESERVATION_MASTER</key>
               </record>
             </section>
           </dnx>
@@ -89,20 +89,20 @@
       <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
         <mets:xmlData>
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
+            <section id="generalFileCharacteristics">
+              <record>
+                <key id="fileModificationDate">2018-03-19T15:12:04</key>
+                <key id="fileCreationDate">2018-03-19T15:12:04</key>
+                <key id="fileSizeBytes">25678</key>
+                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/environments/quickenv/the_ros_env/rosetta_sip_factory/tests/data/test_batch_1/pm/presmaster.jpg</key>
+                <key id="fileOriginalName">presmaster.jpg</key>
+                <key id="label">presmaster</key>
+              </record>
+            </section>
             <section id="fileFixity">
               <record>
                 <key id="fixityType">MD5</key>
                 <key id="fixityValue">9d09f20ab8e37e5d32cdd1508b49f0a9</key>
-              </record>
-            </section>
-            <section id="generalFileCharacteristics">
-              <record>
-                <key id="fileModificationDate">2017-03-07T15:31:31</key>
-                <key id="fileCreationDate">2017-03-07T15:31:31</key>
-                <key id="label">presmaster</key>
-                <key id="fileSizeBytes">25678</key>
-                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/environments/quickenv/rosenv/rosetta_sip_factory/tests/data/test_batch_1/pm/presmaster.jpg</key>
-                <key id="fileOriginalName">presmaster.jpg</key>
               </record>
             </section>
           </dnx>
@@ -138,10 +138,10 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalRepCharacteristics">
               <record>
-                <key id="preservationType">MODIFIED_MASTER</key>
-                <key id="DigitalOriginal">true</key>
                 <key id="RevisionNumber">1</key>
+                <key id="DigitalOriginal">true</key>
                 <key id="usageType">VIEW</key>
+                <key id="preservationType">MODIFIED_MASTER</key>
               </record>
             </section>
           </dnx>
@@ -175,20 +175,20 @@
       <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="dnx">
         <mets:xmlData>
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
+            <section id="generalFileCharacteristics">
+              <record>
+                <key id="fileModificationDate">2018-03-19T15:12:04</key>
+                <key id="fileCreationDate">2018-03-19T15:12:04</key>
+                <key id="fileSizeBytes">29690</key>
+                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/environments/quickenv/the_ros_env/rosetta_sip_factory/tests/data/test_batch_1/mm/modifiedmaster.jpg</key>
+                <key id="fileOriginalName">modifiedmaster.jpg</key>
+                <key id="label">modifiedmaster</key>
+              </record>
+            </section>
             <section id="fileFixity">
               <record>
                 <key id="fixityType">MD5</key>
                 <key id="fixityValue">aff64bf1391ac627edb3234a422f9a77</key>
-              </record>
-            </section>
-            <section id="generalFileCharacteristics">
-              <record>
-                <key id="fileModificationDate">2017-03-07T15:31:31</key>
-                <key id="fileCreationDate">2017-03-07T15:31:31</key>
-                <key id="label">modifiedmaster</key>
-                <key id="fileSizeBytes">29690</key>
-                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/environments/quickenv/rosenv/rosetta_sip_factory/tests/data/test_batch_1/mm/modifiedmaster.jpg</key>
-                <key id="fileOriginalName">modifiedmaster.jpg</key>
               </record>
             </section>
           </dnx>
@@ -230,16 +230,20 @@
     </mets:fileGrp>
   </mets:fileSec>
   <mets:structMap ID="rep1-1" TYPE="PHYSICAL">
-    <mets:div LABEL="Preservation Master" ORDER="1">
-      <mets:div LABEL="presmaster" ORDER="1">
-        <mets:fptr FILEID="fid1-1"/>
+    <mets:div LABEL="Preservation Master">
+      <mets:div LABEL="Table of Contents">
+        <mets:div LABEL="presmaster" TYPE="FILE">
+          <mets:fptr FILEID="fid1-1"/>
+        </mets:div>
       </mets:div>
     </mets:div>
   </mets:structMap>
   <mets:structMap ID="rep2-1" TYPE="PHYSICAL">
-    <mets:div LABEL="Modified Master" ORDER="1">
-      <mets:div LABEL="modifiedmaster" ORDER="1">
-        <mets:fptr FILEID="fid1-2"/>
+    <mets:div LABEL="Modified Master">
+      <mets:div LABEL="Table of Contents">
+        <mets:div LABEL="modifiedmaster" TYPE="FILE">
+          <mets:fptr FILEID="fid1-2"/>
+        </mets:div>
       </mets:div>
     </mets:div>
   </mets:structMap>

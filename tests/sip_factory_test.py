@@ -515,3 +515,30 @@ def test_sip_build_multiple_ies_with_same_named_files():
     output_metses = os.listdir(os.path.join(output_dir, 'content'))
     for f in ['test1.xml', 'test2.xml']:
         assert(f in output_metses)
+
+
+def test_single_file_mets_dnx_with_macron():
+    """Test single-file METS DNX with a macron title 
+    """
+    output_dir = os.path.join(os.path.dirname(
+                os.path.realpath(__file__)),
+                'data',
+                'output_3')
+    # first off, delete anything that's in the output folder
+    shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
+    ie_dc_dict = {"dc:title": "māori"}
+    sip_title = 'Test Deposit'
+    sb.build_single_file_sip(
+        ie_dmd_dict=ie_dc_dict,
+        filepath=os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_3',
+                'presmaster.jpg'),
+        generalIECharacteristics=[
+                {'submissionReason': 'bornDigitalContent',
+                'IEEntityType': 'periodicIE'}],
+        sip_title=sip_title,
+        output_dir=output_dir
+        )
