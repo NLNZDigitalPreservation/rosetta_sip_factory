@@ -528,7 +528,7 @@ def test_single_file_mets_dnx_with_macron():
     shutil.rmtree(output_dir)
     os.makedirs(output_dir)
     ie_dc_dict = {"dc:title": "māori"}
-    sip_title = 'Test Deposit'
+    sip_title = 'Māori Test Deposit'
     sb.build_single_file_sip(
         ie_dmd_dict=ie_dc_dict,
         filepath=os.path.join(

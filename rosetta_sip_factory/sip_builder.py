@@ -31,14 +31,19 @@ def _build_dc_sip(output_dir, sip_title, encoding='unicode'):
     dc_xml = ET.Element('{%s}record' % DC_NS, nsmap=dc_nsmap)
     title = ET.SubElement(dc_xml, '{%s}title' % DC_NS, nsmap=dc_nsmap)
     title.text = sip_title
-    with open(os.path.join(
-              output_dir,
-              'content',
-              'dc.xml'),
-              'wb') as dc_file:
-        if encoding == 'unicode':
-            dc_file.write(ET.tostring(dc_xml, xml_declaration=True))
-        else:
+    if encoding in ['unicode']:
+        with open(os.path.join(
+                  output_dir,
+                  'content',
+                  'dc.xml'),
+                  'w') as dc_file:
+            dc_file.write(ET.tostring(dc_xml, encoding=encoding))
+    else:
+        with open(os.path.join(
+                  output_dir,
+                  'content',
+                  'dc.xml'),
+                  'wb') as dc_file:
             dc_file.write(ET.tostring(dc_xml, xml_declaration=True,
                 encoding=encoding))
 
@@ -228,7 +233,7 @@ def build_sip(
 
     # write SIP DC file if SIP title is supplied
     if sip_title != None:
-        _build_dc_sip(output_dir, sip_title)
+        _build_dc_sip(output_dir, sip_title, encoding=encoding)
 
 
 def build_single_file_sip(ie_dmd_dict=None,
@@ -270,7 +275,7 @@ def build_single_file_sip(ie_dmd_dict=None,
                 'mets.xml'), pretty_print=True,
                 encoding=encoding)
     if sip_title != None:
-        _build_dc_sip(output_dir, sip_title)
+        _build_dc_sip(output_dir, sip_title, encoding=encoding)
 
 def _move_files_from_json(json_doc, streams_dir):
     if type(json_doc) == str:
@@ -449,4 +454,4 @@ def build_sip_from_json(ie_dmd_dict=None,
 
     # write SIP DC file if SIP title is supplied
     if sip_title != None:
-        _build_dc_sip(output_dir, sip_title)
+        _build_dc_sip(output_dir, sip_title, encoding=encoding)
