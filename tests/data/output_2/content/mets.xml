@@ -91,18 +91,18 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalFileCharacteristics">
               <record>
-                <key id="fileModificationDate">2018-03-19T15:12:04</key>
-                <key id="fileCreationDate">2018-03-19T15:12:04</key>
-                <key id="fileSizeBytes">113715</key>
-                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/environments/quickenv/the_ros_env/rosetta_sip_factory/tests/data/test_batch_2/root_folder/Stock-White-angle-Front.jpg</key>
-                <key id="fileOriginalName">Stock-White-angle-Front.jpg</key>
-                <key id="label">Stock-White-angle-Front</key>
+                <key id="fileModificationDate">1st of January, 1601</key>
+                <key id="fileCreationDate">1st of January, 1601</key>
+                <key id="fileOriginalPath">root_folder/tier_2_folder/tier_3_folder/freedom_isnt_what_i_thought_it_would_be.jpg</key>
+                <key id="fileOriginalName">freedom_isnt_what_i_thought_it_would_be.jpg</key>
+                <key id="note">This is a note for image 1</key>
+                <key id="label">Image One</key>
               </record>
             </section>
             <section id="fileFixity">
               <record>
                 <key id="fixityType">MD5</key>
-                <key id="fixityValue">11c2563db299225b38d5df6287ccda7d</key>
+                <key id="fixityValue">9d09f20ab8e37e5d32cdd1508b49f0a9</key>
               </record>
             </section>
           </dnx>
@@ -138,18 +138,18 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalFileCharacteristics">
               <record>
-                <key id="fileModificationDate">2018-03-19T15:12:04</key>
-                <key id="fileCreationDate">2018-03-19T15:12:04</key>
-                <key id="fileSizeBytes">1240735</key>
-                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/environments/quickenv/the_ros_env/rosetta_sip_factory/tests/data/test_batch_2/root_folder/tier_2_folder/Experience.jpg</key>
+                <key id="fileModificationDate">1st of January, 1601</key>
+                <key id="fileCreationDate">1st of January, 1601</key>
+                <key id="fileOriginalPath">root_folder/tier_2_folder/Experience.jpg</key>
                 <key id="fileOriginalName">Experience.jpg</key>
-                <key id="label">Experience</key>
+                <key id="note">This is a note for image 2</key>
+                <key id="label">Image Two</key>
               </record>
             </section>
             <section id="fileFixity">
               <record>
                 <key id="fixityType">MD5</key>
-                <key id="fixityValue">416e0ef2a640cb8d44ef861259b2bec8</key>
+                <key id="fixityValue">11c2563db299225b38d5df6287ccda7d</key>
               </record>
             </section>
           </dnx>
@@ -185,18 +185,18 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalFileCharacteristics">
               <record>
-                <key id="fileModificationDate">2018-03-19T15:12:04</key>
-                <key id="fileCreationDate">2018-03-19T15:12:04</key>
-                <key id="fileSizeBytes">143156</key>
-                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/environments/quickenv/the_ros_env/rosetta_sip_factory/tests/data/test_batch_2/root_folder/tier_2_folder/tier_3_folder/freedom_isnt_what_i_thought_it_would_be.jpg</key>
-                <key id="fileOriginalName">freedom_isnt_what_i_thought_it_would_be.jpg</key>
-                <key id="label">freedom_isnt_what_i_thought_it_would_be</key>
+                <key id="fileModificationDate">1st of January, 1601</key>
+                <key id="fileCreationDate">1st of January, 1601</key>
+                <key id="fileOriginalPath">root_folder/Stock-White-angle-Front.jpg</key>
+                <key id="fileOriginalName">Stock-White-angle-Front.jpg</key>
+                <key id="note">This is a note for image 3</key>
+                <key id="label">Image Three</key>
               </record>
             </section>
             <section id="fileFixity">
               <record>
                 <key id="fixityType">MD5</key>
-                <key id="fixityValue">73836ad5ed74e486238b0d5ea0fa2607</key>
+                <key id="fixityValue">11c2563db299225b38d5df6287ccda7d</key>
               </record>
             </section>
           </dnx>
@@ -226,33 +226,50 @@
     </mets:digiprovMD>
   </mets:amdSec>
   <mets:fileSec>
-    <mets:fileGrp ADMID="rep1-amd" ID="rep1" USE="VIEW">
+    <mets:fileGrp ADMID="rep1-amd" ID="rep1">
       <mets:file ADMID="fid1-1-amd" ID="fid1-1">
-        <mets:FLocat xmlns:xlin="http://www.w3.org/1999/xlink" LOCTYPE="URL" xlin:href="root_folder/Stock-White-angle-Front.jpg"/>
+        <mets:FLocat xmlns:xlin="http://www.w3.org/1999/xlink" LOCTYPE="URL" xlin:href="root_folder/tier_2_folder/tier_3_folder/freedom_isnt_what_i_thought_it_would_be.jpg"/>
       </mets:file>
       <mets:file ADMID="fid2-1-amd" ID="fid2-1">
         <mets:FLocat xmlns:xlin="http://www.w3.org/1999/xlink" LOCTYPE="URL" xlin:href="root_folder/tier_2_folder/Experience.jpg"/>
       </mets:file>
       <mets:file ADMID="fid3-1-amd" ID="fid3-1">
-        <mets:FLocat xmlns:xlin="http://www.w3.org/1999/xlink" LOCTYPE="URL" xlin:href="root_folder/tier_2_folder/tier_3_folder/freedom_isnt_what_i_thought_it_would_be.jpg"/>
+        <mets:FLocat xmlns:xlin="http://www.w3.org/1999/xlink" LOCTYPE="URL" xlin:href="root_folder/Stock-White-angle-Front.jpg"/>
       </mets:file>
     </mets:fileGrp>
   </mets:fileSec>
-  <mets:structMap ID="rep1-1" TYPE="PHYSICAL">
+  <mets:structMap ID="rep1-1" TYPE="LOGICAL">
     <mets:div LABEL="Preservation Master">
-      <mets:div LABEL="tier_2_folder">
-        <mets:div LABEL="Experience.jpg" TYPE="FILE">
-          <mets:fptr FILEID="fid2-1"/>
-        </mets:div>
-        <mets:div LABEL="tier_3_folder">
-          <mets:div LABEL="freedom_isnt_what_i_thought_it_would_be.jpg" TYPE="FILE">
+      <mets:div LABEL="Table of Contents">
+        <mets:div LABEL="root_folder">
+          <mets:div LABEL="tier_2_folder">
+            <mets:div LABEL="tier_3_folder">
+              <mets:div LABEL="Image One" TYPE="FILE">
+                <mets:fptr FILEID="fid1-1"/>
+              </mets:div>
+            </mets:div>
+            <mets:div LABEL="Image Two" TYPE="FILE">
+              <mets:fptr FILEID="fid2-1"/>
+            </mets:div>
+          </mets:div>
+          <mets:div LABEL="Image Three" TYPE="FILE">
             <mets:fptr FILEID="fid3-1"/>
           </mets:div>
         </mets:div>
       </mets:div>
+    </mets:div>
+  </mets:structMap>
+  <mets:structMap ID="rep1-1" TYPE="PHYSICAL">
+    <mets:div LABEL="Preservation Master">
       <mets:div LABEL="Table of Contents">
-        <mets:div LABEL="Stock-White-angle-Front" TYPE="FILE">
+        <mets:div LABEL="Image One" TYPE="FILE">
           <mets:fptr FILEID="fid1-1"/>
+        </mets:div>
+        <mets:div LABEL="Image Two" TYPE="FILE">
+          <mets:fptr FILEID="fid2-1"/>
+        </mets:div>
+        <mets:div LABEL="Image Three" TYPE="FILE">
+          <mets:fptr FILEID="fid3-1"/>
         </mets:div>
       </mets:div>
     </mets:div>

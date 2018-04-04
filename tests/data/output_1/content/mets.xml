@@ -91,8 +91,8 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalFileCharacteristics">
               <record>
-                <key id="fileModificationDate">2018-03-19T15:12:04</key>
-                <key id="fileCreationDate">2018-03-19T15:12:04</key>
+                <key id="fileModificationDate">2018-03-26T04:31:37</key>
+                <key id="fileCreationDate">2018-03-26T04:31:37</key>
                 <key id="fileSizeBytes">25678</key>
                 <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/environments/quickenv/the_ros_env/rosetta_sip_factory/tests/data/test_batch_1/pm/presmaster.jpg</key>
                 <key id="fileOriginalName">presmaster.jpg</key>
@@ -177,8 +177,8 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalFileCharacteristics">
               <record>
-                <key id="fileModificationDate">2018-03-19T15:12:04</key>
-                <key id="fileCreationDate">2018-03-19T15:12:04</key>
+                <key id="fileModificationDate">2018-03-26T04:31:37</key>
+                <key id="fileCreationDate">2018-03-26T04:31:37</key>
                 <key id="fileSizeBytes">29690</key>
                 <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/environments/quickenv/the_ros_env/rosetta_sip_factory/tests/data/test_batch_1/mm/modifiedmaster.jpg</key>
                 <key id="fileOriginalName">modifiedmaster.jpg</key>
@@ -229,7 +229,7 @@
       </mets:file>
     </mets:fileGrp>
   </mets:fileSec>
-  <mets:structMap ID="rep1-1" TYPE="PHYSICAL">
+  <mets:structMap ID="rep1-1" TYPE="LOGICAL">
     <mets:div LABEL="Preservation Master">
       <mets:div LABEL="Table of Contents">
         <mets:div LABEL="presmaster" TYPE="FILE">
@@ -238,7 +238,7 @@
       </mets:div>
     </mets:div>
   </mets:structMap>
-  <mets:structMap ID="rep2-1" TYPE="PHYSICAL">
+  <mets:structMap ID="rep2-1" TYPE="LOGICAL">
     <mets:div LABEL="Modified Master">
       <mets:div LABEL="Table of Contents">
         <mets:div LABEL="modifiedmaster" TYPE="FILE">

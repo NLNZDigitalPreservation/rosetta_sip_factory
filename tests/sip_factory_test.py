@@ -542,3 +542,364 @@ def test_single_file_mets_dnx_with_macron():
         sip_title=sip_title,
         output_dir=output_dir
         )
+
+def test_multi_folder_default_sm_type():
+    """Hierarchical folder SIPs should get Logical structmap by default"""
+    output_dir = os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'output_2')
+    # first off, delete anything that's in the output folder
+    shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
+    ie_dc_dict = {"dc:title": "test title"}
+    input_dir = os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_2')
+    sb.build_sip(
+        ie_dmd_dict=ie_dc_dict,
+        pres_master_dir=os.path.join(
+                input_dir,
+                'root_folder'),
+        input_dir=os.path.join(
+                input_dir),
+        generalIECharacteristics=[
+                {'submissionReason': 'bornDigitalContent',
+                 'IEEntityType': 'periodicIE'}
+                 ],
+        output_dir=output_dir
+        )
+    input_content = os.listdir(input_dir)
+    streams_content = os.listdir(
+                        os.path.join(
+                            output_dir,
+                            'content',
+                            'streams'))
+    for thing in input_content:
+        assert(thing in streams_content)
+    mets = ET.parse(os.path.join(
+        output_dir, 'content', 'mets.xml'))
+    structmaps = mets.findall("{http://www.loc.gov/METS/}structMap")
+    assert(len(structmaps) == 1)
+    assert(structmaps[0].attrib['TYPE'] == 'LOGICAL')
+
+
+def test_multi_folder_both_sm_types():
+    """Hierarchical folder SIPs should get Logical structmap by default"""
+    output_dir = os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'output_2')
+    # first off, delete anything that's in the output folder
+    shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
+    ie_dc_dict = {"dc:title": "test title"}
+    input_dir = os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_2')
+    sb.build_sip(
+        ie_dmd_dict=ie_dc_dict,
+        pres_master_dir=os.path.join(
+                input_dir,
+                'root_folder'),
+        input_dir=os.path.join(
+                input_dir),
+        generalIECharacteristics=[
+                {'submissionReason': 'bornDigitalContent',
+                 'IEEntityType': 'periodicIE'}
+                 ],
+        output_dir=output_dir,
+        structmap_type="BOTH"
+        )
+    input_content = os.listdir(input_dir)
+    streams_content = os.listdir(
+                        os.path.join(
+                            output_dir,
+                            'content',
+                            'streams'))
+    for thing in input_content:
+        assert(thing in streams_content)
+    mets = ET.parse(os.path.join(
+        output_dir, 'content', 'mets.xml'))
+    structmaps = mets.findall("{http://www.loc.gov/METS/}structMap")
+    assert(len(structmaps) == 2)
+    physical_structmap = False
+    logical_structmap = False
+    for structmap in structmaps:
+        print(structmap.attrib['TYPE'])
+        if structmap.attrib['TYPE'].upper() == 'LOGICAL':
+            logical_structmap = True
+        if structmap.attrib['TYPE'].upper() == 'PHYSICAL':
+            physical_structmap = True
+    assert(physical_structmap == True)
+    assert(logical_structmap == True)
+
+
+def test_multi_folder_physical_sm_type():
+    """Hierarchical folder SIPs should get Logical structmap by default"""
+    output_dir = os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'output_2')
+    # first off, delete anything that's in the output folder
+    shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
+    ie_dc_dict = {"dc:title": "test title"}
+    input_dir = os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'data',
+                'test_batch_2')
+    sb.build_sip(
+        ie_dmd_dict=ie_dc_dict,
+        pres_master_dir=os.path.join(
+                input_dir,
+                'root_folder'),
+        input_dir=os.path.join(
+                input_dir),
+        generalIECharacteristics=[
+                {'submissionReason': 'bornDigitalContent',
+                 'IEEntityType': 'periodicIE'}
+                 ],
+        output_dir=output_dir,
+        structmap_type='PHYSICAL'
+        )
+    input_content = os.listdir(input_dir)
+    streams_content = os.listdir(
+                        os.path.join(
+                            output_dir,
+                            'content',
+                            'streams'))
+    for thing in input_content:
+        assert(thing in streams_content)
+    mets = ET.parse(os.path.join(
+        output_dir, 'content', 'mets.xml'))
+    structmaps = mets.findall("{http://www.loc.gov/METS/}structMap")
+    assert(len(structmaps) == 1)
+    assert(structmaps[0].attrib['TYPE'] == 'PHYSICAL')
+    flat_number_of_fptrs = len(
+        mets.findall(".//{http://www.loc.gov/METS/}fptr"))
+    numer_of_fptrs = len(
+        mets.findall("./{http://www.loc.gov/METS/}structMap/" + 
+                     "{http://www.loc.gov/METS/}div/" +
+                     "{http://www.loc.gov/METS/}div/" +
+                     "{http://www.loc.gov/METS/}div/" +
+                     "{http://www.loc.gov/METS/}fptr"))
+    assert(flat_number_of_fptrs == numer_of_fptrs)
+
+
+def test_multi_hierarchical_json_default_structmap():
+    """multi-hierarchical json SIPs get a logical SM by default"""
+
+    pm_json = """[
+        {"fileOriginalName": "freedom_isnt_what_i_thought_it_would_be.jpg",
+         "fileOriginalPath": "root_folder/tier_2_folder/tier_3_folder/freedom_isnt_what_i_thought_it_would_be.jpg",
+         "physical_path" : "%s/freedom_isnt_what_i_thought_it_would_be.jpg",
+         "MD5": "9d09f20ab8e37e5d32cdd1508b49f0a9",
+         "fileCreationDate": "1st of January, 1601",
+         "fileModificationDate": "1st of January, 1601",
+         "label": "Image One",
+         "note": "This is a note for image 1"},
+         {"fileOriginalName": "Experience.jpg",
+         "fileOriginalPath": "root_folder/tier_2_folder/Experience.jpg",
+         "physical_path" : "%s/Experience.jpg",
+         "MD5": "11c2563db299225b38d5df6287ccda7d",
+         "fileCreationDate": "1st of January, 1601",
+         "fileModificationDate": "1st of January, 1601",
+         "label": "Image Two",
+         "note": "This is a note for image 2"},
+         {"fileOriginalName": "Stock-White-angle-Front.jpg",
+         "fileOriginalPath": "root_folder/Stock-White-angle-Front.jpg",
+         "physical_path" : "%s/Stock-White-angle-Front.jpg",
+         "MD5": "11c2563db299225b38d5df6287ccda7d",
+         "fileCreationDate": "1st of January, 1601",
+         "fileModificationDate": "1st of January, 1601",
+         "label": "Image Three",
+         "note": "This is a note for image 3"}
+    ]""" % (os.path.join(CURRENT_DIR, "data", "test_batch_2",
+                         "root_folder", "tier_2_folder", "tier_3_folder"),
+            os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder",
+                         "tier_2_folder"),
+            os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder"))
+
+    output_dir = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)),
+        'data',
+        'output_2')
+
+    # first off, delete anything that's in the output folder
+    shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
+    ie_dc_dict = {"dc:title": "test title"}
+    input_dir = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)),
+        'data',
+        'test_batch_2')
+    sb.build_sip_from_json(
+        ie_dmd_dict=ie_dc_dict,
+        pres_master_json=pm_json,
+        input_dir=os.path.join(
+            input_dir),
+        generalIECharacteristics=[
+            {'submissionReason': 'bornDigitalContent',
+             'IEEntityType': 'periodicIE'}
+        ],
+        output_dir=output_dir
+        )
+    mets = ET.parse(os.path.join(
+        output_dir, 'content', 'mets.xml'))
+    structmaps = mets.findall("{http://www.loc.gov/METS/}structMap")
+    assert(len(structmaps) == 1)
+    assert(structmaps[0].attrib['TYPE'] == 'LOGICAL')
+
+
+def test_multi_hierarchical_json_physical_structmap():
+    """multi-hierarchical json SIPs get a physical SM when flagged"""
+
+    pm_json = """[
+        {"fileOriginalName": "freedom_isnt_what_i_thought_it_would_be.jpg",
+         "fileOriginalPath": "root_folder/tier_2_folder/tier_3_folder/freedom_isnt_what_i_thought_it_would_be.jpg",
+         "physical_path" : "%s/freedom_isnt_what_i_thought_it_would_be.jpg",
+         "MD5": "9d09f20ab8e37e5d32cdd1508b49f0a9",
+         "fileCreationDate": "1st of January, 1601",
+         "fileModificationDate": "1st of January, 1601",
+         "label": "Image One",
+         "note": "This is a note for image 1"},
+         {"fileOriginalName": "Experience.jpg",
+         "fileOriginalPath": "root_folder/tier_2_folder/Experience.jpg",
+         "physical_path" : "%s/Experience.jpg",
+         "MD5": "11c2563db299225b38d5df6287ccda7d",
+         "fileCreationDate": "1st of January, 1601",
+         "fileModificationDate": "1st of January, 1601",
+         "label": "Image Two",
+         "note": "This is a note for image 2"},
+         {"fileOriginalName": "Stock-White-angle-Front.jpg",
+         "fileOriginalPath": "root_folder/Stock-White-angle-Front.jpg",
+         "physical_path" : "%s/Stock-White-angle-Front.jpg",
+         "MD5": "11c2563db299225b38d5df6287ccda7d",
+         "fileCreationDate": "1st of January, 1601",
+         "fileModificationDate": "1st of January, 1601",
+         "label": "Image Three",
+         "note": "This is a note for image 3"}
+    ]""" % (os.path.join(CURRENT_DIR, "data", "test_batch_2",
+                         "root_folder", "tier_2_folder", "tier_3_folder"),
+            os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder",
+                         "tier_2_folder"),
+            os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder"))
+
+    output_dir = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)),
+        'data',
+        'output_2')
+
+    # first off, delete anything that's in the output folder
+    shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
+    ie_dc_dict = {"dc:title": "test title"}
+    input_dir = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)),
+        'data',
+        'test_batch_2')
+    sb.build_sip_from_json(
+        ie_dmd_dict=ie_dc_dict,
+        pres_master_json=pm_json,
+        input_dir=os.path.join(
+            input_dir),
+        generalIECharacteristics=[
+            {'submissionReason': 'bornDigitalContent',
+             'IEEntityType': 'periodicIE'}
+        ],
+        output_dir=output_dir,
+        structmap_type="PHYSICAL"
+        )
+    mets = ET.parse(os.path.join(
+        output_dir, 'content', 'mets.xml'))
+    structmaps = mets.findall("{http://www.loc.gov/METS/}structMap")
+    assert(len(structmaps) == 1)
+    assert(structmaps[0].attrib['TYPE'].upper() == 'PHYSICAL')
+    flat_number_of_fptrs = len(
+        mets.findall(".//{http://www.loc.gov/METS/}fptr"))
+    numer_of_fptrs = len(
+        mets.findall("./{http://www.loc.gov/METS/}structMap/" + 
+                     "{http://www.loc.gov/METS/}div/" +
+                     "{http://www.loc.gov/METS/}div/" +
+                     "{http://www.loc.gov/METS/}div/" +
+                     "{http://www.loc.gov/METS/}fptr"))
+    assert(flat_number_of_fptrs == numer_of_fptrs)
+
+
+def test_multi_hierarchical_json_both_structmaps():
+    """multi-hierarchical json SIPs get a physical and logical SM when 'both' is flagged"""
+
+    pm_json = """[
+        {"fileOriginalName": "freedom_isnt_what_i_thought_it_would_be.jpg",
+         "fileOriginalPath": "root_folder/tier_2_folder/tier_3_folder/freedom_isnt_what_i_thought_it_would_be.jpg",
+         "physical_path" : "%s/freedom_isnt_what_i_thought_it_would_be.jpg",
+         "MD5": "9d09f20ab8e37e5d32cdd1508b49f0a9",
+         "fileCreationDate": "1st of January, 1601",
+         "fileModificationDate": "1st of January, 1601",
+         "label": "Image One",
+         "note": "This is a note for image 1"},
+         {"fileOriginalName": "Experience.jpg",
+         "fileOriginalPath": "root_folder/tier_2_folder/Experience.jpg",
+         "physical_path" : "%s/Experience.jpg",
+         "MD5": "11c2563db299225b38d5df6287ccda7d",
+         "fileCreationDate": "1st of January, 1601",
+         "fileModificationDate": "1st of January, 1601",
+         "label": "Image Two",
+         "note": "This is a note for image 2"},
+         {"fileOriginalName": "Stock-White-angle-Front.jpg",
+         "fileOriginalPath": "root_folder/Stock-White-angle-Front.jpg",
+         "physical_path" : "%s/Stock-White-angle-Front.jpg",
+         "MD5": "11c2563db299225b38d5df6287ccda7d",
+         "fileCreationDate": "1st of January, 1601",
+         "fileModificationDate": "1st of January, 1601",
+         "label": "Image Three",
+         "note": "This is a note for image 3"}
+    ]""" % (os.path.join(CURRENT_DIR, "data", "test_batch_2",
+                         "root_folder", "tier_2_folder", "tier_3_folder"),
+            os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder",
+                         "tier_2_folder"),
+            os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder"))
+
+    output_dir = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)),
+        'data',
+        'output_2')
+
+    # first off, delete anything that's in the output folder
+    shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
+    ie_dc_dict = {"dc:title": "test title"}
+    input_dir = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)),
+        'data',
+        'test_batch_2')
+    sb.build_sip_from_json(
+        ie_dmd_dict=ie_dc_dict,
+        pres_master_json=pm_json,
+        input_dir=os.path.join(
+            input_dir),
+        generalIECharacteristics=[
+            {'submissionReason': 'bornDigitalContent',
+             'IEEntityType': 'periodicIE'}
+        ],
+        output_dir=output_dir,
+        structmap_type="BOTH"
+        )
+    mets = ET.parse(os.path.join(
+        output_dir, 'content', 'mets.xml'))
+    structmaps = mets.findall("{http://www.loc.gov/METS/}structMap")
+    structmaps = mets.findall("{http://www.loc.gov/METS/}structMap")
+    assert(len(structmaps) == 2)
+    physical_structmap = False
+    logical_structmap = False
+    for structmap in structmaps:
+        print(structmap.attrib['TYPE'])
+        if structmap.attrib['TYPE'].upper() == 'LOGICAL':
+            logical_structmap = True
+        if structmap.attrib['TYPE'].upper() == 'PHYSICAL':
+            physical_structmap = True
+    assert(physical_structmap == True)
+    assert(logical_structmap == True)

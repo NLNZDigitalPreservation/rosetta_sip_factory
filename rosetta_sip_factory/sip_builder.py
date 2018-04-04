@@ -78,7 +78,8 @@ def build_sip(
         mets_filename=None,
         sip_title=None,
         output_dir=None,
-        encoding="unicode"):
+        encoding="unicode",
+        structmap_type="DEFAULT"):
     """Builds Submission Information Package.
 
     Moves the nominated files and folders into a Rosetta-friendly SIP
@@ -183,7 +184,8 @@ def build_sip(
         accessRightsPolicy=accessRightsPolicy,
         eventList=eventList,
         input_dir=input_dir,
-        digital_original=digital_original)
+        digital_original=digital_original,
+        structmap_type=structmap_type)
 
     # build output SIP folder structure
     streams_dir = os.path.join(output_dir, 'content', 'streams')
@@ -193,14 +195,14 @@ def build_sip(
     except:
         pass
 
-    if pres_master_dir != None:
+    if pres_master_dir is not None:
         # 2016-10-26: casing for where PM is the same as
         # input_dir, in which case, omit the parent dir
         # for the stream and throw the file straight into
         # the streams dir
-        if (modified_master_dir == None and
-            access_derivative_dir == None and
-            input_dir == pres_master_dir):
+        if (modified_master_dir is None and
+            access_derivative_dir is None and
+                input_dir == pres_master_dir):
             destination = os.path.join(streams_dir)
         else:
             destination = os.path.join(
@@ -208,13 +210,13 @@ def build_sip(
                 os.path.basename(pres_master_dir))
             os.makedirs(destination)
         _copytree(pres_master_dir, destination)
-    if modified_master_dir != None:
+    if modified_master_dir is not None:
         destination = os.path.join(
             streams_dir,
             os.path.basename(modified_master_dir))
         os.makedirs(destination)
         _copytree(modified_master_dir, destination)
-    if access_derivative_dir != None:
+    if access_derivative_dir is not None:
         destination = os.path.join(
             streams_dir,
             os.path.basename(access_derivative_dir))
@@ -223,16 +225,16 @@ def build_sip(
 
     # 2017-03-21: Add "if" block for when there is a mets filename
     if mets_filename:
-        mets.write(os.path.join(output_dir, 'content', 
-                mets_filename + '.xml'), pretty_print=True,
-                encoding=encoding)
+        mets.write(os.path.join(output_dir, 'content',
+                                mets_filename + '.xml'), pretty_print=True,
+                   encoding=encoding)
     else:
-        mets.write(os.path.join(output_dir, 'content', 
-                'mets.xml'), pretty_print=True,
-                encoding=encoding)
+        mets.write(os.path.join(output_dir, 'content',
+                                'mets.xml'), pretty_print=True,
+                   encoding=encoding)
 
     # write SIP DC file if SIP title is supplied
-    if sip_title != None:
+    if sip_title is not None:
         _build_dc_sip(output_dir, sip_title, encoding=encoding)
 
 
@@ -250,32 +252,33 @@ def build_single_file_sip(ie_dmd_dict=None,
                           mets_filename=None,
                           encoding='unicode'):
     # build mets
-    mets = build_single_file_mets(ie_dmd_dict=ie_dmd_dict,
-                filepath=filepath,
-                cms=cms,
-                webHarvesting=webHarvesting,
-                generalIECharacteristics=generalIECharacteristics,
-                objectIdentifier=objectIdentifier,
-                accessRightsPolicy=accessRightsPolicy,
-                eventList=eventList,
-                digital_original=digital_original)
-
+    mets = build_single_file_mets(
+        ie_dmd_dict=ie_dmd_dict,
+        filepath=filepath,
+        cms=cms,
+        webHarvesting=webHarvesting,
+        generalIECharacteristics=generalIECharacteristics,
+        objectIdentifier=objectIdentifier,
+        accessRightsPolicy=accessRightsPolicy,
+        eventList=eventList,
+        digital_original=digital_original)
 
     # build output SIP folder structure
     streams_dir = os.path.join(output_dir, 'content', 'streams')
     os.makedirs(streams_dir)
     shutil.copy2(filepath, os.path.join(streams_dir,
-                    os.path.basename(filepath)))
+                                        os.path.basename(filepath)))
     if mets_filename:
-        mets.write(os.path.join(output_dir, 'content', 
-                mets_filename + '.xml'), pretty_print=True,
-                encoding=encoding)
+        mets.write(os.path.join(output_dir, 'content',
+                                mets_filename + '.xml'), pretty_print=True,
+                   encoding=encoding)
     else:
-        mets.write(os.path.join(output_dir, 'content', 
-                'mets.xml'), pretty_print=True,
-                encoding=encoding)
-    if sip_title != None:
+        mets.write(os.path.join(output_dir, 'content',
+                                'mets.xml'), pretty_print=True,
+                   encoding=encoding)
+    if sip_title is not None:
         _build_dc_sip(output_dir, sip_title, encoding=encoding)
+
 
 def _move_files_from_json(json_doc, streams_dir):
     if type(json_doc) == str:
@@ -285,32 +288,35 @@ def _move_files_from_json(json_doc, streams_dir):
     for item in rep_dict:
         origin = item['physical_path']
         destination = item['fileOriginalPath']
-        if not os.path.exists(os.path.join(streams_dir, os.path.dirname(destination))):
+        if not os.path.exists(
+                os.path.join(streams_dir, os.path.dirname(destination))):
             try:
-                os.makedirs(os.path.join(streams_dir, os.path.dirname(destination)))
+                os.makedirs(
+                    os.path.join(streams_dir, os.path.dirname(destination)))
             except OSError as exc:  # Guard against race condition
-                if exc.errno != errno.EEXIST:
+                if exc.errno is not errno.EEXIST:
                     raise
         shutil.copy2(origin, os.path.join(streams_dir, destination))
 
 
-
-def build_sip_from_json(ie_dmd_dict=None,
-                        pres_master_json=None,
-                        modified_master_json=None,
-                        access_derivative_json=None,
-                        cms=None,
-                        webHarvesting=None,
-                        generalIECharacteristics=None,
-                        objectIdentifier=None,
-                        accessRightsPolicy=None,
-                        eventList=None,
-                        input_dir=None,
-                        digital_original=False,
-                        sip_title=None,
-                        output_dir=None,
-                        mets_filename=None,
-                        encoding='unicode'):
+def build_sip_from_json(
+    ie_dmd_dict=None,
+    pres_master_json=None,
+    modified_master_json=None,
+    access_derivative_json=None,
+    cms=None,
+    webHarvesting=None,
+    generalIECharacteristics=None,
+    objectIdentifier=None,
+    accessRightsPolicy=None,
+    eventList=None,
+    input_dir=None,
+    digital_original=False,
+    sip_title=None,
+    output_dir=None,
+    mets_filename=None,
+    encoding='unicode',
+        structmap_type="DEFAULT"):
     """Builds SIP using JSON for the rep-level information.
 
     Keyword arguments:
@@ -418,14 +424,18 @@ def build_sip_from_json(ie_dmd_dict=None,
         accessRightsPolicy=accessRightsPolicy,
         eventList=eventList,
         input_dir=input_dir,
-        digital_original=digital_original)
+        digital_original=digital_original,
+        structmap_type=structmap_type)
 
     # build output SIP folder structure
     streams_dir = os.path.join(output_dir, 'content', 'streams')
     os.makedirs(streams_dir)
 
     # print(ET.tounicode(mets, pretty_print=True))
-    # files_list = mets.findall(".//{http://www.loc.gov/METS/}fileSec/{http://www.loc.gov/METS/}fileGrp/{http://www.loc.gov/METS/}file")
+    # files_list = mets.findall(
+    #   ".//{http://www.loc.gov/METS/}fileSec/" + 
+    #   "{http://www.loc.gov/METS/}fileGrp/" + 
+    #   "{http://www.loc.gov/METS/}file")
     # for file in files_list:
     #     print("finding {}!".format(file.attrib["ADMID"]))
     #     origin = mets.find('.//mets:amdSec[@ID="%s"]/mets:techMD/mets:mdWrap/mets:xmlData/dnx/section[@id="generalFileCharacteristics"]/record/key[@id="fileOriginalPath"]' % (file.attrib["ADMID"]), namespaces=mets_dnx_nsmap ).text
