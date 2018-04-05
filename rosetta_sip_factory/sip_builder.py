@@ -4,10 +4,10 @@ import shutil
 
 from lxml import etree as ET
 
-from pydc import factory as dc_factory
-from pydnx import factory as dnx_factory
-from pymets import mets_factory
-from mets_dnx.factory import build_mets, build_single_file_mets, build_mets_from_json
+from mets_dnx.factory import (
+    build_mets,
+    build_single_file_mets,
+    build_mets_from_json)
 
 
 # declare namespaces
@@ -44,8 +44,10 @@ def _build_dc_sip(output_dir, sip_title, encoding='unicode'):
                   'content',
                   'dc.xml'),
                   'wb') as dc_file:
-            dc_file.write(ET.tostring(dc_xml, xml_declaration=True,
+            dc_file.write(ET.tostring(
+                dc_xml, xml_declaration=True,
                 encoding=encoding))
+
 
 def _copytree(src, dst, symlinks=False, ignore=None):
     for item in os.listdir(src):
@@ -190,10 +192,10 @@ def build_sip(
     # build output SIP folder structure
     streams_dir = os.path.join(output_dir, 'content', 'streams')
     # 2017-03-21: add try block to accommodate multiple IEs
-    try:
+    if mets_filename:
+        streams_dir = os.path.join(streams_dir, mets_filename)
+    if not os.path.exists(streams_dir):
         os.makedirs(streams_dir)
-    except:
-        pass
 
     if pres_master_dir is not None:
         # 2016-10-26: casing for where PM is the same as
@@ -225,6 +227,10 @@ def build_sip(
 
     # 2017-03-21: Add "if" block for when there is a mets filename
     if mets_filename:
+        for fl in mets.findall(".//{http://www.loc.gov/METS/}FLocat"):
+            fl.attrib["{http://www.w3.org/1999/xlink}href"] = "{}/{}".format(
+                mets_filename,
+                fl.attrib["{http://www.w3.org/1999/xlink}href"])
         mets.write(os.path.join(output_dir, 'content',
                                 mets_filename + '.xml'), pretty_print=True,
                    encoding=encoding)
@@ -265,10 +271,16 @@ def build_single_file_sip(ie_dmd_dict=None,
 
     # build output SIP folder structure
     streams_dir = os.path.join(output_dir, 'content', 'streams')
-    os.makedirs(streams_dir)
+    if mets_filename:
+        streams_dir = os.path.join(streams_dir, mets_filename)
+    if not os.path.exists(streams_dir):
+        os.makedirs(streams_dir)
     shutil.copy2(filepath, os.path.join(streams_dir,
                                         os.path.basename(filepath)))
     if mets_filename:
+        for fl in mets.findall(".//{http://www.loc.gov/METS/}FLocat"):
+            fl.attrib["{http://www.w3.org/1999/xlink}href"] = "{}/{}".format(
+                mets_filename, fl.attrib["{http://www.w3.org/1999/xlink}href"])
         mets.write(os.path.join(output_dir, 'content',
                                 mets_filename + '.xml'), pretty_print=True,
                    encoding=encoding)
@@ -429,39 +441,24 @@ def build_sip_from_json(
 
     # build output SIP folder structure
     streams_dir = os.path.join(output_dir, 'content', 'streams')
-    os.makedirs(streams_dir)
+    if not os.path.exists(streams_dir):
+        os.makedirs(streams_dir)
 
-    # print(ET.tounicode(mets, pretty_print=True))
-    # files_list = mets.findall(
-    #   ".//{http://www.loc.gov/METS/}fileSec/" + 
-    #   "{http://www.loc.gov/METS/}fileGrp/" + 
-    #   "{http://www.loc.gov/METS/}file")
-    # for file in files_list:
-    #     print("finding {}!".format(file.attrib["ADMID"]))
-    #     origin = mets.find('.//mets:amdSec[@ID="%s"]/mets:techMD/mets:mdWrap/mets:xmlData/dnx/section[@id="generalFileCharacteristics"]/record/key[@id="fileOriginalPath"]' % (file.attrib["ADMID"]), namespaces=mets_dnx_nsmap ).text
-    #     destination = os.path.join(file.find(".//{http://www.loc.gov/METS/}FLocat").attrib["{http://www.w3.org/1999/xlink}href"])
-    #     if not os.path.exists(os.path.join(streams_dir, os.path.dirname(destination))):
-    #         try:
-    #             os.makedirs(os.path.join(streams_dir, os.path.dirname(destination)))
-    #         except OSError as exc:  # Guard against race condition
-    #             if exc.errno != errno.EEXIST:
-    #                 raise
-    #     # _copytree(origin, destination)
-    #     shutil.copy2(origin, destination)
     if mets_filename:
         mets.write(os.path.join(output_dir, 'content',
-                   mets_filename + '.xml'), pretty_print=True,
+                                mets_filename + '.xml'),
+                   pretty_print=True,
                    encoding=encoding)
     else:
         mets.write(os.path.join(output_dir, 'content',
-                   'mets.xml'), pretty_print=True,
+                                'mets.xml'),
+                   pretty_print=True,
                    encoding=encoding)
     for entry in (pres_master_json, modified_master_json,
                   access_derivative_json):
-        if entry != None:
+        if entry is not None:
             _move_files_from_json(entry, streams_dir)
 
-
     # write SIP DC file if SIP title is supplied
-    if sip_title != None:
+    if sip_title is not None:
         _build_dc_sip(output_dir, sip_title, encoding=encoding)

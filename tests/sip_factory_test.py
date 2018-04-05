@@ -450,9 +450,12 @@ def test_sip_build_multiple_ies():
         mets_filename='test2',
         output_dir=output_dir
         )
-    output_files = os.listdir(os.path.join(output_dir, 'content', 'streams'))
-    for f in ['img_1.jpg', 'img_2.jpg', 'presmaster.jpg']:
-        assert(f in output_files)
+    output_files_1 = os.listdir(os.path.join(output_dir, 'content', 'streams', 'test1'))
+    output_files_2 = os.listdir(os.path.join(output_dir, 'content', 'streams', 'test2'))
+    for f in ['presmaster.jpg']:
+        assert(f in output_files_1)
+    for f in ['img_1.jpg', 'img_2.jpg']:
+        assert(f in output_files_2)
     output_metses = os.listdir(os.path.join(output_dir, 'content'))
     for f in ['test1.xml', 'test2.xml']:
         assert(f in output_metses)
@@ -628,7 +631,7 @@ def test_multi_folder_both_sm_types():
     physical_structmap = False
     logical_structmap = False
     for structmap in structmaps:
-        print(structmap.attrib['TYPE'])
+        # print(structmap.attrib['TYPE'])
         if structmap.attrib['TYPE'].upper() == 'LOGICAL':
             logical_structmap = True
         if structmap.attrib['TYPE'].upper() == 'PHYSICAL':
@@ -896,10 +899,141 @@ def test_multi_hierarchical_json_both_structmaps():
     physical_structmap = False
     logical_structmap = False
     for structmap in structmaps:
-        print(structmap.attrib['TYPE'])
+        # print(structmap.attrib['TYPE'])
         if structmap.attrib['TYPE'].upper() == 'LOGICAL':
             logical_structmap = True
         if structmap.attrib['TYPE'].upper() == 'PHYSICAL':
             physical_structmap = True
     assert(physical_structmap == True)
     assert(logical_structmap == True)
+
+def test_multiple__single_file_IEs_in_one_SIP_folder():
+    input_dir = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)),
+        'data',
+        'test_batch_4')
+    output_dir = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)),
+        'data',
+        'output_5')
+    # first off, delete anything that's in the output folder
+    if os.path.exists(output_dir):
+        shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
+
+    file_count = 0
+    for file in os.listdir(input_dir):
+        file_count += 1
+        title = "Test_IE_{}".format(file_count)
+        ie_dmd_dict = [{"dc:title": title}]
+        sb.build_single_file_sip(
+            ie_dmd_dict=ie_dmd_dict,
+            filepath=os.path.join(input_dir, file),
+            output_dir=output_dir,
+            mets_filename=title)
+
+def test_multiple_full_IEs_in_one_SIP_folder():
+    input_dir = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)),
+        'data',
+        'test_batch_1')
+    output_dir = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)),
+        'data',
+        'output_5')
+    # first off, delete anything that's in the output folder
+    if os.path.exists(output_dir):
+        shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
+
+    for i in range(10):
+        title = "Test_IE_{}".format(i)
+        ie_dmd_dict = [{"dc:title": title}]
+        sb.build_sip(
+            ie_dmd_dict=ie_dmd_dict,
+            pres_master_dir=os.path.join(input_dir, 'pm'),
+            modified_master_dir=os.path.join(input_dir, 'mm'),
+            input_dir=os.path.join(input_dir),
+            output_dir=output_dir,
+            mets_filename=title)
+    for file in os.listdir(os.path.join(output_dir, 'content')):
+        # print(file)
+        assert(file in ["Test_IE_0.xml", "Test_IE_1.xml", "Test_IE_2.xml",
+            "Test_IE_3.xml", "Test_IE_4.xml", "Test_IE_5.xml", 
+            "Test_IE_6.xml", "Test_IE_7.xml", "Test_IE_8.xml",
+            "Test_IE_9.xml", "streams"])
+
+
+def test_multiple_JSON_IEs_in_one_SIP_folder():
+    pm_json = """[
+        {"fileOriginalName": "freedom_isnt_what_i_thought_it_would_be.jpg",
+         "fileOriginalPath": "root_folder/tier_2_folder/tier_3_folder/freedom_isnt_what_i_thought_it_would_be.jpg",
+         "physical_path" : "%s/freedom_isnt_what_i_thought_it_would_be.jpg",
+         "MD5": "9d09f20ab8e37e5d32cdd1508b49f0a9",
+         "fileCreationDate": "1st of January, 1601",
+         "fileModificationDate": "1st of January, 1601",
+         "label": "Image One",
+         "note": "This is a note for image 1"},
+         {"fileOriginalName": "Experience.jpg",
+         "fileOriginalPath": "root_folder/tier_2_folder/Experience.jpg",
+         "physical_path" : "%s/Experience.jpg",
+         "MD5": "11c2563db299225b38d5df6287ccda7d",
+         "fileCreationDate": "1st of January, 1601",
+         "fileModificationDate": "1st of January, 1601",
+         "label": "Image Two",
+         "note": "This is a note for image 2"},
+         {"fileOriginalName": "Stock-White-angle-Front.jpg",
+         "fileOriginalPath": "root_folder/Stock-White-angle-Front.jpg",
+         "physical_path" : "%s/Stock-White-angle-Front.jpg",
+         "MD5": "11c2563db299225b38d5df6287ccda7d",
+         "fileCreationDate": "1st of January, 1601",
+         "fileModificationDate": "1st of January, 1601",
+         "label": "Image Three",
+         "note": "This is a note for image 3"}
+    ]""" % (os.path.join(CURRENT_DIR, "data", "test_batch_2",
+                         "root_folder", "tier_2_folder", "tier_3_folder"),
+            os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder",
+                         "tier_2_folder"),
+            os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder"))
+
+    output_dir = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)),
+        'data',
+        'output_5')
+
+    # first off, delete anything that's in the output folder
+    shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
+    for i in range(10):
+        title = "test_title_{}".format(i)
+        ie_dc_dict = {"dc:title": title}
+        input_dir = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            'data',
+            'test_batch_2')
+        sb.build_sip_from_json(
+            ie_dmd_dict=ie_dc_dict,
+            pres_master_json=pm_json,
+            input_dir=os.path.join(
+                input_dir),
+            generalIECharacteristics=[
+                {'submissionReason': 'bornDigitalContent',
+                 'IEEntityType': 'periodicIE'}
+            ],
+            output_dir=output_dir,
+            mets_filename=title)
+        input_dir = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            'data',
+            'test_batch_1')
+        output_dir = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            'data',
+            'output_5')
+    for file in os.listdir(os.path.join(output_dir, 'content')):
+        # print(file)
+        assert(file in ['test_title_0.xml', 'test_title_1.xml',
+            'test_title_2.xml', 'test_title_3.xml', 'test_title_4.xml',
+            'test_title_5.xml', 'test_title_6.xml', 'test_title_7.xml',
+            'test_title_8.xml', 'test_title_9.xml', 'streams'])
+        

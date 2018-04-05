@@ -3,7 +3,7 @@
     <mets:mdWrap MDTYPE="DC">
       <mets:xmlData>
         <dc:record xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <dc:title>test title</dc:title>
+          <dc:title>Other test title</dc:title>
         </dc:record>
       </mets:xmlData>
     </mets:mdWrap>
@@ -181,10 +181,10 @@
   <mets:fileSec>
     <mets:fileGrp ADMID="rep1-amd" ID="rep1" USE="VIEW">
       <mets:file ADMID="fid1-1-amd" ID="fid1-1">
-        <mets:FLocat xmlns:xlin="http://www.w3.org/1999/xlink" LOCTYPE="URL" xlin:href="test1/img_1.jpg"/>
+        <mets:FLocat xmlns:xlin="http://www.w3.org/1999/xlink" LOCTYPE="URL" xlin:href="test2/img_1.jpg"/>
       </mets:file>
       <mets:file ADMID="fid2-1-amd" ID="fid2-1">
-        <mets:FLocat xmlns:xlin="http://www.w3.org/1999/xlink" LOCTYPE="URL" xlin:href="test1/img_2.jpg"/>
+        <mets:FLocat xmlns:xlin="http://www.w3.org/1999/xlink" LOCTYPE="URL" xlin:href="test2/img_2.jpg"/>
       </mets:file>
     </mets:fileGrp>
   </mets:fileSec>
