@@ -363,7 +363,7 @@ Code:
                                  }],
         objectIdentifier=[{'objectIdentifierType': 'ALMAMMS',
                            'objectIdentifierValue': '9901234578901234'}],
-        accessRightsPolicy=[{'policyID': '1000'}],
+        accessRightsPolicy=[{'policyId': '1000'}],
         input_dir=base_dir,
         digital_original=True,
         sip_title='Title of SIP'
