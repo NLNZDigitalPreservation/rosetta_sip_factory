@@ -81,7 +81,8 @@ def build_sip(
         sip_title=None,
         output_dir=None,
         encoding="unicode",
-        structmap_type="DEFAULT"):
+        structmap_type="DEFAULT",
+        exclude_file_char = []):
     """Builds Submission Information Package.
 
     Moves the nominated files and folders into a Rosetta-friendly SIP
@@ -187,7 +188,8 @@ def build_sip(
         eventList=eventList,
         input_dir=input_dir,
         digital_original=digital_original,
-        structmap_type=structmap_type)
+        structmap_type=structmap_type,
+        exclude_file_char = exclude_file_char)
 
     # build output SIP folder structure
     streams_dir = os.path.join(output_dir, 'content', 'streams')
@@ -256,7 +258,8 @@ def build_single_file_sip(ie_dmd_dict=None,
                           sip_title=None,
                           output_dir=None,
                           mets_filename=None,
-                          encoding='unicode'):
+                          encoding='unicode',
+                          exclude_file_char = []):
     # build mets
     mets = build_single_file_mets(
         ie_dmd_dict=ie_dmd_dict,
@@ -267,7 +270,8 @@ def build_single_file_sip(ie_dmd_dict=None,
         objectIdentifier=objectIdentifier,
         accessRightsPolicy=accessRightsPolicy,
         eventList=eventList,
-        digital_original=digital_original)
+        digital_original=digital_original,
+         exclude_file_char = exclude_file_char)
 
     # build output SIP folder structure
     streams_dir = os.path.join(output_dir, 'content', 'streams')
