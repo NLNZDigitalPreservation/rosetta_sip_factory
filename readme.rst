@@ -27,7 +27,7 @@ Usage
         digital_original=False,
         sip_title=None,
         output_dir=None,
-        exclude_file_char = ['fileOriginalPath','fileSizeBytes', 'fileModificationDate','fileCreationDate']  
+        exclude_file_char=['fileOriginalPath','fileSizeBytes', 'fileModificationDate','fileCreationDate']  
     )
 
 **NOTE**: If you are wondering why the above arguments are a mixture of snake_case and camelCase, it is beacuse the camelCase terms are the terms as used within Ex Libris's DNX metadata schema. While the author is coming to regret this stylistic decision, it does have the benefit of being able to directly map the arguments to their DNX metadata elements.
@@ -87,7 +87,7 @@ details about building an ie_dmd section)
 
 **output_dir** = string (can supply os.path.join() construct if preferred)  
 
-**exclude_file_char** = list of file characteristics you would like not to include in mets
+**exclude_file_char** = list of the file characteristics not to include in mets
 
 In addition to the "build_sip" function, there is also a convenience function called "build_single_file_sip", which takes a "filepath" parameter, and does not accept "pres_master_dir", "modified_master_dir", "access_derivative_dir" or "input_dir". An example of its usage is shown in the "Common Use Case Examples" subsection below.  
 
@@ -214,7 +214,7 @@ Code:
         digital_original=True,
         sip_title='Title of SIP',
         output_dir=output_dir,
-        exclude_file_char = exclude_file_char = ['fileOriginalPath','fileSizeBytes', 'fileModificationDate','fileCreationDate'],  
+        exclude_file_char=['fileOriginalPath','fileSizeBytes', 'fileModificationDate','fileCreationDate'],  
     )
 
 **SIP for an Intellectual Entity with one representation, consisting of files in one directory**  
