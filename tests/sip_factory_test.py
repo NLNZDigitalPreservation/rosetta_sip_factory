@@ -1096,9 +1096,8 @@ def test_build_single_file_sip_with_exclude_file_char():
     ie_dc_dict = {"dc:title": "test title"}
     sip_title = 'Test Deposit'
   
-
-    exclude_file_char = ['fileOriginalPath','fileSizeBytes', 'fileModificationDate','fileCreationDate']  # Set the list of files to exclude
-
+    # Set the list of files to exclude
+    exclude_file_char = ['fileOriginalPath','fileSizeBytes', 'fileModificationDate','fileCreationDate']  
     # Call the build_sip function with the provided inputs
     sb.build_single_file_sip(
         ie_dmd_dict=ie_dc_dict,
