@@ -2,6 +2,14 @@ Problem description:
 
 The changes have been made to address ambiguities in some of the XML tags and to handle long paths within the METS file. These changes allow for customized exclusion of one or more tags from the METS output.
 
+            general_file_characteristics = [{
+                'fileOriginalPath': file_original_location,
+                'fileSizeBytes': str(file_size_bytes),
+                'fileModificationDate': last_modified,
+                'fileCreationDate': created_time,
+                'fileOriginalName': file_original_name,
+                'label': file_label}]
+
 Use case:
 
 build_sip(
@@ -36,12 +44,6 @@ def build_single_file_sip(...
 2. For mets_dnx (factory.py) new parameter "exclude_file_char" was added to build_single_file_mets  and build_mets functions 
 and also this logic for removing tags.
 
-            general_file_characteristics = [{
-                'fileOriginalPath': file_original_location,
-                'fileSizeBytes': str(file_size_bytes),
-                'fileModificationDate': last_modified,
-                'fileCreationDate': created_time,
-                'fileOriginalName': file_original_name,
-                'label': file_label}]
+
             for file_char in exclude_file_char:
                 general_file_characteristics[0].pop(file_char)
