@@ -33,8 +33,8 @@ def build_single_file_sip(...
 
 
 
-2. For mets_dnx (factory.py) new parameter "exclude_file_char" was added to build_single_file_mets  and build_mets functions.
-and also this logic which removing tags.
+2. For mets_dnx (factory.py) new parameter "exclude_file_char" was added to build_single_file_mets  and build_mets functions 
+and also this logic for removing tags.
 
             general_file_characteristics = [{
                 'fileOriginalPath': file_original_location,
