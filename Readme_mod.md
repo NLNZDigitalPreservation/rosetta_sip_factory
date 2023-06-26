@@ -26,7 +26,7 @@ The changes applied to both rosetta_sip_factory and mets_dnx libraries
 
 
 1. For **rosetta_sip_factory** (sip_builder.py) new parameter "exclude_file_char" was added to build_single_file_sip  and build_sip functions.
-test_build_sip_with_exclude_file_char() test was added.
+test_build_sip_with_exclude_file_char() and test_build_single_file_sip_with_exclude_file_char() test were added.
 
 
 ```
@@ -43,7 +43,7 @@ def build_single_file_sip(...
 ```
 
 2. For **mets_dnx** (factory.py) new parameter "exclude_file_char" was added to build_single_file_mets  and build_mets functions 
-and also this logic for removing tags.
+and also this logic for removing tags. The new tests test_single_file_mets_with_exclude_file_char and test_build_mets_with_exclude_file_charwere added to in metsdnx_test.py.
 
 ```
             for file_char in exclude_file_char:
