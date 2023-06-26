@@ -22,7 +22,7 @@ In this case 'fileOriginalPath','fileSizeBytes', 'fileModificationDate','fileCre
 
 ## Changes description:
 
-Changes applied to both rosetta_sip_factory and mets_dnx libraries 
+The changes applied to both rosetta_sip_factory and mets_dnx libraries 
 
 
 1. For **rosetta_sip_factory** (sip_builder.py) new parameter "exclude_file_char" was added to build_single_file_sip  and build_sip functions.
