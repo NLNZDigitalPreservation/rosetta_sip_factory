@@ -82,7 +82,7 @@ def build_sip(
         output_dir=None,
         encoding="unicode",
         structmap_type="DEFAULT",
-        exclude_file_char = []):
+        exclude_file_characteristics = []):
     """Builds Submission Information Package.
 
     Moves the nominated files and folders into a Rosetta-friendly SIP
@@ -189,7 +189,7 @@ def build_sip(
         input_dir=input_dir,
         digital_original=digital_original,
         structmap_type=structmap_type,
-        exclude_file_char = exclude_file_char)
+        exclude_file_characteristics = exclude_file_characteristics)
 
     # build output SIP folder structure
     streams_dir = os.path.join(output_dir, 'content', 'streams')
@@ -259,7 +259,7 @@ def build_single_file_sip(ie_dmd_dict=None,
                           output_dir=None,
                           mets_filename=None,
                           encoding='unicode',
-                          exclude_file_char = []):
+                          exclude_file_characteristics = []):
     # build mets
     mets = build_single_file_mets(
         ie_dmd_dict=ie_dmd_dict,
@@ -271,7 +271,7 @@ def build_single_file_sip(ie_dmd_dict=None,
         accessRightsPolicy=accessRightsPolicy,
         eventList=eventList,
         digital_original=digital_original,
-         exclude_file_char = exclude_file_char)
+        exclude_file_characteristics = exclude_file_characteristics)
 
     # build output SIP folder structure
     streams_dir = os.path.join(output_dir, 'content', 'streams')
@@ -332,7 +332,7 @@ def build_sip_from_json(
     output_dir=None,
     mets_filename=None,
     encoding='unicode',
-        structmap_type="DEFAULT"):
+    structmap_type="DEFAULT"):
     """Builds SIP using JSON for the rep-level information.
 
     Keyword arguments:

@@ -5,10 +5,10 @@ from lxml import etree as ET
 from nose.tools import *
 
 from rosetta_sip_factory import sip_builder as sb
+import nose2
 
 
 CURRENT_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)))
-
 
 def test_mets_dnx():
     """Test basic construction of METS DNX"""
@@ -25,17 +25,17 @@ def test_mets_dnx():
         pres_master_dir=os.path.join(
                 os.path.dirname(os.path.realpath(__file__)),
                 'data',
-                'test_batch_1',
+                'test_batch_3',
                 'pm'),
         modified_master_dir=
                 os.path.join(os.path.dirname(os.path.realpath(__file__)),
                 'data',
-                'test_batch_1',
+                'test_batch_3',
                 'mm'),
         input_dir=os.path.join(
                 os.path.dirname(os.path.realpath(__file__)),
                 'data',
-                'test_batch_1'),
+                'test_batch_3'),
         generalIECharacteristics=[
                 {'submissionReason': 'bornDigitalContent',
                  'IEEntityType': 'periodicIE'}
@@ -43,7 +43,6 @@ def test_mets_dnx():
         output_dir=output_dir
         )
 
-    # print(ET.tounicode(mets, pretty_print=True))
 
 def test_sip_single_rep_multi_folder_hierarchy():
     """Build SIP with single representation in a complex folder structure"""
@@ -126,8 +125,7 @@ def test_sip_build_correct_digital_original_value():
 
 def test_mets_dnx_with_dc_xml():
     """Test basic construction of METS DNX with a dc.xml file for the
-    SIP title
-    """
+    SIP title    """
     output_dir = os.path.join(os.path.dirname(
                 os.path.realpath(__file__)),
                 'data',
@@ -1038,8 +1036,10 @@ def test_multiple_JSON_IEs_in_one_SIP_folder():
             'test_title_8.xml', 'test_title_9.xml', 'streams'])
 
 
-def test_build_sip_with_exclude_file_char():
-    """Test exclude_file_char"""
+
+
+def test_build_sip_with_exclude_file_characteristics():
+    """Test exclude_file_characteristics"""
     output_dir = os.path.join(
                 os.path.dirname(os.path.realpath(__file__)),
                 'data',
@@ -1052,7 +1052,7 @@ def test_build_sip_with_exclude_file_char():
         {'IEEntityType': 'periodicIE'}
         ],
     # Set the list of files to exclude
-    exclude_file_char = ['fileOriginalPath','fileSizeBytes', 'fileModificationDate','fileCreationDate']  
+    exclude_file_characteristics = ['fileOriginalPath','fileSizeBytes', 'fileModificationDate','fileCreationDate']  
     sb.build_sip(
         ie_dmd_dict=ie_dc_dict,
         pres_master_dir=os.path.join(
@@ -1074,7 +1074,7 @@ def test_build_sip_with_exclude_file_char():
                 'IEEntityType': 'periodicIE'}],
         sip_title="Test Deposit",
         output_dir=output_dir,
-        exclude_file_char = exclude_file_char,
+        exclude_file_characteristics = exclude_file_characteristics,
         )
     with open (os.path.join(CURRENT_DIR, "data", "output_7","content", "mets.xml"),"r") as f:
         data = f.read()
@@ -1084,8 +1084,8 @@ def test_build_sip_with_exclude_file_char():
     assert "fileModificationDate" not in data
     assert 'fileCreationDate' not in data
 
-def test_build_single_file_sip_with_exclude_file_char():
-    """Test exclude_file_char"""
+def test_build_single_file_sip_with_exclude_file_characteristics():
+    """Test exclude_file_characteristics"""
     output_dir = os.path.join(os.path.dirname(
                 os.path.realpath(__file__)),
                 'data',
@@ -1096,8 +1096,9 @@ def test_build_single_file_sip_with_exclude_file_char():
     ie_dc_dict = {"dc:title": "test title"}
     sip_title = 'Test Deposit'
   
-    # Set the list of files to exclude
-    exclude_file_char = ['fileOriginalPath','fileSizeBytes', 'fileModificationDate','fileCreationDate']  
+
+    exclude_file_characteristics = ['fileOriginalPath','fileSizeBytes', 'fileModificationDate','fileCreationDate']  # Set the list of files to exclude
+
     # Call the build_sip function with the provided inputs
     sb.build_single_file_sip(
         ie_dmd_dict=ie_dc_dict,
@@ -1110,9 +1111,11 @@ def test_build_single_file_sip_with_exclude_file_char():
                 {'IEEntityType': 'periodicIE'}],
         sip_title=sip_title,
         output_dir=output_dir,
-        exclude_file_char = exclude_file_char)
+        exclude_file_characteristics = exclude_file_characteristics)
     with open (os.path.join(CURRENT_DIR, "data", "output_7","content", "mets.xml"),"r") as f:
         data = f.read()
     assert "fileOriginalPath" not in data
     assert "fileSizeBytes" not in data
     assert "fileModificationDate" not in data
+
+nose2.main(exit=False, verbosity=2)        
