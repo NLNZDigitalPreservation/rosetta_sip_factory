@@ -25,12 +25,12 @@ def test_mets_dnx():
         pres_master_dir=os.path.join(
                 os.path.dirname(os.path.realpath(__file__)),
                 'data',
-                'test_batch_3',
+                'test_batch_1',
                 'pm'),
         modified_master_dir=
                 os.path.join(os.path.dirname(os.path.realpath(__file__)),
                 'data',
-                'test_batch_3',
+                'test_batch_1',
                 'mm'),
         input_dir=os.path.join(
                 os.path.dirname(os.path.realpath(__file__)),
