@@ -2,7 +2,7 @@
   <mets:dmdSec ID="ie-dmd">
     <mets:mdWrap MDTYPE="DC">
       <mets:xmlData>
-        <dc:record xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <dc:record xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rosetta="http://www.exlibrisgroup.com/dps">
           <dc:title>test_title_2</dc:title>
         </dc:record>
       </mets:xmlData>
@@ -15,8 +15,8 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalIECharacteristics">
               <record>
-                <key id="IEEntityType">periodicIE</key>
                 <key id="submissionReason">bornDigitalContent</key>
+                <key id="IEEntityType">periodicIE</key>
               </record>
             </section>
           </dnx>
@@ -52,10 +52,10 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalRepCharacteristics">
               <record>
-                <key id="RevisionNumber">1</key>
-                <key id="DigitalOriginal">false</key>
-                <key id="usageType">VIEW</key>
                 <key id="preservationType">PRESERVATION_MASTER</key>
+                <key id="usageType">VIEW</key>
+                <key id="DigitalOriginal">false</key>
+                <key id="RevisionNumber">1</key>
               </record>
             </section>
           </dnx>
@@ -91,12 +91,12 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalFileCharacteristics">
               <record>
-                <key id="fileModificationDate">1st of January, 1601</key>
-                <key id="fileCreationDate">1st of January, 1601</key>
-                <key id="fileOriginalPath">root_folder/tier_2_folder/tier_3_folder/freedom_isnt_what_i_thought_it_would_be.jpg</key>
-                <key id="fileOriginalName">freedom_isnt_what_i_thought_it_would_be.jpg</key>
-                <key id="note">This is a note for image 1</key>
                 <key id="label">Image One</key>
+                <key id="note">This is a note for image 1</key>
+                <key id="fileOriginalName">freedom_isnt_what_i_thought_it_would_be.jpg</key>
+                <key id="fileOriginalPath">root_folder/tier_2_folder/tier_3_folder/freedom_isnt_what_i_thought_it_would_be.jpg</key>
+                <key id="fileCreationDate">1st of January, 1601</key>
+                <key id="fileModificationDate">1st of January, 1601</key>
               </record>
             </section>
             <section id="fileFixity">
@@ -138,12 +138,12 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalFileCharacteristics">
               <record>
-                <key id="fileModificationDate">1st of January, 1601</key>
-                <key id="fileCreationDate">1st of January, 1601</key>
-                <key id="fileOriginalPath">root_folder/tier_2_folder/Experience.jpg</key>
-                <key id="fileOriginalName">Experience.jpg</key>
-                <key id="note">This is a note for image 2</key>
                 <key id="label">Image Two</key>
+                <key id="note">This is a note for image 2</key>
+                <key id="fileOriginalName">Experience.jpg</key>
+                <key id="fileOriginalPath">root_folder/tier_2_folder/Experience.jpg</key>
+                <key id="fileCreationDate">1st of January, 1601</key>
+                <key id="fileModificationDate">1st of January, 1601</key>
               </record>
             </section>
             <section id="fileFixity">
@@ -185,12 +185,12 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalFileCharacteristics">
               <record>
-                <key id="fileModificationDate">1st of January, 1601</key>
-                <key id="fileCreationDate">1st of January, 1601</key>
-                <key id="fileOriginalPath">root_folder/Stock-White-angle-Front.jpg</key>
-                <key id="fileOriginalName">Stock-White-angle-Front.jpg</key>
-                <key id="note">This is a note for image 3</key>
                 <key id="label">Image Three</key>
+                <key id="note">This is a note for image 3</key>
+                <key id="fileOriginalName">Stock-White-angle-Front.jpg</key>
+                <key id="fileOriginalPath">root_folder/Stock-White-angle-Front.jpg</key>
+                <key id="fileCreationDate">1st of January, 1601</key>
+                <key id="fileModificationDate">1st of January, 1601</key>
               </record>
             </section>
             <section id="fileFixity">
@@ -226,14 +226,14 @@
     </mets:digiprovMD>
   </mets:amdSec>
   <mets:fileSec>
-    <mets:fileGrp ADMID="rep1-amd" ID="rep1">
-      <mets:file ADMID="fid1-1-amd" ID="fid1-1">
+    <mets:fileGrp ID="rep1" ADMID="rep1-amd">
+      <mets:file ID="fid1-1" ADMID="fid1-1-amd">
         <mets:FLocat xmlns:xlin="http://www.w3.org/1999/xlink" LOCTYPE="URL" xlin:href="root_folder/tier_2_folder/tier_3_folder/freedom_isnt_what_i_thought_it_would_be.jpg"/>
       </mets:file>
-      <mets:file ADMID="fid2-1-amd" ID="fid2-1">
+      <mets:file ID="fid2-1" ADMID="fid2-1-amd">
         <mets:FLocat xmlns:xlin="http://www.w3.org/1999/xlink" LOCTYPE="URL" xlin:href="root_folder/tier_2_folder/Experience.jpg"/>
       </mets:file>
-      <mets:file ADMID="fid3-1-amd" ID="fid3-1">
+      <mets:file ID="fid3-1" ADMID="fid3-1-amd">
         <mets:FLocat xmlns:xlin="http://www.w3.org/1999/xlink" LOCTYPE="URL" xlin:href="root_folder/Stock-White-angle-Front.jpg"/>
       </mets:file>
     </mets:fileGrp>

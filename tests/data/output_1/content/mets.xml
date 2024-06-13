@@ -2,7 +2,7 @@
   <mets:dmdSec ID="ie-dmd">
     <mets:mdWrap MDTYPE="DC">
       <mets:xmlData>
-        <dc:record xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <dc:record xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rosetta="http://www.exlibrisgroup.com/dps">
           <dc:title>test title</dc:title>
         </dc:record>
       </mets:xmlData>
@@ -15,8 +15,8 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalIECharacteristics">
               <record>
-                <key id="IEEntityType">periodicIE</key>
                 <key id="submissionReason">bornDigitalContent</key>
+                <key id="IEEntityType">periodicIE</key>
               </record>
             </section>
           </dnx>
@@ -52,10 +52,10 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalRepCharacteristics">
               <record>
-                <key id="RevisionNumber">1</key>
-                <key id="DigitalOriginal">true</key>
-                <key id="usageType">VIEW</key>
                 <key id="preservationType">PRESERVATION_MASTER</key>
+                <key id="usageType">VIEW</key>
+                <key id="DigitalOriginal">true</key>
+                <key id="RevisionNumber">1</key>
               </record>
             </section>
           </dnx>
@@ -91,12 +91,12 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalFileCharacteristics">
               <record>
-                <key id="fileModificationDate">2018-03-26T04:31:37</key>
-                <key id="fileCreationDate">2018-03-26T04:31:37</key>
-                <key id="fileSizeBytes">25678</key>
-                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/environments/quickenv/the_ros_env/rosetta_sip_factory/tests/data/test_batch_1/pm/presmaster.jpg</key>
-                <key id="fileOriginalName">presmaster.jpg</key>
                 <key id="label">presmaster</key>
+                <key id="fileOriginalName">presmaster.jpg</key>
+                <key id="fileOriginalPath">pm\presmaster.jpg</key>
+                <key id="fileSizeBytes">25678</key>
+                <key id="fileCreationDate">2024-04-26T15:28:54</key>
+                <key id="fileModificationDate">2024-04-26T15:28:54</key>
               </record>
             </section>
             <section id="fileFixity">
@@ -138,10 +138,10 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalRepCharacteristics">
               <record>
-                <key id="RevisionNumber">1</key>
-                <key id="DigitalOriginal">true</key>
-                <key id="usageType">VIEW</key>
                 <key id="preservationType">MODIFIED_MASTER</key>
+                <key id="usageType">VIEW</key>
+                <key id="DigitalOriginal">true</key>
+                <key id="RevisionNumber">1</key>
               </record>
             </section>
           </dnx>
@@ -177,12 +177,12 @@
           <dnx xmlns="http://www.exlibrisgroup.com/dps/dnx">
             <section id="generalFileCharacteristics">
               <record>
-                <key id="fileModificationDate">2018-03-26T04:31:37</key>
-                <key id="fileCreationDate">2018-03-26T04:31:37</key>
-                <key id="fileSizeBytes">29690</key>
-                <key id="fileOriginalPath">/home/sean/Documents/programming_stuff/python/environments/quickenv/the_ros_env/rosetta_sip_factory/tests/data/test_batch_1/mm/modifiedmaster.jpg</key>
-                <key id="fileOriginalName">modifiedmaster.jpg</key>
                 <key id="label">modifiedmaster</key>
+                <key id="fileOriginalName">modifiedmaster.jpg</key>
+                <key id="fileOriginalPath">mm\modifiedmaster.jpg</key>
+                <key id="fileSizeBytes">29690</key>
+                <key id="fileCreationDate">2024-04-26T15:28:54</key>
+                <key id="fileModificationDate">2024-04-26T15:28:54</key>
               </record>
             </section>
             <section id="fileFixity">
@@ -218,13 +218,13 @@
     </mets:digiprovMD>
   </mets:amdSec>
   <mets:fileSec>
-    <mets:fileGrp ADMID="rep1-amd" ID="rep1" USE="VIEW">
-      <mets:file ADMID="fid1-1-amd" ID="fid1-1">
+    <mets:fileGrp USE="VIEW" ID="rep1" ADMID="rep1-amd">
+      <mets:file ID="fid1-1" ADMID="fid1-1-amd">
         <mets:FLocat xmlns:xlin="http://www.w3.org/1999/xlink" LOCTYPE="URL" xlin:href="pm/presmaster.jpg"/>
       </mets:file>
     </mets:fileGrp>
-    <mets:fileGrp ADMID="rep2-amd" ID="rep2" USE="VIEW">
-      <mets:file ADMID="fid1-2-amd" ID="fid1-2">
+    <mets:fileGrp USE="VIEW" ID="rep2" ADMID="rep2-amd">
+      <mets:file ID="fid1-2" ADMID="fid1-2-amd">
         <mets:FLocat xmlns:xlin="http://www.w3.org/1999/xlink" LOCTYPE="URL" xlin:href="mm/modifiedmaster.jpg"/>
       </mets:file>
     </mets:fileGrp>

@@ -1,8 +1,9 @@
 import os
 import shutil
+import pathlib
 
 from lxml import etree as ET
-from nose.tools import *
+from pytest import *
 
 from rosetta_sip_factory import sip_builder as sb
 
@@ -243,26 +244,25 @@ def test_sip_single_rep_flat_files():
 
 def test_sip_single_rep_json():
     """Build SIP with single representation with JSON input"""
-
-    pm_json = """[
-        {"fileOriginalName": "img_1.jpg",
+    print(os.path.join(CURRENT_DIR, "data", "test_batch_4"))
+    pm_json = f"""[
+        {{"fileOriginalName": "img_1.jpg",
          "fileOriginalPath": "img_1.jpg",
-         "physical_path" : "%s/img_1.jpg",
+         "physical_path" : "{pathlib.PureWindowsPath(os.path.join(CURRENT_DIR, "data", "test_batch_4", "img_1.jpg")).as_posix()}",
          "MD5": "9d09f20ab8e37e5d32cdd1508b49f0a9",
          "fileCreationDate": "1st of January, 1601",
          "fileModificationDate": "1st of January, 1601",
          "label": "Image One",
-         "note": "This is a note for image 1"},
-         {"fileOriginalName": "img_2.jpg",
+         "note": "This is a note for image 1"}},
+         {{"fileOriginalName": "img_2.jpg",
          "fileOriginalPath": "img_2.jpg",
-         "physical_path" : "%s/img_2.jpg",
+         "physical_path" : "{pathlib.PureWindowsPath(os.path.join(CURRENT_DIR, "data", "test_batch_4","img_2.jpg")).as_posix()}",
          "MD5": "11c2563db299225b38d5df6287ccda7d",
          "fileCreationDate": "1st of January, 1601",
          "fileModificationDate": "1st of January, 1601",
          "label": "Image Two",
-         "note": "This is a note for image 2"}
-    ]""" % (os.path.join(CURRENT_DIR, "data", "test_batch_4"),
-            os.path.join(CURRENT_DIR, "data", "test_batch_4"))
+         "note": "This is a note for image 2"}}
+    ]"""
     # pm_json = """[
     #     {"name": "img_1.jpg",
     #      "path": "%s/img1.jpg",
@@ -460,10 +460,15 @@ def test_sip_build_multiple_ies():
     for f in ['test1.xml', 'test2.xml']:
         assert(f in output_metses)
 
-@raises(Exception)
 def test_sip_build_multiple_ies_with_same_named_files():
     """Test to see how this process handles two IEs that both have the same named
-    files."""
+    files.
+    
+    SLV note: This process is not working as expected. The test expects that the files
+    will go directly into content/streams/ however, the process is creating subfolders
+    for each test so the path to the files is content/streams/test1 content/streams/test2.
+    
+    Uncertain what the desired behaviour is for our use case so leaving be for now."""
     output_dir = os.path.join(
                 os.path.dirname(os.path.realpath(__file__)),
                 'data',
@@ -695,36 +700,33 @@ def test_multi_folder_physical_sm_type():
 def test_multi_hierarchical_json_default_structmap():
     """multi-hierarchical json SIPs get a logical SM by default"""
 
-    pm_json = """[
-        {"fileOriginalName": "freedom_isnt_what_i_thought_it_would_be.jpg",
+    pm_json = f"""[
+        {{"fileOriginalName": "freedom_isnt_what_i_thought_it_would_be.jpg",
          "fileOriginalPath": "root_folder/tier_2_folder/tier_3_folder/freedom_isnt_what_i_thought_it_would_be.jpg",
-         "physical_path" : "%s/freedom_isnt_what_i_thought_it_would_be.jpg",
+         "physical_path" : "{pathlib.PureWindowsPath(os.path.join(CURRENT_DIR, "data", "test_batch_2",
+                         "root_folder", "tier_2_folder", "tier_3_folder","freedom_isnt_what_i_thought_it_would_be.jpg")).as_posix()}",
          "MD5": "9d09f20ab8e37e5d32cdd1508b49f0a9",
          "fileCreationDate": "1st of January, 1601",
          "fileModificationDate": "1st of January, 1601",
          "label": "Image One",
-         "note": "This is a note for image 1"},
-         {"fileOriginalName": "Experience.jpg",
+         "note": "This is a note for image 1"}},
+         {{"fileOriginalName": "Experience.jpg",
          "fileOriginalPath": "root_folder/tier_2_folder/Experience.jpg",
-         "physical_path" : "%s/Experience.jpg",
+         "physical_path" : "{pathlib.PureWindowsPath(os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder","Experience.jpg")).as_posix()}",
          "MD5": "11c2563db299225b38d5df6287ccda7d",
          "fileCreationDate": "1st of January, 1601",
          "fileModificationDate": "1st of January, 1601",
          "label": "Image Two",
-         "note": "This is a note for image 2"},
-         {"fileOriginalName": "Stock-White-angle-Front.jpg",
+         "note": "This is a note for image 2"}},
+         {{"fileOriginalName": "Stock-White-angle-Front.jpg",
          "fileOriginalPath": "root_folder/Stock-White-angle-Front.jpg",
-         "physical_path" : "%s/Stock-White-angle-Front.jpg",
+         "physical_path" : "{pathlib.PureWindowsPath(os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder","Stock-White-angle-Front.jpg")).as_posix()}",
          "MD5": "11c2563db299225b38d5df6287ccda7d",
          "fileCreationDate": "1st of January, 1601",
          "fileModificationDate": "1st of January, 1601",
          "label": "Image Three",
-         "note": "This is a note for image 3"}
-    ]""" % (os.path.join(CURRENT_DIR, "data", "test_batch_2",
-                         "root_folder", "tier_2_folder", "tier_3_folder"),
-            os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder",
-                         "tier_2_folder"),
-            os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder"))
+         "note": "This is a note for image 3"}}
+    ]""" 
 
     output_dir = os.path.join(
         os.path.dirname(os.path.realpath(__file__)),
@@ -760,36 +762,34 @@ def test_multi_hierarchical_json_default_structmap():
 def test_multi_hierarchical_json_physical_structmap():
     """multi-hierarchical json SIPs get a physical SM when flagged"""
 
-    pm_json = """[
-        {"fileOriginalName": "freedom_isnt_what_i_thought_it_would_be.jpg",
+    pm_json = f"""[
+        {{"fileOriginalName": "freedom_isnt_what_i_thought_it_would_be.jpg",
          "fileOriginalPath": "root_folder/tier_2_folder/tier_3_folder/freedom_isnt_what_i_thought_it_would_be.jpg",
-         "physical_path" : "%s/freedom_isnt_what_i_thought_it_would_be.jpg",
+         "physical_path" : "{pathlib.PureWindowsPath(os.path.join(CURRENT_DIR, "data", "test_batch_2",
+                         "root_folder", "tier_2_folder", "tier_3_folder","freedom_isnt_what_i_thought_it_would_be.jpg")).as_posix()}",
          "MD5": "9d09f20ab8e37e5d32cdd1508b49f0a9",
          "fileCreationDate": "1st of January, 1601",
          "fileModificationDate": "1st of January, 1601",
          "label": "Image One",
-         "note": "This is a note for image 1"},
-         {"fileOriginalName": "Experience.jpg",
+         "note": "This is a note for image 1"}},
+         {{"fileOriginalName": "Experience.jpg",
          "fileOriginalPath": "root_folder/tier_2_folder/Experience.jpg",
-         "physical_path" : "%s/Experience.jpg",
+         "physical_path" : "{pathlib.PureWindowsPath(os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder",
+                         "tier_2_folder","Experience.jpg")).as_posix()}",
          "MD5": "11c2563db299225b38d5df6287ccda7d",
          "fileCreationDate": "1st of January, 1601",
          "fileModificationDate": "1st of January, 1601",
          "label": "Image Two",
-         "note": "This is a note for image 2"},
-         {"fileOriginalName": "Stock-White-angle-Front.jpg",
+         "note": "This is a note for image 2"}},
+         {{"fileOriginalName": "Stock-White-angle-Front.jpg",
          "fileOriginalPath": "root_folder/Stock-White-angle-Front.jpg",
-         "physical_path" : "%s/Stock-White-angle-Front.jpg",
+         "physical_path" : "{pathlib.PureWindowsPath(os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder","Stock-White-angle-Front.jpg")).as_posix()}",
          "MD5": "11c2563db299225b38d5df6287ccda7d",
          "fileCreationDate": "1st of January, 1601",
          "fileModificationDate": "1st of January, 1601",
          "label": "Image Three",
-         "note": "This is a note for image 3"}
-    ]""" % (os.path.join(CURRENT_DIR, "data", "test_batch_2",
-                         "root_folder", "tier_2_folder", "tier_3_folder"),
-            os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder",
-                         "tier_2_folder"),
-            os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder"))
+         "note": "This is a note for image 3"}}
+    ]"""
 
     output_dir = os.path.join(
         os.path.dirname(os.path.realpath(__file__)),
@@ -835,36 +835,34 @@ def test_multi_hierarchical_json_physical_structmap():
 def test_multi_hierarchical_json_both_structmaps():
     """multi-hierarchical json SIPs get a physical and logical SM when 'both' is flagged"""
 
-    pm_json = """[
-        {"fileOriginalName": "freedom_isnt_what_i_thought_it_would_be.jpg",
+    pm_json = f"""[
+        {{"fileOriginalName": "freedom_isnt_what_i_thought_it_would_be.jpg",
          "fileOriginalPath": "root_folder/tier_2_folder/tier_3_folder/freedom_isnt_what_i_thought_it_would_be.jpg",
-         "physical_path" : "%s/freedom_isnt_what_i_thought_it_would_be.jpg",
+         "physical_path" : "{pathlib.PureWindowsPath(os.path.join(CURRENT_DIR, "data", "test_batch_2",
+                         "root_folder", "tier_2_folder", "tier_3_folder","freedom_isnt_what_i_thought_it_would_be.jpg")).as_posix()}",
          "MD5": "9d09f20ab8e37e5d32cdd1508b49f0a9",
          "fileCreationDate": "1st of January, 1601",
          "fileModificationDate": "1st of January, 1601",
          "label": "Image One",
-         "note": "This is a note for image 1"},
-         {"fileOriginalName": "Experience.jpg",
+         "note": "This is a note for image 1"}},
+         {{"fileOriginalName": "Experience.jpg",
          "fileOriginalPath": "root_folder/tier_2_folder/Experience.jpg",
-         "physical_path" : "%s/Experience.jpg",
+         "physical_path" : "{pathlib.PureWindowsPath(os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder",
+                         "tier_2_folder","Experience.jpg")).as_posix()}",
          "MD5": "11c2563db299225b38d5df6287ccda7d",
          "fileCreationDate": "1st of January, 1601",
          "fileModificationDate": "1st of January, 1601",
          "label": "Image Two",
-         "note": "This is a note for image 2"},
-         {"fileOriginalName": "Stock-White-angle-Front.jpg",
+         "note": "This is a note for image 2"}},
+         {{"fileOriginalName": "Stock-White-angle-Front.jpg",
          "fileOriginalPath": "root_folder/Stock-White-angle-Front.jpg",
-         "physical_path" : "%s/Stock-White-angle-Front.jpg",
+         "physical_path" : "{pathlib.PureWindowsPath(os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder","Stock-White-angle-Front.jpg")).as_posix()}",
          "MD5": "11c2563db299225b38d5df6287ccda7d",
          "fileCreationDate": "1st of January, 1601",
          "fileModificationDate": "1st of January, 1601",
          "label": "Image Three",
-         "note": "This is a note for image 3"}
-    ]""" % (os.path.join(CURRENT_DIR, "data", "test_batch_2",
-                         "root_folder", "tier_2_folder", "tier_3_folder"),
-            os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder",
-                         "tier_2_folder"),
-            os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder"))
+         "note": "This is a note for image 3"}}
+    ]"""
 
     output_dir = os.path.join(
         os.path.dirname(os.path.realpath(__file__)),
@@ -965,36 +963,34 @@ def test_multiple_full_IEs_in_one_SIP_folder():
 
 
 def test_multiple_JSON_IEs_in_one_SIP_folder():
-    pm_json = """[
-        {"fileOriginalName": "freedom_isnt_what_i_thought_it_would_be.jpg",
+    pm_json = f"""[
+        {{"fileOriginalName": "freedom_isnt_what_i_thought_it_would_be.jpg",
          "fileOriginalPath": "root_folder/tier_2_folder/tier_3_folder/freedom_isnt_what_i_thought_it_would_be.jpg",
-         "physical_path" : "%s/freedom_isnt_what_i_thought_it_would_be.jpg",
+         "physical_path" : "{pathlib.PureWindowsPath(os.path.join(CURRENT_DIR, "data", "test_batch_2",
+                         "root_folder", "tier_2_folder", "tier_3_folder","freedom_isnt_what_i_thought_it_would_be.jpg")).as_posix()}",
          "MD5": "9d09f20ab8e37e5d32cdd1508b49f0a9",
          "fileCreationDate": "1st of January, 1601",
          "fileModificationDate": "1st of January, 1601",
          "label": "Image One",
-         "note": "This is a note for image 1"},
-         {"fileOriginalName": "Experience.jpg",
+         "note": "This is a note for image 1"}},
+         {{"fileOriginalName": "Experience.jpg",
          "fileOriginalPath": "root_folder/tier_2_folder/Experience.jpg",
-         "physical_path" : "%s/Experience.jpg",
+         "physical_path" : "{pathlib.PureWindowsPath(os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder",
+                         "tier_2_folder","Experience.jpg")).as_posix()}",
          "MD5": "11c2563db299225b38d5df6287ccda7d",
          "fileCreationDate": "1st of January, 1601",
          "fileModificationDate": "1st of January, 1601",
          "label": "Image Two",
-         "note": "This is a note for image 2"},
-         {"fileOriginalName": "Stock-White-angle-Front.jpg",
+         "note": "This is a note for image 2"}},
+         {{"fileOriginalName": "Stock-White-angle-Front.jpg",
          "fileOriginalPath": "root_folder/Stock-White-angle-Front.jpg",
-         "physical_path" : "%s/Stock-White-angle-Front.jpg",
+         "physical_path" : "{pathlib.PureWindowsPath(os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder","Stock-White-angle-Front.jpg")).as_posix()}",
          "MD5": "11c2563db299225b38d5df6287ccda7d",
          "fileCreationDate": "1st of January, 1601",
          "fileModificationDate": "1st of January, 1601",
          "label": "Image Three",
-         "note": "This is a note for image 3"}
-    ]""" % (os.path.join(CURRENT_DIR, "data", "test_batch_2",
-                         "root_folder", "tier_2_folder", "tier_3_folder"),
-            os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder",
-                         "tier_2_folder"),
-            os.path.join(CURRENT_DIR, "data", "test_batch_2", "root_folder"))
+         "note": "This is a note for image 3"}}
+    ]"""
 
     output_dir = os.path.join(
         os.path.dirname(os.path.realpath(__file__)),
