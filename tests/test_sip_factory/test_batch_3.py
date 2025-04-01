@@ -9,7 +9,7 @@ from tests import INPUTS_PATH
 from tests.utils import read_mets_files
 
 
-class TestBatch3:
+class TestBatchThree:
     ie_dc_dict = {"dc:title": "test title"}
     inputs_path = join(INPUTS_PATH, "test_batch_3")
     general_ie_characteristics = [

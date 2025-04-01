@@ -8,7 +8,7 @@ from tests import INPUTS_PATH
 from tests.utils import read_json
 
 
-class TestBatch4:
+class TestBatchFour:
     input_dir = join(INPUTS_PATH, "test_batch_4")
     ie_dc_dict = {"dc:title": "test title"}
     general_ie_characteristics = [
