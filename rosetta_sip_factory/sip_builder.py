@@ -3,12 +3,7 @@ import os
 import shutil
 
 from lxml import etree as ET
-
-from mets_dnx.factory import (
-    build_mets,
-    build_single_file_mets,
-    build_mets_from_json)
-
+from mets_dnx.factory import build_mets, build_mets_from_json, build_single_file_mets
 
 # declare namespaces
 DC_NS = "http://purl.org/dc/elements/1.1/"
@@ -22,31 +17,21 @@ dc_nsmap = {
 }
 
 mets_dnx_nsmap = {
-    'mets': 'http://www.loc.gov/METS/',
-    'dnx': 'http://www.exlibrisgroup.com/dps/dnx'
+    "mets": "http://www.loc.gov/METS/",
+    "dnx": "http://www.exlibrisgroup.com/dps/dnx",
 }
 
 
-def _build_dc_sip(output_dir, sip_title, encoding='unicode'):
-    dc_xml = ET.Element('{%s}record' % DC_NS, nsmap=dc_nsmap)
-    title = ET.SubElement(dc_xml, '{%s}title' % DC_NS, nsmap=dc_nsmap)
+def _build_dc_sip(output_dir, sip_title, encoding="unicode"):
+    dc_xml = ET.Element("{%s}record" % DC_NS, nsmap=dc_nsmap)
+    title = ET.SubElement(dc_xml, "{%s}title" % DC_NS, nsmap=dc_nsmap)
     title.text = sip_title
-    if encoding in ['unicode']:
-        with open(os.path.join(
-                  output_dir,
-                  'content',
-                  'dc.xml'),
-                  'w') as dc_file:
+    if encoding in ["unicode"]:
+        with open(os.path.join(output_dir, "content", "dc.xml"), "w") as dc_file:
             dc_file.write(ET.tostring(dc_xml, encoding=encoding))
     else:
-        with open(os.path.join(
-                  output_dir,
-                  'content',
-                  'dc.xml'),
-                  'wb') as dc_file:
-            dc_file.write(ET.tostring(
-                dc_xml, xml_declaration=True,
-                encoding=encoding))
+        with open(os.path.join(output_dir, "content", "dc.xml"), "wb") as dc_file:
+            dc_file.write(ET.tostring(dc_xml, xml_declaration=True, encoding=encoding))
 
 
 def _copytree(src, dst, symlinks=False, ignore=None):
@@ -65,24 +50,25 @@ def _copytree(src, dst, symlinks=False, ignore=None):
 
 
 def build_sip(
-        ie_dmd_dict=None,
-        pres_master_dir=None,
-        modified_master_dir=None,
-        access_derivative_dir=None,
-        cms=None,
-        webHarvesting=None,
-        generalIECharacteristics=None,
-        objectIdentifier=None,
-        accessRightsPolicy=None,
-        eventList=None,
-        input_dir=None,
-        digital_original=False,
-        mets_filename=None,
-        sip_title=None,
-        output_dir=None,
-        encoding="unicode",
-        structmap_type="DEFAULT",
-        exclude_file_characteristics = []):
+    ie_dmd_dict=None,
+    pres_master_dir=None,
+    modified_master_dir=None,
+    access_derivative_dir=None,
+    cms=None,
+    webHarvesting=None,
+    generalIECharacteristics=None,
+    objectIdentifier=None,
+    accessRightsPolicy=None,
+    eventList=None,
+    input_dir=None,
+    digital_original=False,
+    mets_filename=None,
+    sip_title=None,
+    output_dir=None,
+    encoding="unicode",
+    structmap_type="DEFAULT",
+    exclude_file_characteristics=[],
+):
     """Builds Submission Information Package.
 
     Moves the nominated files and folders into a Rosetta-friendly SIP
@@ -189,10 +175,11 @@ def build_sip(
         input_dir=input_dir,
         digital_original=digital_original,
         structmap_type=structmap_type,
-        exclude_file_characteristics = exclude_file_characteristics)
+        exclude_file_characteristics=exclude_file_characteristics,
+    )
 
     # build output SIP folder structure
-    streams_dir = os.path.join(output_dir, 'content', 'streams')
+    streams_dir = os.path.join(output_dir, "content", "streams")
     # 2017-03-21: add try block to accommodate multiple IEs
     if mets_filename:
         streams_dir = os.path.join(streams_dir, mets_filename)
@@ -204,26 +191,22 @@ def build_sip(
         # input_dir, in which case, omit the parent dir
         # for the stream and throw the file straight into
         # the streams dir
-        if (modified_master_dir is None and
-            access_derivative_dir is None and
-                input_dir == pres_master_dir):
+        if (
+            modified_master_dir is None
+            and access_derivative_dir is None
+            and input_dir == pres_master_dir
+        ):
             destination = os.path.join(streams_dir)
         else:
-            destination = os.path.join(
-                streams_dir,
-                os.path.basename(pres_master_dir))
+            destination = os.path.join(streams_dir, os.path.basename(pres_master_dir))
             os.makedirs(destination)
         _copytree(pres_master_dir, destination)
     if modified_master_dir is not None:
-        destination = os.path.join(
-            streams_dir,
-            os.path.basename(modified_master_dir))
+        destination = os.path.join(streams_dir, os.path.basename(modified_master_dir))
         os.makedirs(destination)
         _copytree(modified_master_dir, destination)
     if access_derivative_dir is not None:
-        destination = os.path.join(
-            streams_dir,
-            os.path.basename(access_derivative_dir))
+        destination = os.path.join(streams_dir, os.path.basename(access_derivative_dir))
         os.makedirs(destination)
         _copytree(access_derivative_dir, destination)
 
@@ -231,35 +214,41 @@ def build_sip(
     if mets_filename:
         for fl in mets.findall(".//{http://www.loc.gov/METS/}FLocat"):
             fl.attrib["{http://www.w3.org/1999/xlink}href"] = "{}/{}".format(
-                mets_filename,
-                fl.attrib["{http://www.w3.org/1999/xlink}href"])
-        mets.write(os.path.join(output_dir, 'content',
-                                mets_filename + '.xml'), pretty_print=True,
-                   encoding=encoding)
+                mets_filename, fl.attrib["{http://www.w3.org/1999/xlink}href"]
+            )
+        mets.write(
+            os.path.join(output_dir, "content", mets_filename + ".xml"),
+            pretty_print=True,
+            encoding=encoding,
+        )
     else:
-        mets.write(os.path.join(output_dir, 'content',
-                                'mets.xml'), pretty_print=True,
-                   encoding=encoding)
+        mets.write(
+            os.path.join(output_dir, "content", "mets.xml"),
+            pretty_print=True,
+            encoding=encoding,
+        )
 
     # write SIP DC file if SIP title is supplied
     if sip_title is not None:
         _build_dc_sip(output_dir, sip_title, encoding=encoding)
 
 
-def build_single_file_sip(ie_dmd_dict=None,
-                          filepath=None,
-                          cms=None,
-                          webHarvesting=None,
-                          generalIECharacteristics=None,
-                          objectIdentifier=None,
-                          accessRightsPolicy=None,
-                          eventList=None,
-                          digital_original=False,
-                          sip_title=None,
-                          output_dir=None,
-                          mets_filename=None,
-                          encoding='unicode',
-                          exclude_file_characteristics = []):
+def build_single_file_sip(
+    ie_dmd_dict=None,
+    filepath=None,
+    cms=None,
+    webHarvesting=None,
+    generalIECharacteristics=None,
+    objectIdentifier=None,
+    accessRightsPolicy=None,
+    eventList=None,
+    digital_original=False,
+    sip_title=None,
+    output_dir=None,
+    mets_filename=None,
+    encoding="unicode",
+    exclude_file_characteristics=[],
+):
     # build mets
     mets = build_single_file_mets(
         ie_dmd_dict=ie_dmd_dict,
@@ -271,27 +260,32 @@ def build_single_file_sip(ie_dmd_dict=None,
         accessRightsPolicy=accessRightsPolicy,
         eventList=eventList,
         digital_original=digital_original,
-        exclude_file_characteristics = exclude_file_characteristics)
+        exclude_file_characteristics=exclude_file_characteristics,
+    )
 
     # build output SIP folder structure
-    streams_dir = os.path.join(output_dir, 'content', 'streams')
+    streams_dir = os.path.join(output_dir, "content", "streams")
     if mets_filename:
         streams_dir = os.path.join(streams_dir, mets_filename)
     if not os.path.exists(streams_dir):
         os.makedirs(streams_dir)
-    shutil.copy2(filepath, os.path.join(streams_dir,
-                                        os.path.basename(filepath)))
+    shutil.copy2(filepath, os.path.join(streams_dir, os.path.basename(filepath)))
     if mets_filename:
         for fl in mets.findall(".//{http://www.loc.gov/METS/}FLocat"):
             fl.attrib["{http://www.w3.org/1999/xlink}href"] = "{}/{}".format(
-                mets_filename, fl.attrib["{http://www.w3.org/1999/xlink}href"])
-        mets.write(os.path.join(output_dir, 'content',
-                                mets_filename + '.xml'), pretty_print=True,
-                   encoding=encoding)
+                mets_filename, fl.attrib["{http://www.w3.org/1999/xlink}href"]
+            )
+        mets.write(
+            os.path.join(output_dir, "content", mets_filename + ".xml"),
+            pretty_print=True,
+            encoding=encoding,
+        )
     else:
-        mets.write(os.path.join(output_dir, 'content',
-                                'mets.xml'), pretty_print=True,
-                   encoding=encoding)
+        mets.write(
+            os.path.join(output_dir, "content", "mets.xml"),
+            pretty_print=True,
+            encoding=encoding,
+        )
     if sip_title is not None:
         _build_dc_sip(output_dir, sip_title, encoding=encoding)
 
@@ -302,13 +296,11 @@ def _move_files_from_json(json_doc, streams_dir):
     else:
         rep_dict = json_doc
     for item in rep_dict:
-        origin = item['physical_path']
-        destination = item['fileOriginalPath']
-        if not os.path.exists(
-                os.path.join(streams_dir, os.path.dirname(destination))):
+        origin = item["physical_path"]
+        destination = item["fileOriginalPath"]
+        if not os.path.exists(os.path.join(streams_dir, os.path.dirname(destination))):
             try:
-                os.makedirs(
-                    os.path.join(streams_dir, os.path.dirname(destination)))
+                os.makedirs(os.path.join(streams_dir, os.path.dirname(destination)))
             except OSError as exc:  # Guard against race condition
                 if exc.errno is not errno.EEXIST:
                     raise
@@ -331,8 +323,9 @@ def build_sip_from_json(
     sip_title=None,
     output_dir=None,
     mets_filename=None,
-    encoding='unicode',
-    structmap_type="DEFAULT"):
+    encoding="unicode",
+    structmap_type="DEFAULT",
+):
     """Builds SIP using JSON for the rep-level information.
 
     Keyword arguments:
@@ -441,25 +434,27 @@ def build_sip_from_json(
         eventList=eventList,
         input_dir=input_dir,
         digital_original=digital_original,
-        structmap_type=structmap_type)
+        structmap_type=structmap_type,
+    )
 
     # build output SIP folder structure
-    streams_dir = os.path.join(output_dir, 'content', 'streams')
+    streams_dir = os.path.join(output_dir, "content", "streams")
     if not os.path.exists(streams_dir):
         os.makedirs(streams_dir)
 
     if mets_filename:
-        mets.write(os.path.join(output_dir, 'content',
-                                mets_filename + '.xml'),
-                   pretty_print=True,
-                   encoding=encoding)
+        mets.write(
+            os.path.join(output_dir, "content", mets_filename + ".xml"),
+            pretty_print=True,
+            encoding=encoding,
+        )
     else:
-        mets.write(os.path.join(output_dir, 'content',
-                                'mets.xml'),
-                   pretty_print=True,
-                   encoding=encoding)
-    for entry in (pres_master_json, modified_master_json,
-                  access_derivative_json):
+        mets.write(
+            os.path.join(output_dir, "content", "mets.xml"),
+            pretty_print=True,
+            encoding=encoding,
+        )
+    for entry in (pres_master_json, modified_master_json, access_derivative_json):
         if entry is not None:
             _move_files_from_json(entry, streams_dir)
 
