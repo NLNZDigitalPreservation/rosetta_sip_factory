@@ -4,27 +4,12 @@ import shutil
 
 from lxml import etree as ET
 from mets_dnx.factory import build_mets, build_mets_from_json, build_single_file_mets
-
-# declare namespaces
-DC_NS = "http://purl.org/dc/elements/1.1/"
-DCTERMS_NS = "http://purl.org/dc/terms/"
-XSI_NS = "http://www.w3.org/2001/XMLSchema-instance"
-
-dc_nsmap = {
-    "dc": DC_NS,
-    "dcterms": DCTERMS_NS,
-    "xsi": XSI_NS,
-}
-
-mets_dnx_nsmap = {
-    "mets": "http://www.loc.gov/METS/",
-    "dnx": "http://www.exlibrisgroup.com/dps/dnx",
-}
+from rosetta_sip_factory. static import DC_NS, DC_NSMAP
 
 
 def _build_dc_sip(output_dir, sip_title, encoding="unicode"):
-    dc_xml = ET.Element("{%s}record" % DC_NS, nsmap=dc_nsmap)
-    title = ET.SubElement(dc_xml, "{%s}title" % DC_NS, nsmap=dc_nsmap)
+    dc_xml = ET.Element("{%s}record" % DC_NS, nsmap=DC_NSMAP)
+    title = ET.SubElement(dc_xml, "{%s}title" % DC_NS, nsmap=DC_NSMAP)
     title.text = sip_title
     if encoding in ["unicode"]:
         with open(os.path.join(output_dir, "content", "dc.xml"), "w") as dc_file:
