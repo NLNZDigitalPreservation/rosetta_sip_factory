@@ -1,0 +1,46 @@
+[project]
+name = "rosetta_sip_factory"
+version = "0.1.10"
+authors = [
+  { name="Sean Mosely", email="sean.mosely@gmail.com" },
+]
+description = "Python library for building Submission Information Packages for the Ex Libris Rosetta digital preservation application."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+
+[project.urls]
+Homepage = "https://github.com/NLNZDigitalPreservation/rosetta_sip_factory"
+Issues = "https://github.com/NLNZDigitalPreservation/rosetta_sip_factory/issues"
+
+[build-system]
+requires = ["setuptools>=61.0", "lxml>=3.6.4", "mets_dnx>=0.1.17"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "INFO"
+pythonpath = [
+  "."
+]
+
+[tool.isort]
+profile = "black"
+
+[tool.pylint.MASTER]
+init-hook='import sys; sys.path.append(".")'
+
+[tool.pylint.main]
+ignore = [".venv", ".scrapy"]
+ignore-patterns = ["__pytestcache__", "cassettes", "outputs"]
+
+[tool.pylint.format]
+max-line-length = "88"
+
+[tool.pylint."messages control"]
+confidence = ["HIGH", "CONTROL_FLOW", "INFERENCE", "INFERENCE_FAILURE", "UNDEFINED"]
+disable = ["protected-access", "too-few-public-methods", "unused-argument", "missing-timeout", "line-too-long", "raw-checker-failed", "missing-module-docstring", "missing-function-docstring", "missing-class-docstring", "bad-inline-option", "locally-disabled", "file-ignored", "suppressed-message", "useless-suppression", "deprecated-pragma", "use-symbolic-message-instead", "use-implicit-booleaness-not-comparison-to-string", "use-implicit-booleaness-not-comparison-to-zero"]

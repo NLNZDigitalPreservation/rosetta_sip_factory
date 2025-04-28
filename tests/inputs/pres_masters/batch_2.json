@@ -1,0 +1,32 @@
+[
+    {
+        "fileOriginalName": "Stock-White-angle-Front.jpg",
+        "fileOriginalPath": "root_folder/Stock-White-angle-Front.jpg",
+        "physical_path": null,
+        "MD5": "11c2563db299225b38d5df6287ccda7d",
+        "fileCreationDate": "1st of January, 1601",
+        "fileModificationDate": "1st of January, 1601",
+        "label": "Image Three",
+        "note": "This is a note for image 3"
+    },
+    {
+        "fileOriginalName": "Experience.jpg",
+        "fileOriginalPath": "root_folder/tier_2_folder/Experience.jpg",
+        "physical_path": null,
+        "MD5": "11c2563db299225b38d5df6287ccda7d",
+        "fileCreationDate": "1st of January, 1601",
+        "fileModificationDate": "1st of January, 1601",
+        "label": "Image Two",
+        "note": "This is a note for image 2"
+    },
+    {
+        "fileOriginalName": "freedom_isnt_what_i_thought_it_would_be.jpg",
+        "fileOriginalPath": "root_folder/tier_2_folder/tier_3_folder/freedom_isnt_what_i_thought_it_would_be.jpg",
+        "physical_path": null,
+        "MD5": "9d09f20ab8e37e5d32cdd1508b49f0a9",
+        "fileCreationDate": "1st of January, 1601",
+        "fileModificationDate": "1st of January, 1601",
+        "label": "Image One",
+        "note": "This is a note for image 1"
+    }
+]

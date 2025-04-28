@@ -1,0 +1,22 @@
+[
+    {
+        "fileOriginalName": "img_1.jpg",
+        "fileOriginalPath": "img_1.jpg",
+        "physical_path": null,
+        "MD5": "9d09f20ab8e37e5d32cdd1508b49f0a9",
+        "fileCreationDate": "1st of January, 1601",
+        "fileModificationDate": "1st of January, 1601",
+        "label": "Image One",
+        "note": "This is a note for image 1"
+    },
+    {
+        "fileOriginalName": "img_2.jpg",
+        "fileOriginalPath": "img_2.jpg",
+        "physical_path": null,
+        "MD5": "11c2563db299225b38d5df6287ccda7d",
+        "fileCreationDate": "1st of January, 1601",
+        "fileModificationDate": "1st of January, 1601",
+        "label": "Image Two",
+        "note": "This is a note for image 2"
+    }
+]
