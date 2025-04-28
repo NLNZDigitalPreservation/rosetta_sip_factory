@@ -1,10 +1,11 @@
+import errno
 import json
 import os
 import shutil
-import errno
 
-from rosetta_sip_factory.utils import build_dc_sip, copy_tree, clean_title
 from mets_dnx.factory import build_mets, build_mets_from_json, build_single_file_mets
+
+from rosetta_sip_factory.utils import build_dc_sip, clean_title, copy_tree
 
 
 def build_sip(

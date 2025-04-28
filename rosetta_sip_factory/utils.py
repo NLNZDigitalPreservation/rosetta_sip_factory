@@ -2,14 +2,13 @@ import os
 import shutil
 
 from lxml import etree as ET
-from rosetta_sip_factory. static import DC_NS, DC_NSMAP
+
+from rosetta_sip_factory.static import DC_NS, DC_NSMAP
 
 
 def clean_title(title):
     if title:
-        replacements = {
-            '-':['–']
-        }
+        replacements = {"-": ["–"]}
         for replacement, targets in replacements.items():
             for target in targets:
                 title = title.replace(target, replacement)
