@@ -1,37 +1,10 @@
 import json
 import os
 import shutil
+import errno
 
-from lxml import etree as ET
+from rosetta_sip_factory.utils import build_dc_sip, copy_tree, clean_title
 from mets_dnx.factory import build_mets, build_mets_from_json, build_single_file_mets
-from rosetta_sip_factory. static import DC_NS, DC_NSMAP
-
-
-def _build_dc_sip(output_dir, sip_title, encoding="unicode"):
-    dc_xml = ET.Element("{%s}record" % DC_NS, nsmap=DC_NSMAP)
-    title = ET.SubElement(dc_xml, "{%s}title" % DC_NS, nsmap=DC_NSMAP)
-    title.text = sip_title
-    if encoding in ["unicode"]:
-        with open(os.path.join(output_dir, "content", "dc.xml"), "w") as dc_file:
-            dc_file.write(ET.tostring(dc_xml, encoding=encoding))
-    else:
-        with open(os.path.join(output_dir, "content", "dc.xml"), "wb") as dc_file:
-            dc_file.write(ET.tostring(dc_xml, xml_declaration=True, encoding=encoding))
-
-
-def _copytree(src, dst, symlinks=False, ignore=None):
-    for item in os.listdir(src):
-        s = os.path.join(src, item)
-        d = os.path.join(dst, item)
-        if os.path.isdir(s):
-            shutil.copytree(s, d, symlinks, ignore)
-        else:
-            # 2017-03-21: change to check if file exists first.
-            # WARNING: THIS IS NOT IMMUNE TO RACE CONDITIONS!
-            if os.path.isfile(d):
-                raise Exception("{} already exists.".format(d))
-            else:
-                shutil.copy2(s, d)
 
 
 def build_sip(
@@ -185,15 +158,15 @@ def build_sip(
         else:
             destination = os.path.join(streams_dir, os.path.basename(pres_master_dir))
             os.makedirs(destination)
-        _copytree(pres_master_dir, destination)
+        copy_tree(pres_master_dir, destination)
     if modified_master_dir is not None:
         destination = os.path.join(streams_dir, os.path.basename(modified_master_dir))
         os.makedirs(destination)
-        _copytree(modified_master_dir, destination)
+        copy_tree(modified_master_dir, destination)
     if access_derivative_dir is not None:
         destination = os.path.join(streams_dir, os.path.basename(access_derivative_dir))
         os.makedirs(destination)
-        _copytree(access_derivative_dir, destination)
+        copy_tree(access_derivative_dir, destination)
 
     # 2017-03-21: Add "if" block for when there is a mets filename
     if mets_filename:
@@ -215,7 +188,7 @@ def build_sip(
 
     # write SIP DC file if SIP title is supplied
     if sip_title is not None:
-        _build_dc_sip(output_dir, sip_title, encoding=encoding)
+        build_dc_sip(output_dir, sip_title, encoding=encoding)
 
 
 def build_single_file_sip(
@@ -272,7 +245,7 @@ def build_single_file_sip(
             encoding=encoding,
         )
     if sip_title is not None:
-        _build_dc_sip(output_dir, sip_title, encoding=encoding)
+        build_dc_sip(output_dir, sip_title, encoding=encoding)
 
 
 def _move_files_from_json(json_doc, streams_dir):
@@ -405,6 +378,8 @@ def build_sip_from_json(
         construction.
     """
 
+    sip_title = clean_title(sip_title)
+
     # build METS
     mets = build_mets_from_json(
         ie_dmd_dict=ie_dmd_dict,
@@ -445,4 +420,4 @@ def build_sip_from_json(
 
     # write SIP DC file if SIP title is supplied
     if sip_title is not None:
-        _build_dc_sip(output_dir, sip_title, encoding=encoding)
+        build_dc_sip(output_dir, sip_title, encoding=encoding)
